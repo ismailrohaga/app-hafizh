@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/ui/colors.dart';
+import 'package:hafizh/common/ui/app_colors.dart';
 
 class AppTheme {
   ThemeData get darkTheme => ThemeData(

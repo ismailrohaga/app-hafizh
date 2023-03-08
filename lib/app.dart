@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/core/router/router.dart';
-import 'package:hafizh/domain/model/catalog.dart';
-import 'package:hafizh/ui/theme/theme.dart';
+import 'package:hafizh/common/ui/app_theme.dart';
+import 'package:hafizh/core/router/app_router.dart';
+import 'package:hafizh/domain/settings/entity/settings.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -14,8 +14,7 @@ class App extends StatelessWidget {
     // Using MultiProvider is convenient when providing multiple objects.
     return MultiProvider(
       providers: [
-        //TODO: remove this
-        Provider(create: (context) => CatalogModel()),
+        Provider(create: (context) => Settings()),
       ],
       child: MaterialApp.router(
         theme: theme.lightTheme,

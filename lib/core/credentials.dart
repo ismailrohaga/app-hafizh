@@ -13,7 +13,7 @@ abstract class Credentials {
 class DevCredentials extends Credentials {
   DevCredentials()
       : super(
-          baseUrl: 'https://api.thecatapi.com/v1/',
+          baseUrl: 'https://api.quran.com/api/v4/',
           env: Environment.dev,
         );
 }
@@ -21,7 +21,7 @@ class DevCredentials extends Credentials {
 class ProdCredentials extends Credentials {
   ProdCredentials()
       : super(
-          baseUrl: 'https://api.thecatapi.com/v1/',
+          baseUrl: 'https://api.quran.com/api/v4/',
           env: Environment.prod,
         );
 }
