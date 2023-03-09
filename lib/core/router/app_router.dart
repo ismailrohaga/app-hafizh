@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:hafizh/domain/home/home.dart';
+import 'package:hafizh/presentation/home/home.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
