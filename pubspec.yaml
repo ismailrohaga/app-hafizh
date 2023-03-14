@@ -30,6 +30,7 @@ dependencies:
   dartz: ^0.10.1
   just_audio: ^0.9.31
   shared_preferences: ^2.0.18
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
