@@ -1,9 +1,10 @@
 class NamedRoutes {
   const NamedRoutes();
 
-  static const splashView = 'splashView';
-  static const onBoardingView = 'onBoardingView';
-  static const homeView = 'homeView';
-  static const detailView = 'detailView';
-  static const bookmarkView = 'bookmarkView';
+  static const detailSurahView = '/detail-surah-view';
+  static const homeView = '/home-view';
+  static const quranView = '/quran-view';
+  static const settingsView = '/settings-view';
+  static const onBoardView = '/onboard-view';
+  static const splashView = '/splash-view';
 }
