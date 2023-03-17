@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
@@ -19,8 +17,8 @@ class DependencyInjection {
 
   static registerCoreModule(Environment env) {
     locator.registerSingleton<Credentials>(credentials[env]!);
-    locator.registerLazySingleton<Dio>(() => locator<DioHandler>().dio);
     locator.registerLazySingleton<DioHandler>(
         () => DioHandler(baseUrl: locator<Credentials>().baseUrl));
+    locator.registerLazySingleton<Dio>(() => locator<DioHandler>().dio);
   }
 }
