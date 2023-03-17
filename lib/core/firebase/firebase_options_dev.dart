@@ -25,16 +25,8 @@ class DefaultFirebaseOptionsDev {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
-      case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -58,5 +50,16 @@ class DefaultFirebaseOptionsDev {
     messagingSenderId: '440550480887',
     projectId: 'hafizh-dev',
     storageBucket: 'hafizh-dev.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAUA1HBFqBIy8CXh1UCcEWEaaWr2sDs16I',
+    appId: '1:440550480887:ios:db7302e97dec1e177aacf2',
+    messagingSenderId: '440550480887',
+    projectId: 'hafizh-dev',
+    storageBucket: 'hafizh-dev.appspot.com',
+    iosClientId:
+        '440550480887-d2ibu46t40v5g40jr6r05oapbtrnc9jq.apps.googleusercontent.com',
+    iosBundleId: 'com.example.hafizh',
   );
 }
