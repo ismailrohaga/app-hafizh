@@ -1,52 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/ui/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hafizh/common/ui/app_colors.dart';
 
 class AppTheme {
-  ThemeData get darkTheme => ThemeData(
-        colorScheme: ColorScheme(
-          onPrimary: AppColors.virdianGreen,
-          onSecondary: AppColors.phthaloGreen,
-          primary: AppColors.virdianGreen,
-          secondary: AppColors.phthaloGreen,
-          surface: Colors.grey.withOpacity(0.25),
-          onSurface: Colors.grey.withOpacity(0.25),
-          background: Colors.black.withOpacity(0.5),
-          onBackground: Colors.black.withOpacity(0.5),
-          error: Colors.red,
-          onError: Colors.red,
-          brightness: Brightness.dark,
+  final kTextTheme = TextTheme(
+    headlineSmall:
+        GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w400),
+    titleLarge: GoogleFonts.poppins(
+        fontSize: 18, fontWeight: FontWeight.w500, letterSpacing: 0.15),
+    titleMedium: GoogleFonts.poppins(
+        fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.15),
+    bodyMedium: GoogleFonts.poppins(
+        fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.25),
+  );
+
+  ThemeData get darkTheme => ThemeData.dark().copyWith(
+        colorScheme: AppColors.kColorScheme.copyWith(
+          primary: AppColors.kDarkTheme,
+          onPrimary: Colors.white,
         ),
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 32,
-          ),
+        appBarTheme: const AppBarTheme(elevation: 0),
+        scaffoldBackgroundColor: AppColors.kDarkTheme,
+        textTheme: kTextTheme.apply(
+          bodyColor: Colors.white,
+          decorationColor: Colors.white,
+          displayColor: Colors.white,
         ),
       );
 
-  ThemeData get lightTheme => ThemeData(
-        colorScheme: ColorScheme(
-          onPrimary: AppColors.teaGreen,
-          onSecondary: AppColors.canary,
-          primary: AppColors.teaGreen,
-          secondary: AppColors.canary,
-          surface: Colors.grey.withOpacity(0.25),
-          onSurface: Colors.grey.withOpacity(0.25),
-          background: Colors.white,
-          onBackground: Colors.white,
-          error: Colors.red,
-          onError: Colors.red,
-          brightness: Brightness.light,
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 32,
-          ),
+  ThemeData get lightTheme => ThemeData.light().copyWith(
+        colorScheme: AppColors.kColorScheme,
+        appBarTheme: const AppBarTheme(elevation: 0),
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: kTextTheme.apply(
+          bodyColor: AppColors.kPurpleSecondary,
+          decorationColor: AppColors.kPurpleSecondary,
+          displayColor: AppColors.kPurpleSecondary,
         ),
       );
 }
