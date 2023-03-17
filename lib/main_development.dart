@@ -1,12 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hafizh/app.dart';
 import 'package:hafizh/core/credentials.dart';
 import 'package:hafizh/core/di/dependency_injection.dart';
+import 'package:hafizh/core/firebase/firebase_options_dev.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   DependencyInjection.registerDependencies(env: Environment.dev);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptionsDev.currentPlatform,
+  );
 
   runApp(const App());
 }

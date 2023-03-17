@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440550480887",
+    "project_id": "hafizh-dev",
+    "storage_bucket": "hafizh-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440550480887:android:caf95523eaa553a77aacf2",
+        "android_client_info": {
+          "package_name": "com.sixmavericks.hafizh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440550480887-d4s0mcci5bkaiv702155cbsssstinhe8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDUvXYY9QVLEa_MRMxJ4F0N81bHQQmuwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440550480887-d4s0mcci5bkaiv702155cbsssstinhe8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
