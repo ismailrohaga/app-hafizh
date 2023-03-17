@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 enum Environment { dev, prod }
 
 abstract class Credentials {
@@ -13,7 +15,7 @@ abstract class Credentials {
 class DevCredentials extends Credentials {
   DevCredentials()
       : super(
-          baseUrl: 'https://api.quran.com/api/v4/',
+          baseUrl: dotenv.get('BASE_URL_DEV'),
           env: Environment.dev,
         );
 }
@@ -21,7 +23,7 @@ class DevCredentials extends Credentials {
 class ProdCredentials extends Credentials {
   ProdCredentials()
       : super(
-          baseUrl: 'https://api.quran.com/api/v4/',
+          baseUrl: dotenv.get('BASE_URL_PROD'),
           env: Environment.prod,
         );
 }

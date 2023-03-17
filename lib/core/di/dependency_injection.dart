@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hafizh/core/credentials.dart';
 import 'package:hafizh/core/network/dio_handler.dart';
@@ -9,13 +12,15 @@ class DependencyInjection {
   static Future<void> registerDependencies({
     required Environment env,
   }) async {
-    locator.registerSingleton<Credentials>(credentials[env]!);
-    registerCoreModule();
+    await dotenv.load(fileName: ".env");
+
+    registerCoreModule(env);
   }
 
-  static registerCoreModule() {
+  static registerCoreModule(Environment env) {
+    locator.registerSingleton<Credentials>(credentials[env]!);
     locator.registerLazySingleton<Dio>(() => locator<DioHandler>().dio);
     locator.registerLazySingleton<DioHandler>(
-        () => DioHandler(baseUrl: 'https://jsonplaceholder.typicode.com'));
+        () => DioHandler(baseUrl: locator<Credentials>().baseUrl));
   }
 }

@@ -31,6 +31,7 @@ dependencies:
   just_audio: ^0.9.31
   shared_preferences: ^2.0.18
   google_fonts: ^4.0.3
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +44,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - .env
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
