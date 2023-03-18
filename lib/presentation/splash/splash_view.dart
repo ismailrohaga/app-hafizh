@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
@@ -14,6 +15,7 @@ class SplashView extends StatelessWidget {
     Future.delayed(const Duration(seconds: 3)).then(
       (_) => {
         if (isDoneOnBoard)
+          //TODO: check whether the user is logged in
           {context.go(NamedRoutes.homeView)}
         else
           {context.go(NamedRoutes.onBoardView)}
@@ -37,7 +39,7 @@ class SplashView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/icons/icon_hafizh_white.png',
+                    AssetConstant.hafizhWhiteIcon,
                     width: 40,
                   ),
                   const SizedBox(width: SpacingConstant.xs),
@@ -56,9 +58,9 @@ class _StatefulWrapper extends StatefulWidget {
   final Function onInit;
   final Widget child;
   const _StatefulWrapper({required this.onInit, required this.child});
+
   @override
-  // ignore: library_private_types_in_public_api
-  _StatefulWrapperState createState() => _StatefulWrapperState();
+  State<_StatefulWrapper> createState() => _StatefulWrapperState();
 }
 
 class _StatefulWrapperState extends State<_StatefulWrapper> {

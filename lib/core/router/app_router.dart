@@ -4,9 +4,10 @@ import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/ui/widget/organisms/bottom_nav/scaffold_with_bottom_nav_bar.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
+import 'package:hafizh/presentation/login/login_view.dart';
 import 'package:hafizh/presentation/quran/quran_view.dart';
 import 'package:hafizh/presentation/settings/settings_view.dart';
-import 'package:hafizh/presentation/splash/onboard_view.dart';
+import 'package:hafizh/presentation/onboard/onboard_view.dart';
 import 'package:hafizh/presentation/splash/splash_view.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -25,6 +26,11 @@ final GoRouter appRouter = GoRouter(
       name: NamedRoutes.onBoardView,
       path: NamedRoutes.onBoardView,
       builder: (context, state) => const OnBoardView(),
+    ),
+    GoRoute(
+      name: NamedRoutes.loginView,
+      path: NamedRoutes.loginView,
+      builder: (context, state) => const LoginView(),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,

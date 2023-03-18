@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/circular_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/screen_padding_constant.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/presentation/onboard/onboard_content.dart';
 
 class OnBoardView extends StatefulWidget {
   const OnBoardView({super.key});
@@ -71,17 +73,17 @@ class _OnBoardViewState extends State<OnBoardView> {
                     },
                     children: const <Widget>[
                       OnBoardContent(
-                        imagePath: 'assets/images/image_onboard.png',
+                        imagePath: AssetConstant.onBoardImage,
                         title: 'satu',
                         description: 'desc',
                       ),
                       OnBoardContent(
-                        imagePath: 'assets/images/image_onboard.png',
+                        imagePath: AssetConstant.onBoardImage,
                         title: 'dua',
                         description: 'desc',
                       ),
                       OnBoardContent(
-                        imagePath: 'assets/images/image_onboard.png',
+                        imagePath: AssetConstant.onBoardImage,
                         title: 'tiga',
                         description: 'desc',
                       ),
@@ -106,7 +108,7 @@ class _OnBoardViewState extends State<OnBoardView> {
   }
 }
 
-//TODO: lift to atomic design
+//TODO: lift to atomic design?
 class OnBoardButton extends StatelessWidget {
   const OnBoardButton({
     super.key,
@@ -127,7 +129,7 @@ class OnBoardButton extends StatelessWidget {
         onPressed: () {
           if (_condition) {
             //TODO: call preference provider markDoneOnBoard
-            context.go(NamedRoutes.homeView);
+            context.go(NamedRoutes.loginView);
           } else {
             _pageController.nextPage(
               duration: const Duration(milliseconds: 500),
