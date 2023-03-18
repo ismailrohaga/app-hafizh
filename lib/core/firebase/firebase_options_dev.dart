@@ -25,7 +25,7 @@ class DefaultFirebaseOptionsDev {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
-      case TargetPlatform.macOS:
+      case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.windows:
         throw UnsupportedError(
@@ -54,12 +54,12 @@ class DefaultFirebaseOptionsDev {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAUA1HBFqBIy8CXh1UCcEWEaaWr2sDs16I',
-    appId: '1:440550480887:ios:db7302e97dec1e177aacf2',
+    appId: '1:440550480887:ios:ea608173095f4c597aacf2',
     messagingSenderId: '440550480887',
     projectId: 'hafizh-dev',
     storageBucket: 'hafizh-dev.appspot.com',
     iosClientId:
-        '440550480887-d2ibu46t40v5g40jr6r05oapbtrnc9jq.apps.googleusercontent.com',
-    iosBundleId: 'com.example.hafizh',
+        '440550480887-773t1mkrk5vq4ojv9p9jpjbtdselldld.apps.googleusercontent.com',
+    iosBundleId: 'com.sixmavericks.hafizh.prod',
   );
 }

@@ -68,9 +68,11 @@ android {
     productFlavors {
         dev {
             dimension "app"
+            applicationId "com.sixmavericks.hafizh.dev"
         }
         prod {
             dimension "app"
+            applicationId "com.sixmavericks.hafizh.prod"
         }
     }
 }
