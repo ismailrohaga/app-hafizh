@@ -4,9 +4,13 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 class AtomCircularPercentageIndicatorWidget extends StatefulWidget {
   final double value;
   final double? strokeWidth;
+  final bool? immediateAnimate;
 
   const AtomCircularPercentageIndicatorWidget(
-      {super.key, required this.value, this.strokeWidth});
+      {super.key,
+      required this.value,
+      this.strokeWidth,
+      this.immediateAnimate = true});
 
   @override
   State<AtomCircularPercentageIndicatorWidget> createState() =>
@@ -23,14 +27,20 @@ class _AtomCircularPercentageWidgetState
     controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
-    )..addListener(() {
-        setState(() {});
-      });
-
-    controller.animateTo(
-      widget.value,
-      curve: Curves.easeInOut,
     );
+
+    controller.addListener(() {
+      setState(() {});
+    });
+
+    if (widget.immediateAnimate!) {
+      controller.animateTo(
+        widget.value,
+        curve: Curves.easeInOut,
+      );
+    } else {
+      controller.value = widget.value;
+    }
 
     super.initState();
   }
