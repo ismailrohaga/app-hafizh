@@ -18,7 +18,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.large),
+      padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.lg),
       child: _isSigningIn
           ? const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
