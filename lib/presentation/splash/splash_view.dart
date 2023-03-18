@@ -29,14 +29,14 @@ class SplashView extends StatelessWidget {
             _handleOnInitialize(context, prefSetProvider.isDoneOnBoard);
           },
           child: Scaffold(
-            backgroundColor: context.colors.primary,
+            backgroundColor: context.colors.background,
             body: Center(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/icon_hafizh_white.png',
+                    'assets/icons/icon_hafizh_white.png',
                     width: 40,
                   ),
                   const SizedBox(width: 5.0),
