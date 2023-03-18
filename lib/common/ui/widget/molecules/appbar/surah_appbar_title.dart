@@ -26,7 +26,7 @@ class SurahAppBarTitle extends StatelessWidget {
             const SizedBox(
               width: 4,
             ),
-            AtomStarBadgeWidget(
+            StarBadgeWidget(
               count: surahNumber,
             ),
           ],
