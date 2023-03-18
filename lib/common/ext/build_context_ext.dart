@@ -6,4 +6,6 @@ extension BuildContextExt on BuildContext {
   TextTheme get textTheme => theme.textTheme;
 
   ColorScheme get colors => theme.colorScheme;
+
+  MediaQueryData get mediaQuery => MediaQuery.of(this);
 }

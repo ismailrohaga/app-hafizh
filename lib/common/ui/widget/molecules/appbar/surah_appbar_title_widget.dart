@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/widget/atoms/star_badge_widget.dart';
 
-class SurahAppBarTitle extends StatelessWidget {
+class MoleculeSurahAppBarTitleWidget extends StatelessWidget {
   final String surah;
   final int? verse;
   final int? surahNumber;
 
-  const SurahAppBarTitle(
+  const MoleculeSurahAppBarTitleWidget(
       {super.key, required this.surah, this.verse, this.surahNumber = 0});
 
   @override
   Widget build(BuildContext context) {
     final verseText = verse != null ? "Ayah $verse" : "";
-
-    print("MoleculeSurahAppBarTitle build");
 
     return Column(
       children: [
@@ -26,7 +24,7 @@ class SurahAppBarTitle extends StatelessWidget {
             const SizedBox(
               width: 4,
             ),
-            StarBadgeWidget(
+            AtomStarBadgeWidget(
               count: surahNumber,
             ),
           ],

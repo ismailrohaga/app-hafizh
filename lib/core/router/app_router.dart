@@ -17,30 +17,35 @@ final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   routes: [
     GoRoute(
+      name: NamedRoutes.splashView,
       path: NamedRoutes.splashView,
       builder: (context, state) => const SplashView(),
     ),
     GoRoute(
+      name: NamedRoutes.onBoardView,
       path: NamedRoutes.onBoardView,
       builder: (context, state) => const OnBoardView(),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
-        return ScaffoldWithBottomNavBar(child: child);
+        return OrganismScaffoldWithBottomNavBar(child: child);
       },
       routes: [
         GoRoute(
+          name: NamedRoutes.homeView,
           path: NamedRoutes.homeView,
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: HomeView()),
         ),
         GoRoute(
+          name: NamedRoutes.quranView,
           path: NamedRoutes.quranView,
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: QuranView()),
         ),
         GoRoute(
+          name: NamedRoutes.settingsView,
           path: NamedRoutes.settingsView,
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: SettingsView()),
@@ -48,6 +53,7 @@ final GoRouter appRouter = GoRouter(
       ],
     ),
     GoRoute(
+      name: NamedRoutes.detailSurahView,
       path: NamedRoutes.detailSurahView,
       builder: (context, state) => const DetailSurahView(),
     ),

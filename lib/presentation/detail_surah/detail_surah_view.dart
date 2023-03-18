@@ -8,11 +8,13 @@ class DetailSurahView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithDetailSurahAppBar(
+    return OrganismScaffoldWithDetailSurahAppBar(
         surah: "Surah Al-Baqarah",
         verse: 1,
         surahNumber: 2,
-        onBackPressed: () => context.go(NamedRoutes.homeView),
+        onBackPressed: () => context.canPop()
+            ? context.pop()
+            : context.goNamed(NamedRoutes.homeView),
         child: const Center(child: Text("DetailSurah View")));
   }
 }

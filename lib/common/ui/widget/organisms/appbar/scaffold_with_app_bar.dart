@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
-import 'package:hafizh/common/ui/widget/molecules/appbar/surah_appbar_title.dart';
+import 'package:hafizh/common/ui/widget/molecules/appbar/surah_appbar_title_widget.dart';
 
-class ScaffoldWithDetailSurahAppBar extends StatelessWidget {
+class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
   final Widget child;
   final String surah;
   final int? verse;
@@ -10,7 +10,7 @@ class ScaffoldWithDetailSurahAppBar extends StatelessWidget {
 
   final void Function()? onBackPressed;
 
-  const ScaffoldWithDetailSurahAppBar(
+  const OrganismScaffoldWithDetailSurahAppBar(
       {super.key,
       required this.child,
       required this.surah,
@@ -23,7 +23,7 @@ class ScaffoldWithDetailSurahAppBar extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           toolbarHeight: 80,
-          title: SurahAppBarTitle(
+          title: MoleculeSurahAppBarTitleWidget(
             surah: surah,
             verse: verse,
             surahNumber: surahNumber,

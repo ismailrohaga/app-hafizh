@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 
-class ScaffoldWithBottomNavBar extends StatefulWidget {
-  const ScaffoldWithBottomNavBar({Key? key, required this.child})
+class OrganismScaffoldWithBottomNavBar extends StatefulWidget {
+  const OrganismScaffoldWithBottomNavBar({Key? key, required this.child})
       : super(key: key);
   final Widget child;
 
   @override
-  State<ScaffoldWithBottomNavBar> createState() =>
-      _ScaffoldWithBottomNavBarState();
+  State<OrganismScaffoldWithBottomNavBar> createState() =>
+      _OrganismScaffoldWithBottomNavBarState();
 }
 
-class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
+class _OrganismScaffoldWithBottomNavBarState
+    extends State<OrganismScaffoldWithBottomNavBar> {
   int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
 
   int _locationToTabIndex(String location) {
