@@ -7,15 +7,26 @@ class PreferenceSettingsProvider extends ChangeNotifier {
 
   PreferenceSettingsProvider({required this.preferenceSettingsHelper}) {
     _getTheme();
+    _getIsDoneOnBoard();
   }
 
+  //theme
   bool _isDarkTheme = false;
   bool get isDarkTheme => _isDarkTheme;
   ThemeData get themeData =>
       _isDarkTheme ? AppTheme().darkTheme : AppTheme().lightTheme;
 
+  //onboard
+  bool _isDoneOnBoard = false;
+  bool get isDoneOnBoard => _isDoneOnBoard;
+
   void _getTheme() async {
     _isDarkTheme = await preferenceSettingsHelper.isDarkTheme;
+    notifyListeners();
+  }
+
+  void _getIsDoneOnBoard() async {
+    _isDoneOnBoard = await preferenceSettingsHelper.isDoneOnBoard;
     notifyListeners();
   }
 
@@ -23,4 +34,6 @@ class PreferenceSettingsProvider extends ChangeNotifier {
     preferenceSettingsHelper.setDarkTheme(value);
     _getTheme();
   }
+
+  void markDoneOnBoard() => preferenceSettingsHelper.setDoneOnBoard(true);
 }
