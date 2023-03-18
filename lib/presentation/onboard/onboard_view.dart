@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/size_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/presentation/onboard/onboard_content.dart';
 
 class OnBoardView extends StatefulWidget {
   const OnBoardView({super.key});
@@ -68,17 +70,17 @@ class _OnBoardViewState extends State<OnBoardView> {
                     },
                     children: const <Widget>[
                       OnBoardContent(
-                        imagePath: 'assets/images/image_onboard.png',
+                        imagePath: AssetConstant.onBoardImage,
                         title: 'satu',
                         description: 'desc',
                       ),
                       OnBoardContent(
-                        imagePath: 'assets/images/image_onboard.png',
+                        imagePath: AssetConstant.onBoardImage,
                         title: 'dua',
                         description: 'desc',
                       ),
                       OnBoardContent(
-                        imagePath: 'assets/images/image_onboard.png',
+                        imagePath: AssetConstant.onBoardImage,
                         title: 'tiga',
                         description: 'desc',
                       ),
@@ -103,7 +105,7 @@ class _OnBoardViewState extends State<OnBoardView> {
   }
 }
 
-//TODO: lift to atomic design
+//TODO: lift to atomic design?
 class OnBoardButton extends StatelessWidget {
   const OnBoardButton({
     super.key,
@@ -124,7 +126,7 @@ class OnBoardButton extends StatelessWidget {
         onPressed: () {
           if (_condition) {
             //TODO: call preference provider markDoneOnBoard
-            context.go(NamedRoutes.homeView);
+            context.go(NamedRoutes.loginView);
           } else {
             _pageController.nextPage(
               duration: const Duration(milliseconds: 500),
@@ -141,54 +143,6 @@ class OnBoardButton extends StatelessWidget {
           _condition ? 'Get Started' : 'Next',
           style: context.textTheme.titleMedium,
         ),
-      ),
-    );
-  }
-}
-
-class OnBoardContent extends StatelessWidget {
-  const OnBoardContent(
-      {super.key,
-      required String imagePath,
-      required String title,
-      required String description})
-      : _imagePath = imagePath,
-        _title = title,
-        _description = description;
-
-  final String _imagePath;
-  final String _title;
-  final String _description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(48.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: Image(
-              image: AssetImage(
-                _imagePath,
-              ),
-              height: 300.0,
-              width: 300.0,
-            ),
-          ),
-          const SizedBox(height: 16.0),
-          Text(
-            _title,
-            style: context.textTheme.headlineMedium,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16.0),
-          Text(
-            _description,
-            style: context.textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }
