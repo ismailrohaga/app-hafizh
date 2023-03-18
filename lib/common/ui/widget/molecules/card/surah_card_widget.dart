@@ -24,10 +24,14 @@ class MoleculeSurahCardWidget extends StatelessWidget {
         child: Container(
           height: 110,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [Color(0xFF012C3B), Color(0xFFD9D9D9)],
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                context.colors.background.withOpacity(0.8),
+                context.colors.background.withOpacity(0.8),
+                context.colors.surface.withOpacity(0.8),
+              ],
             ),
             borderRadius: BorderRadius.circular(8.0),
             image: const DecorationImage(
@@ -40,12 +44,12 @@ class MoleculeSurahCardWidget extends StatelessWidget {
               title: MoleculeSurahTileTitleWidget(
                 name: name,
                 number: number,
-                style: context.theme.textTheme.titleLarge?.copyWith(
+                style: context.textTheme.titleLarge?.copyWith(
                     color: Colors.white, fontWeight: FontWeight.w300),
               ),
               subtitle: Text(
                 subtitle,
-                style: context.theme.textTheme.titleSmall?.copyWith(
+                style: context.textTheme.titleSmall?.copyWith(
                     color: Colors.white, fontWeight: FontWeight.w300),
               ),
             ),
