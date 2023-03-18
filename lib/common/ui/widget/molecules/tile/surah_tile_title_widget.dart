@@ -22,7 +22,7 @@ class MoleculeSurahTileTitleWidget extends StatelessWidget {
               context.theme.textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
         const SizedBox(
-          width: SpacingConstant.small,
+          width: SpacingConstant.sm,
         ),
         AtomStarBadgeWidget(
           count: number,

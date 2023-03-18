@@ -40,7 +40,7 @@ class SplashView extends StatelessWidget {
                     'assets/icons/icon_hafizh_white.png',
                     width: 40,
                   ),
-                  const SizedBox(width: SpacingConstant.xSmall),
+                  const SizedBox(width: SpacingConstant.xs),
                   Text('Hafizh', style: context.textTheme.headlineLarge),
                 ],
               ),

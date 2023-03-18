@@ -23,7 +23,7 @@ class MoleculeSurahAppBarTitleWidget extends StatelessWidget {
           children: [
             Text(surah, style: context.textTheme.titleLarge),
             const SizedBox(
-              width: SpacingConstant.small,
+              width: SpacingConstant.sm,
             ),
             AtomStarBadgeWidget(
               count: surahNumber,
