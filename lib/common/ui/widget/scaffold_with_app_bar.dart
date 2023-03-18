@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/common/ui/widget/star_badge_widget.dart';
 
 class ScaffoldWithDetailSurahAppBar extends StatelessWidget {
   final Widget child;
@@ -59,21 +59,9 @@ class SurahAppBarTitle extends StatelessWidget {
             const SizedBox(
               width: 4,
             ),
-            Container(
-              width: 30,
-              height: 30,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AssetConstant.starIcon),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  surahNumber.toString(),
-                  style: context.theme.textTheme.titleSmall,
-                ),
-              ),
-            )
+            StarBadgeWidget(
+              count: surahNumber,
+            ),
           ],
         ),
         if (verse != null)
