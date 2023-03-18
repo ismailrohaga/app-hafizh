@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/const/size_constant.dart';
+import 'package:hafizh/common/const/screen_padding_constant.dart';
+import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/presentation/onboard/onboard_content.dart';
 
@@ -91,7 +92,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: _buildPageIndicator(),
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: SpacingConstant.medium),
                 OnBoardButton(
                   pageController: _pageController,
                   condition: _isLastPage,
@@ -121,7 +122,7 @@ class OnBoardButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: SizeConstant.horizontalSpacing),
+          horizontal: ScreenPaddingConstant.horizontal),
       child: ElevatedButton(
         onPressed: () {
           if (_condition) {

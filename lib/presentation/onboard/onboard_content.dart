@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
 class OnBoardContent extends StatelessWidget {
@@ -31,13 +32,13 @@ class OnBoardContent extends StatelessWidget {
               width: 300.0,
             ),
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: SpacingConstant.medium),
           Text(
             _title,
             style: context.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: SpacingConstant.medium),
           Text(
             _description,
             style: context.textTheme.bodyLarge,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/const/size_constant.dart';
+import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
 class GoogleSignInButton extends StatefulWidget {
@@ -18,8 +18,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: SizeConstant.horizontalSpacing),
+      padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.large),
       child: _isSigningIn
           ? const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),

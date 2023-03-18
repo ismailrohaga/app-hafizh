@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/widget/atoms/star_badge_widget.dart';
 
@@ -22,7 +22,7 @@ class MoleculeSurahTileTitleWidget extends StatelessWidget {
               context.theme.textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
         const SizedBox(
-          width: 8,
+          width: SpacingConstant.small,
         ),
         AtomStarBadgeWidget(
           count: number,
