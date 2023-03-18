@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/ui/widget/scaffold_with_app_bar.dart';
+import 'package:hafizh/common/ui/widget/organisms/appbar/scaffold_with_app_bar.dart';
 
 class DetailSurahView extends StatelessWidget {
   const DetailSurahView({super.key});

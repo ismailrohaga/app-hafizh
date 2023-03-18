@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/ui/widget/scaffold_with_bottom_nav_bar.dart';
+import 'package:hafizh/common/ui/widget/organisms/bottom_nav/scaffold_with_bottom_nav_bar.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
 import 'package:hafizh/presentation/quran/quran_view.dart';

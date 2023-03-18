@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
-class StarBadgeWidget extends StatelessWidget {
+class AtomStarBadgeWidget extends StatelessWidget {
   final int? count;
 
-  const StarBadgeWidget({super.key, this.count = 0});
+  const AtomStarBadgeWidget({super.key, this.count = 0});
 
   @override
   Widget build(BuildContext context) {
