@@ -23,14 +23,14 @@ class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: context.colors.background,
-          toolbarHeight: 80,
+          toolbarHeight: 90,
           title: MoleculeSurahAppBarTitleWidget(
             surah: surah,
             verse: verse,
             surahNumber: surahNumber,
           ),
           leading: BackButton(
-            color: context.theme.colorScheme.onSecondary,
+            color: context.colors.surface,
             onPressed: onBackPressed,
           )),
       body: child,
