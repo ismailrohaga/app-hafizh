@@ -20,7 +20,7 @@ class MoleculeSurahAppBarTitleWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(surah, style: context.theme.typography.white.titleMedium),
+            Text(surah, style: context.textTheme.titleLarge),
             const SizedBox(
               width: 4,
             ),
@@ -30,7 +30,7 @@ class MoleculeSurahAppBarTitleWidget extends StatelessWidget {
           ],
         ),
         if (verse != null)
-          Text(verseText, style: context.theme.textTheme.titleSmall),
+          Text(verseText, style: context.textTheme.titleMedium),
       ],
     );
   }
