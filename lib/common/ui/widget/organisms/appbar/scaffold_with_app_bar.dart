@@ -22,6 +22,7 @@ class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: context.colors.background,
           toolbarHeight: 80,
           title: MoleculeSurahAppBarTitleWidget(
             surah: surah,
