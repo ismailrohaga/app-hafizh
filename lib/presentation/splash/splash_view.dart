@@ -1,30 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
 
+  void _handleOnInitialize(BuildContext context, bool isDoneOnBoard) async {
+    // TODO: initialize something, such as DB, etc. then remove Future Delayed initialization
+    Future.delayed(const Duration(seconds: 3)).then(
+      (_) => {
+        if (isDoneOnBoard)
+          {context.go(NamedRoutes.homeView)}
+        else
+          {context.go(NamedRoutes.onBoardView)}
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 80.0),
-        child: Center(
-          child: Column(
-            children: [
-              const Text('Splash Screen'),
-              ElevatedButton(
-                onPressed: () {
-                  context.go(NamedRoutes.homeView);
-                },
-                child: const Text('Gotomain',
-                    style: TextStyle(color: Colors.white)),
+    return Consumer<PreferenceSettingsProvider>(
+      builder: (context, prefSetProvider, _) {
+        return _StatefulWrapper(
+          onInit: () {
+            _handleOnInitialize(context, prefSetProvider.isDoneOnBoard);
+          },
+          child: Scaffold(
+            backgroundColor: context.colors.background,
+            body: Center(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/icons/icon_hafizh_white.png',
+                    width: 40,
+                  ),
+                  const SizedBox(width: 5.0),
+                  Text('Hafizh', style: context.textTheme.headlineLarge),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
+  }
+}
+
+class _StatefulWrapper extends StatefulWidget {
+  final Function onInit;
+  final Widget child;
+  const _StatefulWrapper({required this.onInit, required this.child});
+  @override
+  // ignore: library_private_types_in_public_api
+  _StatefulWrapperState createState() => _StatefulWrapperState();
+}
+
+class _StatefulWrapperState extends State<_StatefulWrapper> {
+  @override
+  void initState() {
+    widget.onInit();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }
