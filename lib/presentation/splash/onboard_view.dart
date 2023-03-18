@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/const/size_constant.dart';
+import 'package:hafizh/common/const/screen_padding_constant.dart';
+import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
 class OnBoardView extends StatefulWidget {
@@ -89,7 +90,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: _buildPageIndicator(),
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: SpacingConstant.medium),
                 OnBoardButton(
                   pageController: _pageController,
                   condition: _isLastPage,
@@ -119,7 +120,7 @@ class OnBoardButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: SizeConstant.horizontalSpacing),
+          horizontal: ScreenPaddingConstant.horizontal),
       child: ElevatedButton(
         onPressed: () {
           if (_condition) {
@@ -176,13 +177,13 @@ class OnBoardContent extends StatelessWidget {
               width: 300.0,
             ),
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: SpacingConstant.medium),
           Text(
             _title,
             style: context.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: SpacingConstant.medium),
           Text(
             _description,
             style: context.textTheme.bodyLarge,

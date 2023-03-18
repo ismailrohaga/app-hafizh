@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class SplashView extends StatelessWidget {
                     'assets/icons/icon_hafizh_white.png',
                     width: 40,
                   ),
-                  const SizedBox(width: 5.0),
+                  const SizedBox(width: SpacingConstant.xSmall),
                   Text('Hafizh', style: context.textTheme.headlineLarge),
                 ],
               ),
