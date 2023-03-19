@@ -10,16 +10,21 @@ class HafizhButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(CircularConstant.lg),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            color: context.colors.primary,
+            borderRadius:
+                const BorderRadius.all(Radius.circular(CircularConstant.lg))),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            text,
+            style: context.textTheme.titleMedium,
+            textAlign: TextAlign.center,
+          ),
         ),
-      ),
-      child: Text(
-        text,
-        style: context.textTheme.titleMedium,
       ),
     );
   }
