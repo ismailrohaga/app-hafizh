@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/circular_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/screen_padding_constant.dart';
@@ -9,6 +8,7 @@ import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/presentation/onboard/onboard_content.dart';
+import 'package:hafizh/presentation/onboard/onboard_items.dart';
 import 'package:provider/provider.dart';
 
 class OnBoardView extends StatefulWidget {
@@ -19,8 +19,8 @@ class OnBoardView extends StatefulWidget {
 }
 
 class _OnBoardViewState extends State<OnBoardView> {
-  final int _numPages = 3;
   final PageController _pageController = PageController(initialPage: 0);
+  final int _numPages = 3;
   int _currentPage = 0;
   bool _isLastPage = false;
 
@@ -75,23 +75,13 @@ class _OnBoardViewState extends State<OnBoardView> {
                           _isLastPage = (_currentPage == _numPages - 1);
                         });
                       },
-                      children: const <Widget>[
-                        OnBoardContent(
-                          imagePath: AssetConstant.onBoardImage,
-                          title: 'satu',
-                          description: 'desc',
-                        ),
-                        OnBoardContent(
-                          imagePath: AssetConstant.onBoardImage,
-                          title: 'dua',
-                          description: 'desc',
-                        ),
-                        OnBoardContent(
-                          imagePath: AssetConstant.onBoardImage,
-                          title: 'tiga',
-                          description: 'desc',
-                        ),
-                      ],
+                      children: onBoardItems
+                          .map((data) => OnBoardContent(
+                                imagePath: data['imagePath']!,
+                                title: data['title']!,
+                                description: data['desc']!,
+                              ))
+                          .toList(),
                     ),
                   ),
                   Row(
@@ -99,6 +89,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                     children: _buildPageIndicator(),
                   ),
                   const SizedBox(height: SpacingConstant.md),
+                  //TODO: lift button ui implementation to atomic design?
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: ScreenPaddingConstant.horizontal),
