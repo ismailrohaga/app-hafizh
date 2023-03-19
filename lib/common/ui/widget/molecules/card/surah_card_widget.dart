@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
+import 'package:hafizh/common/const/circular_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/widget/molecules/tile/surah_tile_title_widget.dart';
 
@@ -33,7 +34,7 @@ class MoleculeSurahCardWidget extends StatelessWidget {
                 context.colors.surface.withOpacity(0.8),
               ],
             ),
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(CircularConstant.md),
             image: const DecorationImage(
               image: AssetImage(AssetConstant.quranCardBgImage),
               fit: BoxFit.cover,

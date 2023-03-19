@@ -33,6 +33,7 @@ dependencies:
     google_fonts: ^4.0.3
     flutter_dotenv: ^5.0.2
     firebase_core: ^2.8.0
+    syncfusion_flutter_charts: ^20.4.54
 
 dev_dependencies:
     flutter_test:
