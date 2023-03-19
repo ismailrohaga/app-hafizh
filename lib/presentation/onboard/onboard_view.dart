@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
+import 'package:hafizh/common/const/circular_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/screen_padding_constant.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
@@ -34,12 +35,13 @@ class _OnBoardViewState extends State<OnBoardView> {
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
-      margin: const EdgeInsets.symmetric(horizontal: SpacingConstant.small),
+      margin: const EdgeInsets.symmetric(horizontal: SpacingConstant.sm),
       height: 12.0,
       width: isActive ? 22.0 : 12.0,
       decoration: BoxDecoration(
         color: isActive ? context.colors.secondary : context.colors.tertiary,
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderRadius:
+            const BorderRadius.all(Radius.circular(CircularConstant.lg)),
       ),
     );
   }
@@ -96,7 +98,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: _buildPageIndicator(),
                   ),
-                  const SizedBox(height: SpacingConstant.medium),
+                  const SizedBox(height: SpacingConstant.md),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: ScreenPaddingConstant.horizontal),

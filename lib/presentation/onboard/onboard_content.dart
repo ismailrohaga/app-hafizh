@@ -32,13 +32,13 @@ class OnBoardContent extends StatelessWidget {
               width: 300.0,
             ),
           ),
-          const SizedBox(height: SpacingConstant.medium),
+          const SizedBox(height: SpacingConstant.md),
           Text(
             _title,
             style: context.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: SpacingConstant.medium),
+          const SizedBox(height: SpacingConstant.md),
           Text(
             _description,
             style: context.textTheme.bodyLarge,
