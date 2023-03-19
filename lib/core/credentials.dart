@@ -1,4 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 
 enum Environment { dev, prod }
 

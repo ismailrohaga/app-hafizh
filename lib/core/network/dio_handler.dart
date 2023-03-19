@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/core/network/api_interceptors.dart';
 
 class DioHandler {

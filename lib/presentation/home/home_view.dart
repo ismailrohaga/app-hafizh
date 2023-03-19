@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/screen_padding_constant.dart';
-import 'package:hafizh/common/ui/widget/atoms/circular_percentage_indicator_widget.dart';
-import 'package:hafizh/common/ui/widget/atoms/horizontal_progress_bar_indicator_widget.dart';
-import 'package:hafizh/common/ui/widget/molecules/chart/bar_chart_widget.dart';
+import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/ui/widget/atoms/atoms.dart';
+import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -40,7 +39,8 @@ class HomeView extends StatelessWidget {
                 ChartData('2 Days', 5),
                 ChartData('1 Days', 6),
               ],
-            )
+            ),
+            ElevatedButton(onPressed: () {}, child: const Text('Next'))
           ],
         ),
       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/dependencies/get_it/get_it.dart';
+import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/widget/organisms/bottom_nav/scaffold_with_bottom_nav_bar.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';

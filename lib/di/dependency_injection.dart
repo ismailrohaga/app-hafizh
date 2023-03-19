@@ -1,8 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hafizh/common/dependencies/get_it/get_it.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/core/credentials.dart';
 import 'package:hafizh/core/network/dio_handler.dart';
 import 'package:hafizh/data/data_source/quran_local_data_source.dart';
