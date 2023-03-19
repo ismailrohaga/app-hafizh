@@ -38,7 +38,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 // TODO: Add a method call to the Google Sign-In authentication
-                context.go(NamedRoutes.homeView);
+                context.goNamed(NamedRoutes.homeView);
 
                 setState(() {
                   _isSigningIn = false;
