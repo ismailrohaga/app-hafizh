@@ -10,11 +10,12 @@ import 'package:provider/provider.dart';
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
 
-  void _handleOnInitialize(BuildContext context, bool isDoneOnBoard) async {
+  void _handleOnInitialize(
+      BuildContext context, PreferenceSettingsProvider prefSetProvider) async {
     // TODO: initialize something, such as DB, etc. then remove Future Delayed initialization
     Future.delayed(const Duration(seconds: 3)).then(
       (_) => {
-        if (isDoneOnBoard)
+        if (prefSetProvider.isDoneOnBoard)
           //TODO: check whether the user is logged in
           {context.goNamed(NamedRoutes.homeView)}
         else
@@ -29,7 +30,7 @@ class SplashView extends StatelessWidget {
       builder: (context, prefSetProvider, _) {
         return _StatefulWrapper(
           onInit: () {
-            _handleOnInitialize(context, prefSetProvider.isDoneOnBoard);
+            _handleOnInitialize(context, prefSetProvider);
           },
           child: Scaffold(
             backgroundColor: context.colors.background,
