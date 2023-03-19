@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/const/screen_padding_constant.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
@@ -18,7 +19,8 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.large),
+      padding: const EdgeInsets.symmetric(
+          horizontal: ScreenPaddingConstant.horizontal),
       child: _isSigningIn
           ? const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -38,7 +40,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 // TODO: Add a method call to the Google Sign-In authentication
-                context.go(NamedRoutes.homeView);
+                context.goNamed(NamedRoutes.homeView);
 
                 setState(() {
                   _isSigningIn = false;

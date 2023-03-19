@@ -24,7 +24,7 @@ class _OrganismScaffoldWithBottomNavBarState
 
   void _onItemTapped(BuildContext context, int tabIndex) {
     if (tabIndex != _currentIndex) {
-      context.go(tabs[tabIndex].initialLocation);
+      context.goNamed(tabs[tabIndex].initialLocation);
     }
   }
 

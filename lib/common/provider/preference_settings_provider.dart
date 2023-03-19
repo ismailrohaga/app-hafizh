@@ -35,5 +35,8 @@ class PreferenceSettingsProvider extends ChangeNotifier {
     _getTheme();
   }
 
-  void markDoneOnBoard() => preferenceSettingsHelper.setDoneOnBoard(true);
+  void markDoneOnBoard(bool value) {
+    preferenceSettingsHelper.setDoneOnBoard(value);
+    _getIsDoneOnBoard();
+  }
 }

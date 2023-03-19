@@ -32,7 +32,7 @@ class _OnBoardViewState extends State<OnBoardView> {
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: SpacingConstant.small),
       height: 12.0,
       width: isActive ? 22.0 : 12.0,
       decoration: BoxDecoration(
@@ -93,56 +93,34 @@ class _OnBoardViewState extends State<OnBoardView> {
                   children: _buildPageIndicator(),
                 ),
                 const SizedBox(height: SpacingConstant.medium),
-                OnBoardButton(
-                  pageController: _pageController,
-                  condition: _isLastPage,
-                )
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: ScreenPaddingConstant.horizontal),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_isLastPage) {
+                        context.goNamed(NamedRoutes.loginView);
+                      } else {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.ease,
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      _isLastPage ? 'Get Started' : 'Next',
+                      style: context.textTheme.titleMedium,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-//TODO: lift to atomic design?
-class OnBoardButton extends StatelessWidget {
-  const OnBoardButton({
-    super.key,
-    required PageController pageController,
-    required bool condition,
-  })  : _pageController = pageController,
-        _condition = condition;
-
-  final PageController _pageController;
-  final bool _condition;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: ScreenPaddingConstant.horizontal),
-      child: ElevatedButton(
-        onPressed: () {
-          if (_condition) {
-            //TODO: call preference provider markDoneOnBoard
-            context.go(NamedRoutes.loginView);
-          } else {
-            _pageController.nextPage(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.ease,
-            );
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        child: Text(
-          _condition ? 'Get Started' : 'Next',
-          style: context.textTheme.titleMedium,
         ),
       ),
     );

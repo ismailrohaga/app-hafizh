@@ -16,9 +16,9 @@ class SplashView extends StatelessWidget {
       (_) => {
         if (isDoneOnBoard)
           //TODO: check whether the user is logged in
-          {context.go(NamedRoutes.homeView)}
+          {context.goNamed(NamedRoutes.homeView)}
         else
-          {context.go(NamedRoutes.onBoardView)}
+          {context.goNamed(NamedRoutes.onBoardView)}
       },
     );
   }
