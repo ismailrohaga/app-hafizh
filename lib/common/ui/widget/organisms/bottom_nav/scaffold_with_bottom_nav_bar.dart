@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class OrganismScaffoldWithBottomNavBar extends StatefulWidget {
   const OrganismScaffoldWithBottomNavBar({Key? key, required this.child})
@@ -29,14 +32,18 @@ class _OrganismScaffoldWithBottomNavBarState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        items: tabs,
-        onTap: (index) => _onItemTapped(context, index),
-      ),
-    );
+    return Consumer<PreferenceSettingsProvider>(
+        builder: (context, prefSetProvider, _) {
+      return Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: prefSetProvider.systemUiOverlayStyle, child: widget.child),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          items: tabs,
+          onTap: (index) => _onItemTapped(context, index),
+        ),
+      );
+    });
   }
 }
 

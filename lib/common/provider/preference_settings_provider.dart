@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hafizh/common/helper/preference_settings_helper.dart';
 import 'package:hafizh/common/ui/app_theme.dart';
 
@@ -15,6 +16,8 @@ class PreferenceSettingsProvider extends ChangeNotifier {
   bool get isDarkTheme => _isDarkTheme;
   ThemeData get themeData =>
       _isDarkTheme ? AppTheme().darkTheme : AppTheme().lightTheme;
+  SystemUiOverlayStyle get systemUiOverlayStyle =>
+      _isDarkTheme ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark;
 
   //onboard
   bool _isDoneOnBoard = false;
