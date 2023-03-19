@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
-import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/common/state/view_data_state.dart';
+import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
+import 'package:hafizh/presentation/login/cubit/login_state.dart';
 
 class GoogleSignInButton extends StatefulWidget {
   const GoogleSignInButton({super.key});
@@ -13,59 +15,61 @@ class GoogleSignInButton extends StatefulWidget {
 }
 
 class _GoogleSignInButtonState extends State<GoogleSignInButton> {
-  bool _isSigningIn = false;
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.lg),
-      child: _isSigningIn
-          ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            )
-          : OutlinedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              onPressed: () async {
-                setState(() {
-                  _isSigningIn = true;
-                });
+    return BlocBuilder<LoginCubit, LoginState>(
+      bloc: context.read<LoginCubit>(),
+      builder: (context, state) {
+        final status = state.viewData.status;
 
-                // TODO: Add a method call to the Google Sign-In authentication
-                context.go(NamedRoutes.homeView);
+        if (status.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-                setState(() {
-                  _isSigningIn = false;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Image(
-                      image: AssetImage(AssetConstant.googleIcon),
-                      height: 22.0,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Sign in with Google',
-                        style: context.textTheme.titleMedium!
-                            .copyWith(color: Colors.black),
-                      ),
-                    )
-                  ],
+        if (status.isError) {
+          return Text(state.message);
+        }
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.lg),
+          child: OutlinedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.white),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ),
+            onPressed: () async {
+              context.read<LoginCubit>().signInWithGoogle();
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Image(
+                    image: AssetImage(AssetConstant.googleIcon),
+                    height: 22.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      'Sign in with Google',
+                      style: context.textTheme.titleMedium!
+                          .copyWith(color: Colors.black),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
