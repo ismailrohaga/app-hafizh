@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
+import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
@@ -17,10 +19,14 @@ class GoogleSignInButton extends StatefulWidget {
 class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<LoginCubit>();
+
     return BlocBuilder<LoginCubit, LoginState>(
-      bloc: context.read<LoginCubit>(),
+      bloc: bloc,
       builder: (context, state) {
         final status = state.viewData.status;
+
+        print(status.toString());
 
         if (status.isLoading) {
           return const Center(
@@ -29,7 +35,17 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
         }
 
         if (status.isError) {
-          return Text(state.message);
+          context.scaffoldMessenger
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.viewData.message),
+              ),
+            );
+        }
+
+        if (status.isHasData) {
+          context.goNamed(NamedRoutes.homeView);
         }
 
         return Padding(
@@ -43,9 +59,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 ),
               ),
             ),
-            onPressed: () async {
-              context.read<LoginCubit>().signInWithGoogle();
-            },
+            onPressed: () async => await bloc.signInWithGoogleUseCase(),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Row(

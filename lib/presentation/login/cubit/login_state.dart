@@ -10,6 +10,16 @@ class LoginState extends Equatable {
     this.message = '',
   }) : viewData = viewData ?? ViewData.initial();
 
+  LoginState copyWith({
+    ViewData? viewData,
+    String? message,
+  }) {
+    return LoginState(
+      viewData: viewData ?? this.viewData,
+      message: message ?? this.message,
+    );
+  }
+
   @override
   List<Object?> get props => [viewData, message];
 }

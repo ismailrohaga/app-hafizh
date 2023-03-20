@@ -12,19 +12,21 @@ class LoginCubit extends Cubit<LoginState> {
         ));
 
   Future<void> signInWithGoogle() async {
-    emit(LoginState(
-      viewData: ViewData.loading(message: "Logging in"),
+    emit(state.copyWith(
+      viewData: ViewData.loading(
+        message: "Logging in...",
+      ),
     ));
 
     final result = await signInWithGoogleUseCase.call();
 
     result.fold(
-        (failure) => emit(LoginState(
+        (failure) => emit(state.copyWith(
               message: failure.message,
               viewData: ViewData.error(message: failure.message),
             )),
         (user) => emit(
-              LoginState(
+              state.copyWith(
                   message: "Login successful",
                   viewData: ViewData.loaded(data: user)),
             ));

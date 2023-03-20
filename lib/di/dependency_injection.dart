@@ -41,12 +41,11 @@ class DependencyInjection {
 
     // Google Signin
     locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn(
-            clientId:
-                "440550480887-cp6hsnjdv75ccnkbnkkvelpsqmnij72c.apps.googleusercontent.com",
-            scopes: [
-              'email',
-              'https://www.googleapis.com/auth/contacts.readonly',
-            ]));
+          scopes: [
+            'email',
+            'https://www.googleapis.com/auth/contacts.readonly',
+          ],
+        ));
 
     /// Database
     locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());

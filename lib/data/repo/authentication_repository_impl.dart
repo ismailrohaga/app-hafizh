@@ -16,11 +16,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
     FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
   })  : firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        googleSignIn = googleSignIn ??
-            GoogleSignIn(clientId: 'YOUR_CLIENT_ID', scopes: [
-              'email',
-              'https://www.googleapis.com/auth/contacts.readonly',
-            ]);
+        googleSignIn = googleSignIn ?? GoogleSignIn();
 
   @visibleForTesting
   bool isWeb = kIsWeb;
@@ -42,35 +38,31 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
   }
 
   // TODO: Implement this method to get the current user from shared preferences @ismail
-  // UserEntity get currentUser {
-  //   final firebaseUser = firebaseAuth.currentUser;
+  UserEntity get currentUser {
+    final firebaseUser = firebaseAuth.currentUser;
 
-  //   return firebaseUser?.toUserEntity ?? UserEntity.empty;
-  // }
+    return firebaseUser?.toUserEntity ?? UserEntity.empty;
+  }
 
   @override
   Future<Either<LogInWithGoogleFailure, UserEntity>> signInWithGoogle() async {
     try {
-      // late final AuthCredential credential;
-
-      // print(googleSignIn.clientId);
+      late final AuthCredential credential;
 
       // TODO: Need to check on ios/Runner (GoogleService-Info.plist) if it's included @ismail
       final googleUser = await googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;
 
-      print(googleAuth.accessToken.toString());
+      credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-      // credential = GoogleAuthProvider.credential(
-      //   accessToken: googleAuth.accessToken,
-      //   idToken: googleAuth.idToken,
-      // );
+      final user = await firebaseAuth.signInWithCredential(credential);
 
-      // // final user = await firebaseAuth.signInWithCredential(credential);
-
-      // print("HALO ${credential.accessToken}");
-
-      return const Right(UserEntity(id: ''));
+      return Right(
+        user.user?.toUserEntity ?? UserEntity.empty,
+      );
     } on FirebaseAuthException catch (e) {
       return Left(LogInWithGoogleFailure.fromCode(e.code));
     } catch (_) {

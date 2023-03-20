@@ -3,12 +3,18 @@ import 'package:hafizh/common/const/screen_padding_constant.dart';
 import 'package:hafizh/common/ui/widget/atoms/circular_percentage_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/atoms/horizontal_progress_bar_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/molecules/chart/bar_chart_widget.dart';
+import 'package:hafizh/presentation/bloc/app_bloc.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+
+    print(user.toString());
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(ScreenPaddingConstant.horizontal),
