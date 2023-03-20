@@ -21,4 +21,18 @@ class UserEntity extends Equatable {
 
   @override
   List<Object?> get props => [id, name, email, photo];
+
+  factory UserEntity.fromJson(Map<String, dynamic> json) => UserEntity(
+        id: json["id"],
+        name: json["name"],
+        email: json["email"],
+        photo: json["photo"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "email": email,
+        "photo": photo,
+      };
 }

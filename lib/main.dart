@@ -4,6 +4,8 @@ import 'package:hafizh/common/helper/helper.dart';
 import 'package:hafizh/common/provider/provider.dart';
 import 'package:hafizh/common/ui/app_theme.dart';
 import 'package:hafizh/core/router/app_router.dart';
+import 'package:hafizh/presentation/bloc/app_bloc.dart';
+import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,14 +24,23 @@ class App extends StatelessWidget {
           ),
         ),
       ],
-      child: Consumer<PreferenceSettingsProvider>(
-        builder: (context, prefSetProvider, _) {
-          return MaterialApp.router(
-            title: 'Hafizh',
-            theme: prefSetProvider.themeData,
-            routerConfig: appRouter,
-          );
-        },
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (_) => AppBloc(authenticationRepository: locator())),
+          BlocProvider(
+              create: (context) =>
+                  LoginCubit(signInWithGoogleUseCase: locator())),
+        ],
+        child: Consumer<PreferenceSettingsProvider>(
+          builder: (context, prefSetProvider, _) {
+            return MaterialApp.router(
+              title: 'Hafizh',
+              theme: prefSetProvider.themeData,
+              routerConfig: appRouter,
+            );
+          },
+        ),
       ),
     );
   }

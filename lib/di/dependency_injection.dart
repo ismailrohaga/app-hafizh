@@ -1,4 +1,6 @@
 import 'package:hafizh/common/dependencies/dependencies.dart';
+import 'package:hafizh/common/helper/preference_settings_helper.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/core/credentials.dart';
 import 'package:hafizh/core/network/dio_handler.dart';
 import 'package:hafizh/data/data_source/quran_local_data_source.dart';
@@ -32,17 +34,23 @@ class DependencyInjection {
         () => DioHandler(baseUrl: locator<Credentials>().baseUrl));
     locator.registerLazySingleton<Dio>(() => locator<DioHandler>().dio);
 
+    // Shared Preference
+    locator.registerLazySingleton<Future<SharedPreferences>>(
+        () => SharedPreferences.getInstance());
+
+    // Shared Preference Settings
+    locator.registerLazySingleton<PreferenceSettingsHelper>(
+        () => PreferenceSettingsHelper(sharedPreferences: locator()));
+
+    // PreferenceSettingsProvider
+    locator.registerLazySingleton<PreferenceSettingsProvider>(
+        () => PreferenceSettingsProvider(preferenceSettingsHelper: locator()));
+
     // Firebase
     locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
     // Google Signin
-    locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn(
-            clientId:
-                "440550480887-cp6hsnjdv75ccnkbnkkvelpsqmnij72c.apps.googleusercontent.com",
-            scopes: [
-              'email',
-              'https://www.googleapis.com/auth/contacts.readonly',
-            ]));
+    locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
 
     /// Database
     locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
@@ -61,8 +69,9 @@ class DependencyInjection {
 
     locator.registerLazySingleton<AuthenticationRepo>(() =>
         AuthenticationRepositoryImpl(
-            firebaseAuth: locator<FirebaseAuth>(),
-            googleSignIn: locator<GoogleSignIn>()));
+            preferenceSettingsProvider: locator(),
+            firebaseAuth: locator(),
+            googleSignIn: locator()));
 
     /// Use Case
     locator.registerLazySingleton<GetSurahUsecase>(

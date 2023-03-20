@@ -1,26 +1,23 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
+
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/error/auth_error.dart';
 import 'package:hafizh/common/ext/firebase_auth_ext.dart';
+import 'package:hafizh/common/provider/provider.dart';
 import 'package:hafizh/domain/repo/authentication_repo.dart';
 import 'package:hafizh/domain/entity/user_entity.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter/foundation.dart';
-import 'package:dartz/dartz.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepo {
   final FirebaseAuth firebaseAuth;
   final GoogleSignIn googleSignIn;
+  final PreferenceSettingsProvider preferenceSettingsProvider;
 
   AuthenticationRepositoryImpl({
-    FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
-  })  : firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        googleSignIn = googleSignIn ??
-            GoogleSignIn(clientId: 'YOUR_CLIENT_ID', scopes: [
-              'email',
-              'https://www.googleapis.com/auth/contacts.readonly',
-            ]);
+    required this.preferenceSettingsProvider,
+    required this.firebaseAuth,
+    required this.googleSignIn,
+  });
 
   @visibleForTesting
   bool isWeb = kIsWeb;
@@ -28,49 +25,43 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
   @visibleForTesting
   static const userCacheKey = '__user_cache_key__';
 
+  @override
   Stream<UserEntity> get user {
     return firebaseAuth.authStateChanges().map(
       (firebaseUser) {
-        // If the firebaseUser is null, return an empty user.
-        final UserEntity user = firebaseUser?.toUserEntity ?? UserEntity.empty;
+        final user = firebaseUser?.toUserEntity ?? UserEntity.empty;
 
-        // TODO: Save the user to shared preferences @ismail
+        preferenceSettingsProvider.setUser(user);
 
         return user;
       },
     );
   }
 
-  // TODO: Implement this method to get the current user from shared preferences @ismail
-  // UserEntity get currentUser {
-  //   final firebaseUser = firebaseAuth.currentUser;
-
-  //   return firebaseUser?.toUserEntity ?? UserEntity.empty;
-  // }
+  @override
+  UserEntity get currentUser {
+    final firebaseUser = firebaseAuth.currentUser;
+    return firebaseUser?.toUserEntity ?? preferenceSettingsProvider.user;
+  }
 
   @override
   Future<Either<LogInWithGoogleFailure, UserEntity>> signInWithGoogle() async {
     try {
-      // late final AuthCredential credential;
+      late final AuthCredential credential;
 
-      // print(googleSignIn.clientId);
-
-      // TODO: Need to check on ios/Runner (GoogleService-Info.plist) if it's included @ismail
       final googleUser = await googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;
 
-      print(googleAuth.accessToken.toString());
+      credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-      // credential = GoogleAuthProvider.credential(
-      //   accessToken: googleAuth.accessToken,
-      //   idToken: googleAuth.idToken,
-      // );
+      final user = await firebaseAuth.signInWithCredential(credential);
 
-      // // final user = await firebaseAuth.signInWithCredential(credential);
-
-      // print("HALO ${credential.accessToken}");
-
-      return const Right(UserEntity(id: ''));
+      return Right(
+        user.user?.toUserEntity ?? UserEntity.empty,
+      );
     } on FirebaseAuthException catch (e) {
       return Left(LogInWithGoogleFailure.fromCode(e.code));
     } catch (_) {
