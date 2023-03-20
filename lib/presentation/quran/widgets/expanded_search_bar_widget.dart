@@ -19,7 +19,7 @@ class _ExpandedSearchBarWidget extends State<ExpandedSearchBarWidget> {
   void initState() {
     super.initState();
 
-    if (widget.value != null) {
+    if (widget.value != null && widget.value!.isNotEmpty) {
       _isExpanded = true;
     }
 
