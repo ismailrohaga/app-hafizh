@@ -30,10 +30,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
   Stream<UserEntity> get user {
     return firebaseAuth.authStateChanges().map(
       (firebaseUser) {
-        // If the firebaseUser is null, return an empty user.
         final user = firebaseUser?.toUserEntity ?? UserEntity.empty;
 
-        // TODO: Save the user to shared preferences @ismail
         preferenceSettingsProvider.setUser(user);
 
         return user;
@@ -68,6 +66,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
     } on FirebaseAuthException catch (e) {
       return Left(LogInWithGoogleFailure.fromCode(e.code));
     } catch (_) {
+      print(_.toString());
       return const Left(LogInWithGoogleFailure());
     }
   }
