@@ -8,11 +8,11 @@ import 'package:hafizh/di/dependency_injection.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  DependencyInjection.registerDependencies(env: Environment.prod);
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptionsProd.currentPlatform,
   );
+
+  DependencyInjection.registerDependencies(env: Environment.prod);
 
   runApp(const App());
 }

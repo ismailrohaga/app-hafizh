@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/helper/preference_settings_helper.dart';
 import 'package:hafizh/common/ui/app_theme.dart';
+import 'package:hafizh/domain/entity/user_entity.dart';
 
 class PreferenceSettingsProvider extends ChangeNotifier {
   late PreferenceSettingsHelper preferenceSettingsHelper;
@@ -8,6 +9,7 @@ class PreferenceSettingsProvider extends ChangeNotifier {
   PreferenceSettingsProvider({required this.preferenceSettingsHelper}) {
     _getTheme();
     _getIsDoneOnBoard();
+    _getUser();
   }
 
   //theme
@@ -20,6 +22,9 @@ class PreferenceSettingsProvider extends ChangeNotifier {
   bool _isDoneOnBoard = false;
   bool get isDoneOnBoard => _isDoneOnBoard;
 
+  UserEntity? _user;
+  UserEntity get user => _user ?? UserEntity.empty;
+
   void _getTheme() async {
     _isDarkTheme = await preferenceSettingsHelper.isDarkTheme;
     notifyListeners();
@@ -27,6 +32,11 @@ class PreferenceSettingsProvider extends ChangeNotifier {
 
   void _getIsDoneOnBoard() async {
     _isDoneOnBoard = await preferenceSettingsHelper.isDoneOnBoard;
+    notifyListeners();
+  }
+
+  void _getUser() async {
+    _user = await preferenceSettingsHelper.user;
     notifyListeners();
   }
 
@@ -38,5 +48,10 @@ class PreferenceSettingsProvider extends ChangeNotifier {
   void markDoneOnBoard() {
     preferenceSettingsHelper.setDoneOnBoard(true);
     _getIsDoneOnBoard();
+  }
+
+  void setUser(UserEntity user) {
+    preferenceSettingsHelper.setUser(user);
+    _getUser();
   }
 }
