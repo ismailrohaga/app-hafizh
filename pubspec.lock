@@ -153,6 +153,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.2"
+  dio_cache_interceptor:
+    dependency: "direct main"
+    description:
+      name: dio_cache_interceptor
+      sha256: "24f5fb2fbffea25325e9eabc1501b6582d0928b0ef5cb9127c920e58fbf6ca62"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   equatable:
     dependency: "direct main"
     description:
