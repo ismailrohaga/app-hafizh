@@ -1,8 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hafizh/common/dependencies/get_it/get_it.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/helper/preference_settings_helper.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/core/credentials.dart';
@@ -26,7 +22,6 @@ import 'package:hafizh/domain/usecase/save_bookmark_verses_usecase.dart';
 import 'package:hafizh/domain/usecase/save_last_read_usecase.dart';
 import 'package:hafizh/domain/usecase/status_bookmark_verse_usecase.dart';
 import 'package:hafizh/domain/usecase/update_last_read_usecase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DependencyInjection {
   static Future<void> registerDependencies({

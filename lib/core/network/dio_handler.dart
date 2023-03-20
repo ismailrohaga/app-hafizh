@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/core/network/api_interceptors.dart';
 import 'package:hafizh/core/network/cache_interceptors.dart';
 

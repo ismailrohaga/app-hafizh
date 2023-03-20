@@ -1,13 +1,12 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
+
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/error/auth_error.dart';
 import 'package:hafizh/common/ext/firebase_auth_ext.dart';
-import 'package:hafizh/common/provider/preference_settings_provider.dart';
+import 'package:hafizh/common/provider/provider.dart';
 import 'package:hafizh/domain/repo/authentication_repo.dart';
 import 'package:hafizh/domain/entity/user_entity.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter/foundation.dart';
-import 'package:dartz/dartz.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepo {
   final FirebaseAuth firebaseAuth;
