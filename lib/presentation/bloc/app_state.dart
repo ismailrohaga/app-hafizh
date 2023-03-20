@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:hafizh/domain/entity/user_entity.dart';
+part of 'app_bloc.dart';
 
 enum AppStatus {
   authenticated,
@@ -7,9 +6,6 @@ enum AppStatus {
 }
 
 class AppState extends Equatable {
-  final AppStatus status;
-  final UserEntity user;
-
   const AppState._({
     required this.status,
     this.user = UserEntity.empty,
@@ -20,6 +16,9 @@ class AppState extends Equatable {
 
   const AppState.unauthenticated() : this._(status: AppStatus.unauthenticated);
 
+  final AppStatus status;
+  final UserEntity user;
+
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object> get props => [status, user];
 }

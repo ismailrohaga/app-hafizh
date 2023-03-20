@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hafizh/domain/entity/user_entity.dart';
 import 'package:hafizh/domain/repo/authentication_repo.dart';
-import 'package:hafizh/presentation/bloc/app_event.dart';
-import 'package:hafizh/presentation/bloc/app_state.dart';
+import 'package:equatable/equatable.dart';
+
+part 'app_event.dart';
+part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({required AuthenticationRepo authenticationRepository})
@@ -16,6 +18,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         ) {
     on<AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
+
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AppUserChanged(user)),
     );

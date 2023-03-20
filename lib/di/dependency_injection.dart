@@ -40,12 +40,7 @@ class DependencyInjection {
     locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
     // Google Signin
-    locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn(
-          scopes: [
-            'email',
-            'https://www.googleapis.com/auth/contacts.readonly',
-          ],
-        ));
+    locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
 
     /// Database
     locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
@@ -64,8 +59,7 @@ class DependencyInjection {
 
     locator.registerLazySingleton<AuthenticationRepo>(() =>
         AuthenticationRepositoryImpl(
-            firebaseAuth: locator<FirebaseAuth>(),
-            googleSignIn: locator<GoogleSignIn>()));
+            firebaseAuth: locator(), googleSignIn: locator()));
 
     /// Use Case
     locator.registerLazySingleton<GetSurahUsecase>(

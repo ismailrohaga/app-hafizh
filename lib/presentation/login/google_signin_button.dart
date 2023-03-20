@@ -21,69 +21,79 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   Widget build(BuildContext context) {
     final bloc = context.read<LoginCubit>();
 
-    return BlocBuilder<LoginCubit, LoginState>(
-      bloc: bloc,
-      builder: (context, state) {
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
         final status = state.viewData.status;
+        final message = state.message;
 
-        print(status.toString());
-
-        if (status.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
+        if (status.isError) {
+          context.scaffoldMessenger.showSnackBar(
+            SnackBar(
+              backgroundColor: context.colors.primary,
+              content: Text(message.toString()),
+            ),
           );
         }
 
-        if (status.isError) {
-          context.scaffoldMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(state.viewData.message),
-              ),
-            );
-        }
-
         if (status.isHasData) {
+          context.scaffoldMessenger.showSnackBar(
+            SnackBar(
+              backgroundColor: context.colors.background,
+              content: Text(message.toString()),
+            ),
+          );
+
           context.goNamed(NamedRoutes.homeView);
         }
+      },
+      child: BlocBuilder<LoginCubit, LoginState>(
+        bloc: bloc,
+        builder: (context, state) {
+          final status = state.viewData.status;
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.lg),
-          child: OutlinedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+          if (status.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.lg),
+            child: OutlinedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              onPressed: () => context.read<LoginCubit>().signInWithGoogle(),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Image(
+                      image: AssetImage(AssetConstant.googleIcon),
+                      height: 22.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Sign in with Google',
+                        style: context.textTheme.titleMedium!
+                            .copyWith(color: Colors.black),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
-            onPressed: () async => await bloc.signInWithGoogleUseCase(),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Image(
-                    image: AssetImage(AssetConstant.googleIcon),
-                    height: 22.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      'Sign in with Google',
-                      style: context.textTheme.titleMedium!
-                          .copyWith(color: Colors.black),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

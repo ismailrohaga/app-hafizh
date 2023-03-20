@@ -24,11 +24,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
   @visibleForTesting
   static const userCacheKey = '__user_cache_key__';
 
+  @override
   Stream<UserEntity> get user {
     return firebaseAuth.authStateChanges().map(
       (firebaseUser) {
         // If the firebaseUser is null, return an empty user.
-        final UserEntity user = firebaseUser?.toUserEntity ?? UserEntity.empty;
+        final user = firebaseUser?.toUserEntity ?? UserEntity.empty;
 
         // TODO: Save the user to shared preferences @ismail
 
@@ -37,10 +38,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
     );
   }
 
-  // TODO: Implement this method to get the current user from shared preferences @ismail
+  @override
   UserEntity get currentUser {
     final firebaseUser = firebaseAuth.currentUser;
-
     return firebaseUser?.toUserEntity ?? UserEntity.empty;
   }
 
@@ -49,7 +49,6 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
     try {
       late final AuthCredential credential;
 
-      // TODO: Need to check on ios/Runner (GoogleService-Info.plist) if it's included @ismail
       final googleUser = await googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;
 

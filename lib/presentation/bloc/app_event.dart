@@ -1,4 +1,4 @@
-import 'package:hafizh/domain/entity/user_entity.dart';
+part of 'app_bloc.dart';
 
 abstract class AppEvent {
   const AppEvent();
