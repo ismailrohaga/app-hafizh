@@ -22,7 +22,7 @@ class QuranView extends StatelessWidget {
               subtitle: "Last Read at ayah ${index + 1}",
               name: "Al-Fatiha",
               number: index + 1,
-              onTap: () => context.pushNamed(NamedRoutes.detailSurahView),
+              onTap: () => context.goNamed(NamedRoutes.detailSurahView),
             ),
           ),
         ),
