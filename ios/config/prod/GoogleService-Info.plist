@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SERVER_CLIENT_ID</key>
+	<string>1075143665059-dn6hofeogabh64e8eenfie9r108acgp3.apps.googleusercontent.com</string>
 	<key>CLIENT_ID</key>
-	<string>1075143665059-c3l0klmaigugf3k3bebnkmkea1bssj22.apps.googleusercontent.com</string>
+	<string>1075143665059-f5m1did77hcr092ris6g33gdrqpcm7jo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1075143665059-c3l0klmaigugf3k3bebnkmkea1bssj22</string>
+	<string>com.googleusercontent.apps.1075143665059-f5m1did77hcr092ris6g33gdrqpcm7jo</string>
 	<key>API_KEY</key>
 	<string>AIzaSyB-B35fGRU7EZ2QwxVtHNfGyHb_reuiPwc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.sixmavericks.hafizh</string>
+	<string>com.sixmavericks.hafizh.prod</string>
 	<key>PROJECT_ID</key>
 	<string>hafizh-prod</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1075143665059:ios:3a4f09d3c6125ca1096616</string>
+	<string>1:1075143665059:ios:033d8e5facffa751096616</string>
 </dict>
 </plist>
