@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/domain/entity/user_entity.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceSettingsHelper {
   final Future<SharedPreferences> sharedPreferences;

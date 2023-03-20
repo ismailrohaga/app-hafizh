@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/screen_padding_constant.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/widget/atoms/circular_percentage_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/atoms/horizontal_progress_bar_indicator_widget.dart';

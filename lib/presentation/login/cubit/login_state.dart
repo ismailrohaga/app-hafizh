@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
 
 class LoginState extends Equatable {
