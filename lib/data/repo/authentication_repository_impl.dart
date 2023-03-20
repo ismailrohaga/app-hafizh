@@ -66,7 +66,6 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
     } on FirebaseAuthException catch (e) {
       return Left(LogInWithGoogleFailure.fromCode(e.code));
     } catch (_) {
-      print(_.toString());
       return const Left(LogInWithGoogleFailure());
     }
   }
