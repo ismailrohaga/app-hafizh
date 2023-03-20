@@ -14,22 +14,22 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter appRouter = GoRouter(
-  initialLocation: NamedRoutes.splashView,
+  initialLocation: '/splash-view',
   navigatorKey: _rootNavigatorKey,
   routes: [
     GoRoute(
       name: NamedRoutes.splashView,
-      path: NamedRoutes.splashView,
+      path: '/splash-view',
       builder: (context, state) => const SplashView(),
     ),
     GoRoute(
       name: NamedRoutes.onBoardView,
-      path: NamedRoutes.onBoardView,
+      path: '/onboard-view',
       builder: (context, state) => const OnBoardView(),
     ),
     GoRoute(
       name: NamedRoutes.loginView,
-      path: NamedRoutes.loginView,
+      path: '/login-view',
       builder: (context, state) => const LoginView(),
     ),
     ShellRoute(
@@ -40,19 +40,19 @@ final GoRouter appRouter = GoRouter(
       routes: [
         GoRoute(
           name: NamedRoutes.homeView,
-          path: NamedRoutes.homeView,
+          path: '/home-view',
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: HomeView()),
         ),
         GoRoute(
           name: NamedRoutes.quranView,
-          path: NamedRoutes.quranView,
+          path: '/quran-view',
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: QuranView()),
         ),
         GoRoute(
           name: NamedRoutes.settingsView,
-          path: NamedRoutes.settingsView,
+          path: '/settings-view',
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: SettingsView()),
         ),
@@ -60,7 +60,7 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       name: NamedRoutes.detailSurahView,
-      path: NamedRoutes.detailSurahView,
+      path: '/detail-surah-view',
       builder: (context, state) => const DetailSurahView(),
     ),
   ],
