@@ -17,22 +17,23 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
-        BlocProvider(
-            create: (_) => AppBloc(authenticationRepository: locator())),
-        BlocProvider(
-            create: (_) => LoginCubit(signInWithGoogleUseCase: locator())),
-      ],
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => PreferenceSettingsProvider(
-              preferenceSettingsHelper: PreferenceSettingsHelper(
-                sharedPreferences: SharedPreferences.getInstance(),
-              ),
+        ChangeNotifierProvider(
+          create: (_) => PreferenceSettingsProvider(
+            preferenceSettingsHelper: PreferenceSettingsHelper(
+              sharedPreferences: SharedPreferences.getInstance(),
             ),
           ),
+        ),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (_) => AppBloc(authenticationRepository: locator())),
+          BlocProvider(
+              create: (context) =>
+                  LoginCubit(signInWithGoogleUseCase: locator())),
         ],
         child: Consumer<PreferenceSettingsProvider>(
           builder: (context, prefSetProvider, _) {

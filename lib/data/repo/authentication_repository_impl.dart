@@ -1,5 +1,6 @@
 import 'package:hafizh/common/error/auth_error.dart';
 import 'package:hafizh/common/ext/firebase_auth_ext.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/domain/repo/authentication_repo.dart';
 import 'package:hafizh/domain/entity/user_entity.dart';
 
@@ -11,12 +12,13 @@ import 'package:dartz/dartz.dart';
 class AuthenticationRepositoryImpl extends AuthenticationRepo {
   final FirebaseAuth firebaseAuth;
   final GoogleSignIn googleSignIn;
+  final PreferenceSettingsProvider preferenceSettingsProvider;
 
   AuthenticationRepositoryImpl({
-    FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
-  })  : firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        googleSignIn = googleSignIn ?? GoogleSignIn();
+    required this.preferenceSettingsProvider,
+    required this.firebaseAuth,
+    required this.googleSignIn,
+  });
 
   @visibleForTesting
   bool isWeb = kIsWeb;
@@ -32,6 +34,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
         final user = firebaseUser?.toUserEntity ?? UserEntity.empty;
 
         // TODO: Save the user to shared preferences @ismail
+        preferenceSettingsProvider.setUser(user);
 
         return user;
       },
@@ -41,7 +44,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
   @override
   UserEntity get currentUser {
     final firebaseUser = firebaseAuth.currentUser;
-    return firebaseUser?.toUserEntity ?? UserEntity.empty;
+    return firebaseUser?.toUserEntity ?? preferenceSettingsProvider.user;
   }
 
   @override

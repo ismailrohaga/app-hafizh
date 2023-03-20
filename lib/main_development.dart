@@ -9,11 +9,11 @@ import 'package:hafizh/core/firebase/firebase_options_dev.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  DependencyInjection.registerDependencies(env: Environment.dev);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptionsDev.currentPlatform,
   );
-
-  DependencyInjection.registerDependencies(env: Environment.dev);
 
   runApp(const App());
 }

@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hafizh/common/dependencies/get_it/get_it.dart';
+import 'package:hafizh/common/helper/preference_settings_helper.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/core/credentials.dart';
 import 'package:hafizh/core/network/dio_handler.dart';
 import 'package:hafizh/data/data_source/quran_local_data_source.dart';
@@ -24,6 +26,7 @@ import 'package:hafizh/domain/usecase/save_bookmark_verses_usecase.dart';
 import 'package:hafizh/domain/usecase/save_last_read_usecase.dart';
 import 'package:hafizh/domain/usecase/status_bookmark_verse_usecase.dart';
 import 'package:hafizh/domain/usecase/update_last_read_usecase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DependencyInjection {
   static Future<void> registerDependencies({
@@ -35,6 +38,18 @@ class DependencyInjection {
     locator.registerLazySingleton<DioHandler>(
         () => DioHandler(baseUrl: locator<Credentials>().baseUrl));
     locator.registerLazySingleton<Dio>(() => locator<DioHandler>().dio);
+
+    // Shared Preference
+    locator.registerLazySingleton<Future<SharedPreferences>>(
+        () => SharedPreferences.getInstance());
+
+    // Shared Preference Settings
+    locator.registerLazySingleton<PreferenceSettingsHelper>(
+        () => PreferenceSettingsHelper(sharedPreferences: locator()));
+
+    // PreferenceSettingsProvider
+    locator.registerLazySingleton<PreferenceSettingsProvider>(
+        () => PreferenceSettingsProvider(preferenceSettingsHelper: locator()));
 
     // Firebase
     locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
@@ -59,7 +74,9 @@ class DependencyInjection {
 
     locator.registerLazySingleton<AuthenticationRepo>(() =>
         AuthenticationRepositoryImpl(
-            firebaseAuth: locator(), googleSignIn: locator()));
+            preferenceSettingsProvider: locator(),
+            firebaseAuth: locator(),
+            googleSignIn: locator()));
 
     /// Use Case
     locator.registerLazySingleton<GetSurahUsecase>(
