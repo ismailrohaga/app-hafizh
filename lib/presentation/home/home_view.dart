@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/const/screen_padding_constant.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
-import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/widget/atoms/circular_percentage_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/atoms/horizontal_progress_bar_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/molecules/chart/bar_chart_widget.dart';
@@ -13,8 +13,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select((AppBloc bloc) => bloc.state.user);
-
     return BlocListener<AppBloc, AppState>(
       listener: (context, state) {
         if (state.status == AppStatus.unauthenticated) {
@@ -28,34 +26,6 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                  onPressed: () =>
-                      context.read<AppBloc>().add(const AppLogoutRequested()),
-                  child: Text(
-                    "Logout",
-                    style: context.textTheme.titleMedium,
-                  )),
-              Text(
-                user.name.toString(),
-                style: context.textTheme.bodyLarge?.copyWith(
-                  color: context.colors.primary,
-                ),
-              ),
-              user.photo == null
-                  ? const SizedBox()
-                  : Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(user.photo.toString()),
-                        ),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-              const SizedBox(
-                height: 24,
-              ),
               const AtomCircularPercentageIndicatorWidget(
                 value: 0.8,
               ),

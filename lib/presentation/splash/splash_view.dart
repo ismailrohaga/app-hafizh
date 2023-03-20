@@ -21,14 +21,14 @@ class _SplashViewState extends State<SplashView> {
   //   Future.delayed(const Duration(seconds: 3)).then(
   //     (_) {
   //       if (!isNotLoggedIn) {
-  //         context.go(NamedRoutes.homeView);
+  //         context.goNamed(NamedRoutes.homeView);
   //         return;
   //       }
 
   //       if (isDoneOnBoard) {
-  //         context.go(NamedRoutes.homeView);
+  //         context.goNamed(NamedRoutes.homeView);
   //       } else {
-  //         context.go(NamedRoutes.onBoardView);
+  //         context.goNamed(NamedRoutes.onBoardView);
   //       }
   //     },
   //   );
@@ -43,14 +43,14 @@ class _SplashViewState extends State<SplashView> {
         final user = prefSetProvider.user;
 
         if (user.isNotEmpty) {
-          return context.go(NamedRoutes.homeView);
+          return context.goNamed(NamedRoutes.homeView);
         }
 
         if (!isDoneOnBoard) {
-          return context.go(NamedRoutes.onBoardView);
+          return context.goNamed(NamedRoutes.onBoardView);
         }
 
-        context.go(NamedRoutes.loginView);
+        context.goNamed(NamedRoutes.loginView);
       });
     });
 

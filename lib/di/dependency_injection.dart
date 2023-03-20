@@ -104,7 +104,6 @@ class DependencyInjection {
     locator.registerLazySingleton<StatusBookmarkVerseUsecase>(
         () => StatusBookmarkVerseUsecase(repository: locator()));
 
-    // Authentication Use Case
     locator.registerLazySingleton<SignInWithGoogleUseCase>(
         () => SignInWithGoogleUseCase(repository: locator()));
 

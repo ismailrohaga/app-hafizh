@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hafizh/common/const/named_routes.dart';
 
 class OrganismScaffoldWithBottomNavBar extends StatefulWidget {
   const OrganismScaffoldWithBottomNavBar({Key? key, required this.child})

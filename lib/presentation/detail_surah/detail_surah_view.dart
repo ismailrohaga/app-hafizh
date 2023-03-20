@@ -14,7 +14,7 @@ class DetailSurahView extends StatelessWidget {
         surahNumber: 2,
         onBackPressed: () => context.canPop()
             ? context.pop()
-            : context.goNamed(NamedRoutes.homeView),
+            : context.goNamed(NamedRoutes.quranView),
         child: const Center(child: Text("DetailSurah View")));
   }
 }

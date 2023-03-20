@@ -6,6 +6,7 @@ import 'package:hafizh/common/ui/app_theme.dart';
 import 'package:hafizh/core/router/app_router.dart';
 import 'package:hafizh/presentation/bloc/app_bloc.dart';
 import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
+import 'package:hafizh/presentation/quran/bloc/quran_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -31,6 +32,7 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   LoginCubit(signInWithGoogleUseCase: locator())),
+          BlocProvider(create: (_) => QuranBloc(getSurahUsecase: locator()))
         ],
         child: Consumer<PreferenceSettingsProvider>(
           builder: (context, prefSetProvider, _) {
