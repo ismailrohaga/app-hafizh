@@ -51,17 +51,17 @@ class ScaffoldWithNavBarTabItem extends BottomNavigationBarItem {
 
 const tabs = [
   ScaffoldWithNavBarTabItem(
-    initialLocation: NamedRoutes.homeView,
+    initialLocation: '/home-view',
     icon: Icon(Icons.home),
     label: 'Home',
   ),
   ScaffoldWithNavBarTabItem(
-    initialLocation: NamedRoutes.quranView,
+    initialLocation: '/quran-view',
     icon: Icon(Icons.menu_book_rounded),
     label: 'Quran',
   ),
   ScaffoldWithNavBarTabItem(
-    initialLocation: NamedRoutes.settingsView,
+    initialLocation: '/settings-view',
     icon: Icon(Icons.settings),
     label: 'Settings',
   ),
