@@ -9,7 +9,7 @@ class TahfidzhHistoryListDelegateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
+          horizontal: ScreenPaddingConstant.horizontal),
       child: Column(
         children: [
           SurahCardWidget(
