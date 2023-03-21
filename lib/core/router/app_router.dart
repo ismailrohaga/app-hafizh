@@ -4,7 +4,6 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/widget/organisms/bottom_nav/scaffold_with_bottom_nav_bar.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
-import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/login/login_view.dart';
 import 'package:hafizh/presentation/quran/quran_view.dart';
 import 'package:hafizh/presentation/settings/settings_view.dart';
@@ -61,8 +60,11 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       name: NamedRoutes.detailSurahView,
-      path: '/detail-surah-view',
-      builder: (context, state) => const DetailSurahView(),
+      path: '/detail-surah-view/:id',
+      builder: (context, state) => DetailSurahView(
+        key: const Key('detail-surah-view'),
+        number: int.parse(state.params['id']!),
+      ),
     ),
   ],
 );
