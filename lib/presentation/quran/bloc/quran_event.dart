@@ -7,7 +7,11 @@ abstract class QuranEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class FetchSurah extends QuranEvent {}
+class FetchSurah extends QuranEvent {
+  final bool? forceRefresh;
+
+  const FetchSurah({this.forceRefresh});
+}
 
 class FilterSurah extends QuranEvent {
   final String query;
