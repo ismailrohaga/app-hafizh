@@ -6,16 +6,16 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/widget/atoms/circular_percentage_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/atoms/horizontal_progress_bar_indicator_widget.dart';
 import 'package:hafizh/common/ui/widget/molecules/chart/bar_chart_widget.dart';
-import 'package:hafizh/presentation/bloc/app_bloc.dart';
+import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state.status == AppStatus.unauthenticated) {
+        if (state.status == AuthStatus.unauthenticated) {
           context.goNamed(NamedRoutes.loginView);
         }
       },
