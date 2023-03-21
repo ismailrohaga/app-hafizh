@@ -38,6 +38,7 @@ dependencies:
     google_sign_in: ^6.0.2
     dio_cache_interceptor: ^3.4.0
     shimmer: ^2.0.0
+    stream_transform: ^2.1.0
 
 dev_dependencies:
     flutter_test:
