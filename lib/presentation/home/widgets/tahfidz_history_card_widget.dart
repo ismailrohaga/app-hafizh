@@ -50,12 +50,12 @@ class MemorizedInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MemorizedResultCountWidget(
-            image: 'assets/images/quran_1_image.png',
+            image: AssetConstant.quranOneImage,
             title: 'Juz Memorized',
             count: juzMemorizedCount,
           ),
           MemorizedResultCountWidget(
-            image: 'assets/images/quran_2_image.png',
+            image: AssetConstant.quranTwoImage,
             title: 'Surah Memorized',
             count: surahMemorizedCount,
           ),
