@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
-class AtomCircularPercentageIndicatorWidget extends StatefulWidget {
+class CircularPercentageIndicatorWidget extends StatefulWidget {
   final double value;
   final double? strokeWidth;
   final bool? immediateAnimate;
 
-  const AtomCircularPercentageIndicatorWidget(
+  const CircularPercentageIndicatorWidget(
       {super.key,
       required this.value,
       this.strokeWidth,
       this.immediateAnimate = true});
 
   @override
-  State<AtomCircularPercentageIndicatorWidget> createState() =>
-      _AtomCircularPercentageWidgetState();
+  State<CircularPercentageIndicatorWidget> createState() =>
+      _CircularPercentageWidgetState();
 }
 
-class _AtomCircularPercentageWidgetState
-    extends State<AtomCircularPercentageIndicatorWidget>
+class _CircularPercentageWidgetState
+    extends State<CircularPercentageIndicatorWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
 
@@ -46,8 +46,7 @@ class _AtomCircularPercentageWidgetState
   }
 
   @override
-  void didUpdateWidget(
-      covariant AtomCircularPercentageIndicatorWidget oldWidget) {
+  void didUpdateWidget(covariant CircularPercentageIndicatorWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.value != widget.value) {

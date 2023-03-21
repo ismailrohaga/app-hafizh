@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
-import 'package:hafizh/common/ui/widget/organisms/bottom_nav/scaffold_with_bottom_nav_bar.dart';
+import 'package:hafizh/common/ui/widget/organisms/organisms.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
 import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
@@ -38,7 +38,7 @@ final GoRouter appRouter = GoRouter(
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
-        return OrganismScaffoldWithBottomNavBar(child: child);
+        return ScaffoldWithBottomNavBar(child: child);
       },
       routes: [
         GoRoute(

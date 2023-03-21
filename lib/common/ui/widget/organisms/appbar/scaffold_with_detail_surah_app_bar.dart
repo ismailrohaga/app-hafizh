@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
-import 'package:hafizh/common/ui/widget/molecules/appbar/surah_appbar_title_widget.dart';
+import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 
-class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
+class ScaffoldWithDetailSurahAppBar extends StatelessWidget {
   final Widget child;
-  final String surah;
-  final int? verse;
-  final int? surahNumber;
+  final SurahAppBarTitleWidget? title;
 
   final void Function()? onBackPressed;
 
-  const OrganismScaffoldWithDetailSurahAppBar(
+  const ScaffoldWithDetailSurahAppBar(
       {super.key,
       required this.child,
-      required this.surah,
-      this.verse,
-      this.onBackPressed,
-      this.surahNumber = 0});
+      required this.title,
+      this.onBackPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +20,7 @@ class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: context.colors.background,
           toolbarHeight: 90,
-          title: MoleculeSurahAppBarTitleWidget(
-            surah: surah,
-            verse: verse,
-            surahNumber: surahNumber,
-          ),
+          title: title,
           leading: BackButton(
             color: context.colors.surface,
             onPressed: onBackPressed,
