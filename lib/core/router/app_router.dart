@@ -31,9 +31,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       name: NamedRoutes.loginView,
       path: "/login-view",
-      builder: (context, state) => BlocProvider(
-          create: (context) => LoginCubit(signInWithGoogleUseCase: locator()),
-          child: const LoginView()),
+      builder: (context, state) => const LoginView(),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
