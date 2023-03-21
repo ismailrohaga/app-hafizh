@@ -57,15 +57,14 @@ class DefaultFirebaseOptionsProd {
     storageBucket: 'hafizh-prod.appspot.com',
   );
 
-  //TODO: update this
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB-B35fGRU7EZ2QwxVtHNfGyHb_reuiPwc',
-    appId: '1:1075143665059:ios:c70d8036d5f9867b096616',
+    appId: '1:1075143665059:ios:033d8e5facffa751096616',
     messagingSenderId: '1075143665059',
     projectId: 'hafizh-prod',
     storageBucket: 'hafizh-prod.appspot.com',
     iosClientId:
-        '1075143665059-3ouct1lrpibcdbpc5np0uq0ogfl780g6.apps.googleusercontent.com',
-    iosBundleId: 'com.example.hafizh',
+        '1075143665059-f5m1did77hcr092ris6g33gdrqpcm7jo.apps.googleusercontent.com',
+    iosBundleId: 'com.sixmavericks.hafizh.prod',
   );
 }

@@ -34,6 +34,9 @@ dependencies:
     flutter_dotenv: ^5.0.2
     firebase_core: ^2.8.0
     syncfusion_flutter_charts: ^20.4.54
+    firebase_auth: ^4.3.0
+    google_sign_in: ^6.0.2
+    dio_cache_interceptor: ^3.4.0
 
 dev_dependencies:
     flutter_test:

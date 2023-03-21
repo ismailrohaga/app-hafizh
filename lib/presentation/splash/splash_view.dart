@@ -7,72 +7,74 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:provider/provider.dart';
 
-class SplashView extends StatelessWidget {
+class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
-  void _handleOnInitialize(
-      BuildContext context, PreferenceSettingsProvider prefSetProvider) async {
-    // TODO: initialize something, such as DB, etc. then remove Future Delayed initialization
-    Future.delayed(const Duration(seconds: 3)).then(
-      (_) => {
-        if (prefSetProvider.isDoneOnBoard)
-          //TODO: check whether the user is logged in
-          {context.goNamed(NamedRoutes.homeView)}
-        else
-          {context.goNamed(NamedRoutes.onBoardView)}
-      },
-    );
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return Consumer<PreferenceSettingsProvider>(
-      builder: (context, prefSetProvider, _) {
-        return _StatefulWrapper(
-          onInit: () {
-            _handleOnInitialize(context, prefSetProvider);
-          },
-          child: Scaffold(
-            backgroundColor: context.colors.background,
-            body: Center(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AssetConstant.hafizhWhiteIcon,
-                    width: 40,
-                  ),
-                  const SizedBox(width: SpacingConstant.xs),
-                  Text('Hafizh', style: context.textTheme.headlineLarge),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
+  State<SplashView> createState() => _SplashViewState();
 }
 
-class _StatefulWrapper extends StatefulWidget {
-  final Function onInit;
-  final Widget child;
-  const _StatefulWrapper({required this.onInit, required this.child});
+class _SplashViewState extends State<SplashView> {
+  // void _handleOnInitialize(
+  //     BuildContext context, bool isDoneOnBoard, bool isNotLoggedIn) async {
+  //   // TODO: initialize something, such as DB, etc. then remove Future Delayed initialization
+  //   Future.delayed(const Duration(seconds: 3)).then(
+  //     (_) {
+  //       if (!isNotLoggedIn) {
+  //         context.goNamed(NamedRoutes.homeView);
+  //         return;
+  //       }
 
-  @override
-  State<_StatefulWrapper> createState() => _StatefulWrapperState();
-}
+  //       if (isDoneOnBoard) {
+  //         context.goNamed(NamedRoutes.homeView);
+  //       } else {
+  //         context.goNamed(NamedRoutes.onBoardView);
+  //       }
+  //     },
+  //   );
+  // }
 
-class _StatefulWrapperState extends State<_StatefulWrapper> {
   @override
   void initState() {
-    widget.onInit();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 3)).then((_) {
+        final prefSetProvider = context.read<PreferenceSettingsProvider>();
+        final isDoneOnBoard = prefSetProvider.isDoneOnBoard;
+        final user = prefSetProvider.user;
+
+        if (user.isNotEmpty) {
+          return context.goNamed(NamedRoutes.homeView);
+        }
+
+        if (!isDoneOnBoard) {
+          return context.goNamed(NamedRoutes.onBoardView);
+        }
+
+        context.goNamed(NamedRoutes.loginView);
+      });
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return Scaffold(
+      backgroundColor: context.colors.background,
+      body: Center(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              AssetConstant.hafizhWhiteIcon,
+              width: 40,
+            ),
+            const SizedBox(width: SpacingConstant.xs),
+            Text('Hafizh', style: context.textTheme.headlineLarge),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/widget/organisms/bottom_nav/scaffold_with_bottom_nav_bar.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
+import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/login/login_view.dart';
 import 'package:hafizh/presentation/quran/quran_view.dart';
 import 'package:hafizh/presentation/settings/settings_view.dart';
@@ -29,8 +30,10 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       name: NamedRoutes.loginView,
-      path: '/login-view',
-      builder: (context, state) => const LoginView(),
+      path: "/login-view",
+      builder: (context, state) => BlocProvider(
+          create: (context) => LoginCubit(signInWithGoogleUseCase: locator()),
+          child: const LoginView()),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 
 class ApiInterceptors extends Interceptor {
   @override

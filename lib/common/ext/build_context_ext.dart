@@ -8,4 +8,6 @@ extension BuildContextExt on BuildContext {
   ColorScheme get colors => theme.colorScheme;
 
   MediaQueryData get mediaQuery => MediaQuery.of(this);
+
+  ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(this);
 }

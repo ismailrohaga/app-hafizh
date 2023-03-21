@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
-import 'package:provider/provider.dart';
 
 class OrganismScaffoldWithBottomNavBar extends StatefulWidget {
   const OrganismScaffoldWithBottomNavBar({Key? key, required this.child})

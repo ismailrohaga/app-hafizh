@@ -54,12 +54,12 @@ class DefaultFirebaseOptionsDev {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAUA1HBFqBIy8CXh1UCcEWEaaWr2sDs16I',
-    appId: '1:440550480887:ios:ea608173095f4c597aacf2',
+    appId: '1:440550480887:ios:98769705f74270307aacf2',
     messagingSenderId: '440550480887',
     projectId: 'hafizh-dev',
     storageBucket: 'hafizh-dev.appspot.com',
     iosClientId:
-        '440550480887-773t1mkrk5vq4ojv9p9jpjbtdselldld.apps.googleusercontent.com',
-    iosBundleId: 'com.sixmavericks.hafizh.prod',
+        '440550480887-qmc28r0oen7fp209hm4o88j8v7ikjbdv.apps.googleusercontent.com',
+    iosBundleId: 'com.sixmavericks.hafizh.dev',
   );
 }
