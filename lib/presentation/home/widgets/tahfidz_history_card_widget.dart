@@ -47,7 +47,7 @@ class MemorizedInfoWidget extends StatelessWidget {
             bottomRight: Radius.circular(CircularConstant.lg)),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: [
           MemorizedResultCountWidget(
             image: AssetConstant.quranOneImage,
@@ -79,8 +79,7 @@ class MemorizedResultCountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.mediaQuery.size.width * 0.33,
+    return Expanded(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
