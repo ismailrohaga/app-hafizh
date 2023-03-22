@@ -96,8 +96,7 @@ class _OnBoardViewState extends State<OnBoardView> {
                     child: HafizhButtonWidget(
                         onTap: () {
                           if (_isLastPage) {
-                            // TODO: uncomment when building
-                            // prefSetProvider.markDoneOnBoard();
+                            prefSetProvider.markDoneOnBoard();
                             context.goNamed(NamedRoutes.loginView);
                           } else {
                             _pageController.nextPage(
