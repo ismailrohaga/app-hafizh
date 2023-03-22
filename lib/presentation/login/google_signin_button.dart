@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/asset_constant.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/common/ui/app_colors.dart';
 
 class GoogleSignInButton extends StatelessWidget {
   final Function()? onPressed;
@@ -11,12 +12,6 @@ class GoogleSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (loading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: SpacingConstant.lg),
       child: OutlinedButton(
@@ -28,27 +23,40 @@ class GoogleSignInButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: () {
+          if (loading) return;
+          if (onPressed != null) onPressed!();
+        },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Image(
-                image: AssetImage(AssetConstant.googleIcon),
-                height: 22.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  'Sign in with Google',
-                  style: context.textTheme.titleMedium!
-                      .copyWith(color: Colors.black),
+          child: loading
+              ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(AppColors.kDeepGreen),
+                  ),
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Image(
+                      image: AssetImage(AssetConstant.googleIcon),
+                      height: 22.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        loading ? 'Loading...' : 'Sign in with Google',
+                        style: context.textTheme.titleMedium!
+                            .copyWith(color: Colors.black),
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
         ),
       ),
     );
