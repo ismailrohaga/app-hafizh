@@ -14,12 +14,20 @@ class ListViewSurahWidget extends StatelessWidget {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       itemCount: surah.length,
-      itemBuilder: (context, index) => MoleculeSurahCardWidget(
-        subtitle: "Number of Verses : ${surah[index].numberOfVerses}",
-        name: surah[index].name.transliteration.id,
-        number: surah[index].number,
-        onTap: () => context.goNamed(NamedRoutes.detailSurahView),
-      ),
+      itemBuilder: (context, index) {
+        final data = surah[index];
+        final name = data.name.transliteration.id;
+        final numberOfVerses = data.numberOfVerses;
+        final number = data.number;
+
+        return MoleculeSurahCardWidget(
+          subtitle: "Number of Verses : $numberOfVerses",
+          name: name,
+          number: number,
+          onTap: () => context.goNamed(NamedRoutes.detailSurahView,
+              params: {'id': number.toString()}),
+        );
+      },
     );
   }
 }

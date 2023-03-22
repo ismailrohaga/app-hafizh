@@ -8,5 +8,7 @@ export 'package:firebase_auth/firebase_auth.dart';
 export 'package:google_sign_in/google_sign_in.dart';
 export 'package:equatable/equatable.dart';
 export 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+export 'package:shimmer/shimmer.dart';
+export 'package:stream_transform/stream_transform.dart';
 
 export 'get_it/get_it.dart';

@@ -7,6 +7,7 @@ import 'package:hafizh/common/state/view_data_state.dart';
 import 'package:hafizh/presentation/quran/bloc/bloc.dart';
 import 'package:hafizh/presentation/quran/widgets/expanded_search_bar_widget.dart';
 import 'package:hafizh/presentation/quran/widgets/list_view_surah_widget.dart';
+import 'package:hafizh/presentation/quran/widgets/shimmer_list_view_surah_widget.dart';
 
 class QuranView extends StatefulWidget {
   const QuranView({super.key});
@@ -21,18 +22,18 @@ class _QuranViewState extends State<QuranView> {
     super.initState();
 
     Future.microtask(() {
-      final quranBloc = context.read<QuranBloc>();
-      final isInitialFetchSurah = quranBloc.state.statusSurah.status.isInitial;
-
-      if (isInitialFetchSurah) {
-        quranBloc.add(FetchSurah());
-        return;
-      }
+      _fetchSurah();
     });
+  }
+
+  _fetchSurah({bool? forceRefresh}) {
+    context.read<QuranBloc>().add(FetchSurah(forceRefresh: forceRefresh));
   }
 
   @override
   Widget build(BuildContext context) {
+    final quranBloc = context.select((QuranBloc bloc) => bloc);
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -43,16 +44,16 @@ class _QuranViewState extends State<QuranView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ExpandedSearchBarWidget(
-                value: context.read<QuranBloc>().state.query,
+                value: quranBloc.state.query,
                 onSearch: (value) {
-                  context.read<QuranBloc>().add(FilterSurah(query: value));
+                  quranBloc.add(FilterSurah(query: value));
                 },
               ),
               const SizedBox(height: SpacingConstant.md),
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: () async {
-                    context.read<QuranBloc>().add(FetchSurah());
+                    _fetchSurah(forceRefresh: true);
                   },
                   child: BlocBuilder<QuranBloc, QuranState>(
                     builder: (context, state) {
@@ -60,9 +61,7 @@ class _QuranViewState extends State<QuranView> {
                       final message = state.statusSurah.message;
                       // Check Status
                       if (status.isLoading || status.isInitial) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return const ShimmerListViewSurah();
                       }
 
                       if (status.isNoData) {

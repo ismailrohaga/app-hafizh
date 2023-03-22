@@ -60,8 +60,11 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       name: NamedRoutes.detailSurahView,
-      path: '/detail-surah-view',
-      builder: (context, state) => const DetailSurahView(),
+      path: '/detail-surah-view/:id',
+      builder: (context, state) => DetailSurahView(
+        key: const Key('detail-surah-view'),
+        number: int.parse(state.params['id']!),
+      ),
     ),
   ],
 );

@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
@@ -45,16 +45,7 @@ class SettingsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(user.photo.toString()),
-                ),
-                shape: BoxShape.circle,
-              ),
-            ),
+            ProfilePicWidget(photoUrl: user.photo!),
             const SizedBox(
               height: 10,
             ),
@@ -73,6 +64,41 @@ class SettingsView extends StatelessWidget {
           ],
         )),
       ),
+    );
+  }
+}
+
+class ProfilePicWidget extends StatelessWidget {
+  final String photoUrl;
+
+  const ProfilePicWidget({super.key, required this.photoUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return CachedNetworkImage(
+      imageUrl: photoUrl,
+      height: 80,
+      width: 80,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      placeholder: (context, url) => Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+              height: 80,
+              width: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.white,
+              ))),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

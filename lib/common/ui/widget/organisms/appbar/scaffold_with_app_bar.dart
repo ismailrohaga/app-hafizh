@@ -4,9 +4,10 @@ import 'package:hafizh/common/ui/widget/molecules/appbar/surah_appbar_title_widg
 
 class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
   final Widget child;
-  final String surah;
+  final String? surah;
   final int? verse;
   final int? surahNumber;
+  final bool? loading;
 
   final void Function()? onBackPressed;
 
@@ -16,7 +17,8 @@ class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
       required this.surah,
       this.verse,
       this.onBackPressed,
-      this.surahNumber = 0});
+      this.surahNumber = 0,
+      this.loading});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,10 @@ class OrganismScaffoldWithDetailSurahAppBar extends StatelessWidget {
           backgroundColor: context.colors.background,
           toolbarHeight: 90,
           title: MoleculeSurahAppBarTitleWidget(
-            surah: surah,
+            surah: surah ?? "-",
             verse: verse,
             surahNumber: surahNumber,
+            loading: loading,
           ),
           leading: BackButton(
             color: context.colors.surface,
