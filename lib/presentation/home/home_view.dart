@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hafizh/common/const/const.dart';
 
-import 'package:hafizh/common/const/named_routes.dart';
-import 'package:hafizh/common/const/screen_padding_constant.dart';
+import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
+import 'package:hafizh/common/ui/widget/organisms/organisms.dart';
+
 import 'package:hafizh/common/dependencies/dependencies.dart';
-import 'package:hafizh/common/ui/widget/atoms/circular_percentage_indicator_widget.dart';
-import 'package:hafizh/common/ui/widget/atoms/horizontal_progress_bar_indicator_widget.dart';
-import 'package:hafizh/common/ui/widget/molecules/chart/bar_chart_widget.dart';
 import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
+
+import 'package:hafizh/presentation/home/widgets/tahfidz_history_card_widget.dart';
+import 'package:hafizh/presentation/home/widgets/tahfidz_history_list_delegate_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -14,47 +16,24 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state.status == AuthStatus.unauthenticated) {
-          context.goNamed(NamedRoutes.loginView);
-        }
-      },
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(ScreenPaddingConstant.horizontal),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const AtomCircularPercentageIndicatorWidget(
-                value: 0.8,
+        listener: (context, state) {
+          if (state.status == AuthStatus.unauthenticated) {
+            context.goNamed(NamedRoutes.loginView);
+          }
+        },
+        child: const Scaffold(
+          body: SliverScrollWrapperViewWidget(
+            background: DashboardWidget(
+              backgroundImage: AssetConstant.heroBgImage,
+              callToAction: HafizhButtonWidget(
+                text: 'Start New Tahfidz',
               ),
-              const SizedBox(height: 24.0),
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                ),
-                child: AtomHorizontalProgressBarIndicator(
-                  count: 3,
-                  value: 2,
-                ),
-              ),
-              const SizedBox(
-                height: 24.0,
-              ),
-              MoleculeBarChartWidget(
-                dataSource: [
-                  ChartData('10 Days', 2),
-                  ChartData('6 Days', 3),
-                  ChartData('4 Days', 4),
-                  ChartData('2 Days', 5),
-                  ChartData('1 Days', 6),
-                ],
-              )
+            ),
+            listDelegate: [
+              TahfidzHistoryCardWidget(),
+              TahfidzhHistoryListDelegateWidget()
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

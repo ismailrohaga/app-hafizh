@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class MoleculeBarChartWidget extends StatelessWidget {
+class BarChartWidget extends StatelessWidget {
   final List<ChartData> dataSource;
 
-  const MoleculeBarChartWidget({super.key, required this.dataSource});
+  const BarChartWidget({super.key, required this.dataSource});
 
   @override
   Widget build(BuildContext context) {

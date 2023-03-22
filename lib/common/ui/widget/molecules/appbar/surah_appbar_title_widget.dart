@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/spacing_constant.dart';
+import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
-import 'package:hafizh/common/ui/widget/atoms/star_badge_widget.dart';
+import 'package:hafizh/common/ui/widget/atoms/atoms.dart';
 
-class MoleculeSurahAppBarTitleWidget extends StatelessWidget {
-  final String surah;
+class SurahAppBarTitleWidget extends StatelessWidget {
   final int? verse;
-  final int? surahNumber;
   final bool? loading;
+  final SurahWithBadgeWidget surahWithBadgeWidget;
 
-  const MoleculeSurahAppBarTitleWidget(
+  const SurahAppBarTitleWidget(
       {super.key,
-      required this.surah,
       this.verse,
-      this.surahNumber = 0,
-      this.loading});
+      required this.surahWithBadgeWidget,
+      this.loading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +25,7 @@ class MoleculeSurahAppBarTitleWidget extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(surah, style: context.textTheme.titleLarge),
-            const SizedBox(
-              width: SpacingConstant.sm,
-            ),
-            AtomStarBadgeWidget(
-              count: surahNumber,
-            ),
-          ],
-        ),
+        surahWithBadgeWidget,
         if (verse != null)
           Text(verseText, style: context.textTheme.titleMedium),
       ],
@@ -73,7 +59,7 @@ class AppBarWithShimmerEffectWidget extends StatelessWidget {
                 const SizedBox(
                   width: SpacingConstant.xs,
                 ),
-                const AtomStarBadgeWidget(
+                const StarBadgeWidget(
                   count: 0,
                 ),
               ],
