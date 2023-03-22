@@ -4,7 +4,7 @@ import 'package:hafizh/common/helper/helper.dart';
 import 'package:hafizh/common/provider/provider.dart';
 import 'package:hafizh/common/ui/app_theme.dart';
 import 'package:hafizh/core/router/app_router.dart';
-import 'package:hafizh/presentation/bloc/app_bloc.dart';
+import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
 import 'package:hafizh/presentation/detail_surah/bloc/detail_surah_bloc.dart';
 import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/quran/bloc/quran_bloc.dart';
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => AppBloc(authenticationRepository: locator())),
+              create: (_) => AuthBloc(authenticationRepository: locator())),
           BlocProvider(
               create: (context) =>
                   LoginCubit(signInWithGoogleUseCase: locator())),

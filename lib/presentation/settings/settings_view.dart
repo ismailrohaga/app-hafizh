@@ -6,20 +6,20 @@ import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 
 import 'package:hafizh/common/ext/build_context_ext.dart';
-import 'package:hafizh/presentation/bloc/app_bloc.dart';
+import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.select((AppBloc bloc) => bloc);
+    final bloc = context.select((AuthBloc bloc) => bloc);
     final user = bloc.state.user;
 
-    return BlocListener<AppBloc, AppState>(
+    return BlocListener<AuthBloc, AuthState>(
       bloc: bloc,
       listener: (context, state) {
-        if (state.status == AppStatus.unauthenticated) {
+        if (state.status == AuthStatus.unauthenticated) {
           context.goNamed(NamedRoutes.loginView);
         }
       },
@@ -36,7 +36,7 @@ class SettingsView extends StatelessWidget {
               IconButton(
                 tooltip: "Logout",
                 onPressed: () =>
-                    context.read<AppBloc>().add(const AppLogoutRequested()),
+                    context.read<AuthBloc>().add(const AuthLogoutRequested()),
                 icon: Icon(
                   Icons.logout,
                   color: context.colors.surface,

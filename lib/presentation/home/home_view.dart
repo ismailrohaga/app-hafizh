@@ -5,8 +5,8 @@ import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 import 'package:hafizh/common/ui/widget/organisms/organisms.dart';
 
 import 'package:hafizh/common/dependencies/dependencies.dart';
+import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
 
-import 'package:hafizh/presentation/bloc/app_bloc.dart';
 import 'package:hafizh/presentation/home/widgets/tahfidz_history_card_widget.dart';
 import 'package:hafizh/presentation/home/widgets/tahfidz_history_list_delegate_widget.dart';
 
@@ -15,9 +15,9 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
+    return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state.status == AppStatus.unauthenticated) {
+          if (state.status == AuthStatus.unauthenticated) {
             context.goNamed(NamedRoutes.loginView);
           }
         },
