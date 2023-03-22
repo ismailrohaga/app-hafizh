@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:hafizh/common/const/asset_constant.dart';
+import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/common/state/view_data_state.dart';
+import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
+import 'package:hafizh/presentation/login/cubit/login_state.dart';
 import 'package:hafizh/presentation/login/google_signin_button.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +59,42 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                // implement firebase
-                const GoogleSignInButton(),
+                BlocConsumer<LoginCubit, LoginState>(
+                  bloc: context.read<LoginCubit>(),
+                  listener: (context, state) {
+                    final status = state.viewData.status;
+                    final message = state.message;
+
+                    if (status.isError) {
+                      context.scaffoldMessenger.showSnackBar(
+                        SnackBar(
+                          backgroundColor: context.colors.primary,
+                          content: Text(message.toString()),
+                        ),
+                      );
+                    }
+
+                    if (status.isHasData) {
+                      context.scaffoldMessenger.showSnackBar(
+                        SnackBar(
+                          backgroundColor: context.colors.background,
+                          content: Text(message.toString()),
+                        ),
+                      );
+
+                      context.goNamed(NamedRoutes.homeView);
+                    }
+                  },
+                  builder: (context, state) {
+                    final loading = state.viewData.status.isLoading;
+
+                    return GoogleSignInButton(
+                      loading: loading,
+                      onPressed: () =>
+                          context.read<LoginCubit>().signInWithGoogle(),
+                    );
+                  },
+                ),
               ],
             ),
           ),

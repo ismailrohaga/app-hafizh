@@ -4,10 +4,11 @@ import 'package:hafizh/domain/usecase/authentication/sign_in_with_google_usecase
 import 'package:hafizh/presentation/login/cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final SignInWithGoogleUseCase signInWithGoogleUseCase;
+  final SignInWithGoogleUseCase _signInWithGoogleUseCase;
 
-  LoginCubit({required this.signInWithGoogleUseCase})
-      : super(LoginState(
+  LoginCubit({required SignInWithGoogleUseCase signInWithGoogleUseCase})
+      : _signInWithGoogleUseCase = signInWithGoogleUseCase,
+        super(LoginState(
           viewData: ViewData.initial(),
         ));
 
@@ -19,7 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       ));
 
-      final result = await signInWithGoogleUseCase.call();
+      final result = await _signInWithGoogleUseCase.call();
 
       result.fold(
           (failure) => emit(state.copyWith(
