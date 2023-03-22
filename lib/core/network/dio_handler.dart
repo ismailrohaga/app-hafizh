@@ -18,7 +18,7 @@ class DioHandler {
       store: MemCacheStore(),
       // All subsequent fields are optional.
       // Default.
-      policy: CachePolicy.request,
+      policy: CachePolicy.noCache,
       // Returns a cached response on error but for statuses 401 & 403.
       // Also allows to return a cached response on network errors (e.g. offline usage).
       // Defaults to [null].
