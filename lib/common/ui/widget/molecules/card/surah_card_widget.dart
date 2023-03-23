@@ -49,8 +49,7 @@ class SurahCardWidget extends StatelessWidget {
             ),
             subtitle: Text(
               subtitle,
-              style: context.textTheme.titleSmall
-                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w300),
+              style: context.textTheme.bodyLarge?.copyWith(color: Colors.white),
             ),
           ),
         ),
