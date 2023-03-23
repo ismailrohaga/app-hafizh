@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 import 'package:hafizh/domain/entity/surah_entity.dart';
@@ -11,15 +11,26 @@ class ListViewSurahWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       scrollDirection: Axis.vertical,
+      separatorBuilder: (context, index) =>
+          const SizedBox(height: SpacingConstant.sm),
+      padding: const EdgeInsets.all(0),
       itemCount: surah.length,
-      itemBuilder: (context, index) => SurahCardWidget(
-        subtitle: "Number of Verses : ${surah[index].numberOfVerses}",
-        name: surah[index].name.transliteration.id,
-        number: surah[index].number,
-        onTap: () => context.goNamed(NamedRoutes.detailSurahView),
-      ),
+      itemBuilder: (context, index) {
+        final data = surah[index];
+        final name = data.name.transliteration.id;
+        final numberOfVerses = data.numberOfVerses;
+        final number = data.number;
+
+        return SurahCardWidget(
+          subtitle: "Number of Verses : $numberOfVerses",
+          name: name,
+          number: number,
+          onTap: () => context.goNamed(NamedRoutes.detailSurahView,
+              params: {'id': number.toString()}),
+        );
+      },
     );
   }
 }

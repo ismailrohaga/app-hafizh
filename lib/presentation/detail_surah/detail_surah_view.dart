@@ -48,6 +48,7 @@ class _DetailSurahViewState extends State<DetailSurahView> {
         return ScaffoldWithDetailSurahAppBar(
             title: SurahAppBarTitleWidget(
               loading: status.isLoading,
+              verse: surah?.numberOfVerses ?? 0,
               surahWithBadgeWidget: SurahWithBadgeWidget(
                 surah: surah?.name.transliteration.id ?? '',
                 surahNumber: surah?.number ?? 0,

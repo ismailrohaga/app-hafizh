@@ -8,10 +8,12 @@ import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 class DashboardWidget extends StatelessWidget {
   final String backgroundImage;
   final HafizhButtonWidget? callToAction;
+  final Widget contractWidget;
 
   const DashboardWidget({
     super.key,
     required this.backgroundImage,
+    required this.contractWidget,
     this.callToAction,
   });
 
@@ -24,26 +26,26 @@ class DashboardWidget extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage(backgroundImage), fit: BoxFit.cover)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
-                Expanded(
-                  child: DashboardUserProgressWidget(),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-                CircularPercentageIndicatorWidget(
-                  value: 0.8,
-                )
-              ],
-            ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: contractWidget,
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              const CircularPercentageIndicatorWidget(
+                value: 0.8,
+              )
+            ],
           ),
           const SizedBox(
-            height: 22,
+            height: SpacingConstant.lg,
           ),
           Row(
             children: [
@@ -58,25 +60,14 @@ class DashboardWidget extends StatelessWidget {
   }
 }
 
-// TODO: Need to be injected from the outside @mizard
-class DashboardUserProgressWidget extends StatelessWidget {
-  const DashboardUserProgressWidget({
-    super.key,
-  });
+class DashboardFullContractWidget extends StatelessWidget {
+  const DashboardFullContractWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text(
-          'Hi Bayek',
-          style: context.textTheme.headlineMedium,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
         const SurahWithBadgeWidget(
           surah: 'Al-Mulk',
           surahNumber: 92,
@@ -101,6 +92,30 @@ class DashboardUserProgressWidget extends StatelessWidget {
         Text(
           'Great progress! You\'ll finish memorizing al-mulk in 5 days at this rate!',
           style: context.textTheme.labelSmall,
+        ),
+      ],
+    );
+  }
+}
+
+class DashboardSurahContractWidget extends StatelessWidget {
+  const DashboardSurahContractWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SurahWithBadgeWidget(
+          surah: 'Al-Mulk',
+          surahNumber: 92,
+        ),
+        const SizedBox(
+          height: SpacingConstant.md,
+        ),
+        Text(
+          'You’re on the  5 day streaks !',
+          style: context.textTheme.bodyLarge,
         ),
       ],
     );
