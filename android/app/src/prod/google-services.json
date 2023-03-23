@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1075143665059-9pqbdtc8sn7e5i6rh8bi4un7aogs5isi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sixmavericks.hafizh.prod",
+            "certificate_hash": "df1e4d56b514202fd7c4a030faea60b9187ae526"
+          }
+        },
+        {
           "client_id": "1075143665059-dn6hofeogabh64e8eenfie9r108acgp3.apps.googleusercontent.com",
           "client_type": 3
         }
