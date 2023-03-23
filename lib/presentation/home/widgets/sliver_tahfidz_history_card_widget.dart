@@ -4,24 +4,26 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/app_colors.dart';
 import 'package:hafizh/common/ui/widget/atoms/surah_with_badge_widget.dart';
 
-class TahfidzHistoryCardWidget extends StatelessWidget {
-  const TahfidzHistoryCardWidget({super.key});
+class SliverTahfidzHistoryCardWidget extends StatelessWidget {
+  const SliverTahfidzHistoryCardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(
-            vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            HistoryResultOfTahfidzWidget(),
-            MemorizedInfoWidget(
-              juzMemorizedCount: '2',
-              surahMemorizedCount: '102',
-            ),
-          ],
-        ));
+    return SliverToBoxAdapter(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(
+              vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              HistoryResultOfTahfidzWidget(),
+              MemorizedInfoWidget(
+                juzMemorizedCount: '2',
+                surahMemorizedCount: '102',
+              ),
+            ],
+          )),
+    );
   }
 }
 

@@ -53,7 +53,6 @@ class _SliverExpandedSearchBarWidget
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
-    final colors = context.colors;
     final isDarkTheme = widget.isDarkTheme;
 
     return SliverToBoxAdapter(
