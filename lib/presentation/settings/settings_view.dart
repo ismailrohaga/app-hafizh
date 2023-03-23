@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
+import 'package:hafizh/common/ui/widget/molecules/button/hafizh_button_widget.dart';
 import 'package:hafizh/common/const/named_routes.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 
@@ -21,49 +23,60 @@ class SettingsView extends StatelessWidget {
           context.goNamed(NamedRoutes.loginView);
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: context.colors.background,
-          title: Text(
-            "Settings",
-            style: context.textTheme.titleMedium,
-          ),
-          actions: [
-            IconButton(
-              tooltip: "Logout",
-              onPressed: () =>
-                  context.read<AuthBloc>().add(const AuthLogoutRequested()),
-              icon: Icon(
-                Icons.logout,
-                color: context.colors.surface,
+      child: Consumer<PreferenceSettingsProvider>(
+          builder: (context, prefSetProvider, _) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: context.colors.background,
+            title: Text(
+              "Settings",
+              style: context.textTheme.titleMedium,
+            ),
+            actions: [
+              IconButton(
+                tooltip: "Logout",
+                onPressed: () =>
+                    context.read<AuthBloc>().add(const AuthLogoutRequested()),
+                icon: Icon(
+                  Icons.logout,
+                  color: context.colors.surface,
+                ),
               ),
-            ),
-          ],
-        ),
-        body: Center(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ProfilePicWidget(photoUrl: user.photo!),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              user.name.toString(),
-              style:
-                  context.textTheme.titleMedium?.copyWith(color: Colors.black),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              user.email.toString(),
-              style: context.textTheme.titleSmall?.copyWith(color: Colors.grey),
-            ),
-          ],
-        )),
-      ),
+            ],
+          ),
+          body: Center(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ProfilePicWidget(
+                photoUrl: user.photo ?? '',
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                user.name.toString(),
+                style: context.textTheme.titleMedium
+                    ?.copyWith(color: Colors.black),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                user.email.toString(),
+                style:
+                    context.textTheme.titleSmall?.copyWith(color: Colors.grey),
+              ),
+              HafizhButtonWidget(
+                onTap: () => prefSetProvider
+                    .enableDarkTheme(!prefSetProvider.isDarkTheme),
+                text: 'Hit me!',
+              ),
+            ],
+          )),
+        );
+      }),
     );
   }
 }

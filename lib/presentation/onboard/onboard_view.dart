@@ -7,6 +7,7 @@ import 'package:hafizh/common/const/screen_padding_constant.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
+import 'package:hafizh/common/ui/widget/molecules/button/hafizh_button_widget.dart';
 import 'package:hafizh/presentation/onboard/onboard_content.dart';
 import 'package:hafizh/presentation/onboard/onboard_items.dart';
 import 'package:provider/provider.dart';
@@ -89,32 +90,22 @@ class _OnBoardViewState extends State<OnBoardView> {
                     children: _buildPageIndicator(),
                   ),
                   const SizedBox(height: SpacingConstant.md),
-                  //TODO: lift button ui implementation to atomic design?
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: ScreenPaddingConstant.horizontal),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_isLastPage) {
-                          prefSetProvider.markDoneOnBoard();
-                          context.goNamed(NamedRoutes.loginView);
-                        } else {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: Text(
-                        _isLastPage ? 'Get Started' : 'Next',
-                        style: context.textTheme.titleMedium,
-                      ),
-                    ),
+                    child: HafizhButtonWidget(
+                        onTap: () {
+                          if (_isLastPage) {
+                            prefSetProvider.markDoneOnBoard();
+                            context.goNamed(NamedRoutes.loginView);
+                          } else {
+                            _pageController.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease,
+                            );
+                          }
+                        },
+                        text: _isLastPage ? 'Get Started' : 'Next'),
                   ),
                 ],
               ),

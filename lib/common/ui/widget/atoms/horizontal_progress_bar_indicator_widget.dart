@@ -3,11 +3,11 @@ import 'package:hafizh/common/const/circular_constant.dart';
 import 'package:hafizh/common/const/spacing_constant.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
-class AtomHorizontalProgressBarIndicator extends StatelessWidget {
+class HorizontalProgressBarIndicator extends StatelessWidget {
   final int count;
   final int value;
 
-  const AtomHorizontalProgressBarIndicator(
+  const HorizontalProgressBarIndicator(
       {super.key, required this.count, required this.value});
 
   @override
