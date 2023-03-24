@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/app_colors.dart';
 import 'package:hafizh/common/ui/widget/atoms/surah_with_badge_widget.dart';
@@ -10,19 +11,23 @@ class SliverTahfidzHistoryCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              HistoryResultOfTahfidzWidget(),
-              MemorizedInfoWidget(
-                juzMemorizedCount: '2',
-                surahMemorizedCount: '102',
-              ),
-            ],
-          )),
+      child: ShowUpAnimation(
+        animationDuration: const Duration(milliseconds: 350),
+        direction: Direction.vertical,
+        child: Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                HistoryResultOfTahfidzWidget(),
+                MemorizedInfoWidget(
+                  juzMemorizedCount: '2',
+                  surahMemorizedCount: '102',
+                ),
+              ],
+            )),
+      ),
     );
   }
 }
