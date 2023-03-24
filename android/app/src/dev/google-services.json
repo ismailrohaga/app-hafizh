@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:440550480887:android:caf95523eaa553a77aacf2",
+        "mobilesdk_app_id": "1:440550480887:android:9e90327443dcb6c37aacf2",
         "android_client_info": {
-          "package_name": "com.sixmavericks.hafizh"
+          "package_name": "com.sixmavericks.hafizh.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "440550480887-d4s0mcci5bkaiv702155cbsssstinhe8.apps.googleusercontent.com",
+          "client_id": "440550480887-givl3lliepjkmq2iilt5k2e0qf4qrlpg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +29,13 @@
             {
               "client_id": "440550480887-d4s0mcci5bkaiv702155cbsssstinhe8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "440550480887-773t1mkrk5vq4ojv9p9jpjbtdselldld.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sixmavericks.hafizh.prod"
+              }
             }
           ]
         }
