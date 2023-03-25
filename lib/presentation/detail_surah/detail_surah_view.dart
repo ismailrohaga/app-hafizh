@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/named_routes.dart';
+import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
@@ -48,10 +48,13 @@ class _DetailSurahViewState extends State<DetailSurahView> {
         return ScaffoldWithDetailSurahAppBar(
             title: SurahAppBarTitleWidget(
               loading: status.isLoading,
-              verse: surah?.numberOfVerses ?? 0,
-              surahWithBadgeWidget: SurahWithBadgeWidget(
+              title: SurahWithBadgeWidget(
                 surah: surah?.name.transliteration.id ?? '',
                 surahNumber: surah?.number ?? 0,
+              ),
+              subtitle: Text(
+                surah?.name.translation.id ?? '',
+                style: textTheme.titleSmall,
               ),
             ),
             onBackPressed: () => context.goNamed(NamedRoutes.quranView),
@@ -59,11 +62,25 @@ class _DetailSurahViewState extends State<DetailSurahView> {
               onRefresh: () async {
                 _fetchDetailSurah();
               },
-              child: ListVerseWidget(
-                  verses: verses,
-                  status: status,
-                  textTheme: textTheme,
-                  colors: colors),
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: ScreenPaddingConstant.horizontal,
+                      vertical: ScreenPaddingConstant.vertical),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListVerseWidget(
+                            verses: verses,
+                            status: status,
+                            textTheme: textTheme,
+                            colors: colors),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ));
       },
     );

@@ -15,14 +15,12 @@ class SliverChildBuilderDelegateListSurahWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(delegate: delegate());
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+            childCount: surah.length, _buildListSurah));
   }
 
-  SliverChildBuilderDelegate delegate() {
-    return SliverChildBuilderDelegate(childCount: surah.length, builder);
-  }
-
-  Widget? builder(BuildContext context, index) {
+  Widget _buildListSurah(BuildContext context, index) {
     final data = surah[index];
 
     final name = data.name.transliteration.id;
@@ -49,19 +47,14 @@ class SliverChildBuilderDelegateListSurahWidget extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 350),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: ScreenPaddingConstant.horizontal),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: SpacingConstant.sm),
-              SurahCardWidget(
-                subtitle: "Number of Verses : $numberOfVerses",
-                name: name,
-                number: number,
-                onTap: () => context.goNamed(NamedRoutes.detailSurahView,
-                    params: {'id': number.toString()}),
-              ),
-            ],
+              horizontal: ScreenPaddingConstant.horizontal,
+              vertical: SpacingConstant.xs),
+          child: SurahCardWidget(
+            subtitle: "Number of Verses : $numberOfVerses",
+            name: name,
+            number: number,
+            onTap: () => context.goNamed(NamedRoutes.detailSurahView,
+                params: {'id': number.toString()}),
           ),
         ),
       );
