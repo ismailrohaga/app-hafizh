@@ -42,8 +42,8 @@ class AppTheme {
         labelStyle: kTextTheme.bodyMedium,
         prefixIconColor: AppColors.kGrey,
         suffixIconColor: AppColors.kGrey,
-        floatingLabelStyle: kTextTheme.bodyLarge?.apply(
-          color: AppColors.kGrey,
+        floatingLabelStyle: kTextTheme.bodyLarge?.copyWith(
+          color: Colors.black,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.w),
