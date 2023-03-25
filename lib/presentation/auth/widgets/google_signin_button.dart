@@ -34,9 +34,9 @@ class GoogleSignInButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(CircularConstant.lg),
         ),
-        padding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 16,
+        padding: EdgeInsets.symmetric(
+          vertical: 12.h,
+          horizontal: 16.w,
         ),
       ),
       child: Row(
@@ -44,8 +44,8 @@ class GoogleSignInButton extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             AssetConstant.googleIcon,
-            width: 24,
-            height: 24,
+            width: 24.r,
+            height: 24.r,
           ),
           SizedBox(width: SpacingConstant.sm),
           Text(
@@ -65,7 +65,7 @@ class GoogleSignInButton extends StatelessWidget {
               width: SpacingConstant.md,
               height: SpacingConstant.md,
               child: CircularProgressIndicator(
-                strokeWidth: 2,
+                strokeWidth: 2.w,
                 valueColor:
                     AlwaysStoppedAnimation<Color>(context.colors.primary),
               ),
