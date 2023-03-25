@@ -37,14 +37,42 @@ class AppTheme {
         GoogleFonts.nunitoSans(fontSize: 12.sp, fontWeight: FontWeight.normal),
   );
 
+  InputDecorationTheme get kInputDecorationTheme => InputDecorationTheme(
+        contentPadding: EdgeInsets.all(12.sp),
+        labelStyle: kTextTheme.bodyMedium,
+        floatingLabelStyle: kTextTheme.bodyMedium,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.w),
+          borderSide: const BorderSide(color: AppColors.kGrey),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.w),
+        ),
+      );
+  BottomNavigationBarThemeData get kBottomNavigationBarTheme =>
+      const BottomNavigationBarThemeData();
+
   ThemeData get darkTheme => ThemeData.dark().copyWith(
         colorScheme: AppColors.kColorScheme,
         appBarTheme: const AppBarTheme(elevation: 0),
         scaffoldBackgroundColor: AppColors.kDeepGreen,
-        textTheme: kTextTheme,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        inputDecorationTheme: kInputDecorationTheme.copyWith(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.w),
+            borderSide: const BorderSide(color: AppColors.kGrey),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.w),
+          ),
+        ),
+        bottomNavigationBarTheme: kBottomNavigationBarTheme.copyWith(
           backgroundColor: AppColors.kDeepGreen,
-          unselectedItemColor: Colors.white,
+          selectedItemColor: AppColors.kPrimary,
+          unselectedItemColor: AppColors.kGrey,
+        ),
+        textTheme: kTextTheme.apply(
+          bodyColor: Colors.grey[300],
+          displayColor: Colors.grey[300],
         ),
       );
 
@@ -52,8 +80,19 @@ class AppTheme {
       colorScheme: AppColors.kColorScheme,
       appBarTheme: const AppBarTheme(elevation: 0),
       scaffoldBackgroundColor: Colors.white,
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          // TODO: Change this if needed
-          ),
-      textTheme: kTextTheme);
+      bottomNavigationBarTheme: kBottomNavigationBarTheme,
+      inputDecorationTheme: kInputDecorationTheme.copyWith(
+        prefixIconColor: AppColors.kGrey,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.w),
+          borderSide: const BorderSide(color: AppColors.kGrey),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.w),
+        ),
+      ),
+      textTheme: kTextTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+      ));
 }
