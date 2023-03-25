@@ -13,11 +13,11 @@ class SliverTahfidzhHistoryListDelegateWidget extends StatelessWidget {
         return ShowUpAnimation(
           direction: Direction.horizontal,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
                 horizontal: ScreenPaddingConstant.horizontal),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(
+              SizedBox(
                 height: SpacingConstant.sm,
               ),
               SurahCardWidget(

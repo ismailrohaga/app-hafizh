@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
@@ -12,6 +11,7 @@ import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/login/cubit/login_state.dart';
 import 'package:hafizh/presentation/login/widgets/google_signin_button.dart';
+import 'package:hafizh/presentation/login/widgets/scaffold_login_view_wrapper_widget.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -56,48 +56,35 @@ class LoginView extends StatelessWidget {
       },
     );
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: prefsSettingsProvider.isDarkTheme
-          ? SystemUiOverlayStyle.light
-          : SystemUiOverlayStyle.dark,
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: ScreenPaddingConstant.vertical,
-              horizontal: ScreenPaddingConstant.horizontal,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Sign In',
-                  style: context.textTheme.headlineLarge?.copyWith(
-                      color: prefsSettingsProvider.isDarkTheme
-                          ? Colors.grey[300]
-                          : Colors.black),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: SpacingConstant.xl),
-                googleSignInBloc,
-                const SizedBox(height: SpacingConstant.md),
-                HafizhButtonWidget(
-                  text: 'Sign-in with Email',
-                  onTap: () {
-                    prefsSettingsProvider
-                        .enableDarkTheme(!prefsSettingsProvider.isDarkTheme);
-                  },
-                  leftIcon: const Icon(
-                    Icons.email,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: SpacingConstant.xl),
-                const TermOfServicePrivacyPolicyTextWidget(),
-              ],
+    return ScaffoldLoginViewWrapperWidget(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Sign In',
+            style: context.textTheme.headlineLarge?.copyWith(
+                color: prefsSettingsProvider.isDarkTheme
+                    ? Colors.grey[300]
+                    : Colors.black),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: SpacingConstant.xl),
+          googleSignInBloc,
+          SizedBox(height: SpacingConstant.md),
+          HafizhButtonWidget(
+            text: 'Sign-in with Email',
+            onTap: () {
+              prefsSettingsProvider
+                  .enableDarkTheme(!prefsSettingsProvider.isDarkTheme);
+            },
+            leftIcon: const Icon(
+              Icons.email,
+              color: Colors.white,
             ),
           ),
-        ),
+          SizedBox(height: SpacingConstant.xl),
+          const TermOfServicePrivacyPolicyTextWidget(),
+        ],
       ),
     );
   }
@@ -116,6 +103,7 @@ class TermOfServicePrivacyPolicyTextWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 52),
       child: Text.rich(
         style: context.textTheme.bodyMedium?.copyWith(
+          fontSize: 14.sp,
           color: prefsSettingsProvider.isDarkTheme
               ? Colors.grey[300]
               : AppColors.kDeepGreen,
@@ -133,7 +121,6 @@ class TermOfServicePrivacyPolicyTextWidget extends StatelessWidget {
                 color: prefsSettingsProvider.isDarkTheme
                     ? Colors.blueAccent
                     : AppColors.kNormalBlue,
-                fontWeight: FontWeight.bold,
               ),
             ),
             const TextSpan(
@@ -149,7 +136,6 @@ class TermOfServicePrivacyPolicyTextWidget extends StatelessWidget {
                 color: prefsSettingsProvider.isDarkTheme
                     ? Colors.blueAccent
                     : AppColors.kNormalBlue,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ],

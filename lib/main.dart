@@ -39,10 +39,15 @@ class App extends StatelessWidget {
         ],
         child: Consumer<PreferenceSettingsProvider>(
           builder: (context, prefSetProvider, _) {
-            return MaterialApp.router(
-              title: 'Hafizh',
-              theme: prefSetProvider.themeData,
-              routerConfig: appRouter,
+            return ScreenUtilInit(
+              designSize: const Size(390, 844),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) => MaterialApp.router(
+                title: 'Hafizh',
+                theme: prefSetProvider.themeData,
+                routerConfig: appRouter,
+              ),
             );
           },
         ),

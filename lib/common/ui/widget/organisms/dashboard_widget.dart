@@ -20,7 +20,7 @@ class DashboardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
           vertical: 42, horizontal: ScreenPaddingConstant.horizontal),
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -44,7 +44,7 @@ class DashboardWidget extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
+          SizedBox(
             height: SpacingConstant.lg,
           ),
           callToAction ?? const SizedBox(),
@@ -104,7 +104,7 @@ class DashboardSurahContractWidget extends StatelessWidget {
           surah: 'Al-Mulk',
           surahNumber: 92,
         ),
-        const SizedBox(
+        SizedBox(
           height: SpacingConstant.md,
         ),
         Text(

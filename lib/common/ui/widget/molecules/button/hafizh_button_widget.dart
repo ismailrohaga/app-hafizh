@@ -35,12 +35,12 @@ class HafizhButtonWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           if (leftIcon != null) leftIcon!,
-          if (leftIcon != null) const SizedBox(width: SpacingConstant.sm),
+          if (leftIcon != null) SizedBox(width: SpacingConstant.sm),
           Text(
             text,
             style: context.textTheme.labelLarge,
           ),
-          if (rightIcon != null) const SizedBox(width: SpacingConstant.sm),
+          if (rightIcon != null) SizedBox(width: SpacingConstant.sm),
           if (rightIcon != null) rightIcon!,
         ],
       ),

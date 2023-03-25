@@ -57,7 +57,7 @@ class _SliverExpandedSearchBarWidget
 
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
             vertical: SpacingConstant.sm,
             horizontal: ScreenPaddingConstant.horizontal),
         child: Row(

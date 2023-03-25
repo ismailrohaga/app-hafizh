@@ -42,7 +42,7 @@ class GoogleSignInButton extends StatelessWidget {
             width: 24,
             height: 24,
           ),
-          const SizedBox(width: SpacingConstant.sm),
+          SizedBox(width: SpacingConstant.sm),
           Text(
             'Sign in with Google',
             style: context.textTheme.labelLarge?.copyWith(
@@ -52,7 +52,7 @@ class GoogleSignInButton extends StatelessWidget {
             ),
           ),
           if (loading)
-            const SizedBox(width: SpacingConstant.sm)
+            SizedBox(width: SpacingConstant.sm)
           else
             const SizedBox(width: 0),
           if (loading)

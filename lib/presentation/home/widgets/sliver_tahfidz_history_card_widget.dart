@@ -15,7 +15,7 @@ class SliverTahfidzHistoryCardWidget extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 350),
         direction: Direction.vertical,
         child: Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
                 vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,20 +142,20 @@ class HistoryResultOfTahfidzWidget extends StatelessWidget {
                   'Tahfidz History',
                   style: context.textTheme.titleMedium,
                 ),
-                const SizedBox(width: SpacingConstant.xs),
+                SizedBox(width: SpacingConstant.xs),
                 Icon(Icons.keyboard_arrow_right, color: colors.surface)
               ],
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: SpacingConstant.lg,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text("2 weeks ago, you’ve memorized"),
+            children: [
+              const Text("2 weeks ago, you’ve memorized"),
               SizedBox(height: SpacingConstant.xs),
-              SurahWithBadgeWidget(surah: "An-Nisa", surahNumber: 92)
+              const SurahWithBadgeWidget(surah: "An-Nisa", surahNumber: 92)
             ],
           )
         ],
