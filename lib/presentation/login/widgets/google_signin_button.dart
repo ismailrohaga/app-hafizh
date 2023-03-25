@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
+import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/common/ui/app_colors.dart';
 
 class GoogleSignInButton extends StatelessWidget {
@@ -11,6 +13,8 @@ class GoogleSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prefsSettingProvider = context.read<PreferenceSettingsProvider>();
+
     return OutlinedButton(
       onPressed: () {
         if (loading) return;
@@ -42,7 +46,9 @@ class GoogleSignInButton extends StatelessWidget {
           Text(
             'Sign in with Google',
             style: context.textTheme.labelLarge?.copyWith(
-              color: AppColors.kDeepGreen,
+              color: prefsSettingProvider.isDarkTheme
+                  ? Colors.grey[300]
+                  : AppColors.kDeepGreen,
             ),
           ),
           if (loading)
