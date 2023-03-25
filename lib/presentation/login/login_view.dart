@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hafizh/common/const/const.dart';
@@ -6,12 +5,12 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
-import 'package:hafizh/common/ui/app_colors.dart';
 import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/login/cubit/login_state.dart';
 import 'package:hafizh/presentation/login/widgets/google_signin_button.dart';
 import 'package:hafizh/presentation/login/widgets/scaffold_login_view_wrapper_widget.dart';
+import 'package:hafizh/presentation/login/widgets/term_of_service_privacy_policy_widget.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -66,81 +65,21 @@ class LoginView extends StatelessWidget {
                 color: prefsSettingsProvider.isDarkTheme
                     ? Colors.grey[300]
                     : Colors.black),
-            textAlign: TextAlign.center,
           ),
           SizedBox(height: SpacingConstant.xl),
           googleSignInBloc,
           SizedBox(height: SpacingConstant.md),
           HafizhButtonWidget(
             text: 'Sign-in with Email',
-            onTap: () {
-              prefsSettingsProvider
-                  .enableDarkTheme(!prefsSettingsProvider.isDarkTheme);
-            },
+            onTap: () => context.goNamed(NamedRoutes.loginWithEmailView),
             leftIcon: const Icon(
               Icons.email,
               color: Colors.white,
             ),
           ),
           SizedBox(height: SpacingConstant.xl),
-          const TermOfServicePrivacyPolicyTextWidget(),
+          const TermOfServicePrivacyPolicyWidget(),
         ],
-      ),
-    );
-  }
-}
-
-class TermOfServicePrivacyPolicyTextWidget extends StatelessWidget {
-  const TermOfServicePrivacyPolicyTextWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final prefsSettingsProvider = context.read<PreferenceSettingsProvider>();
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 52),
-      child: Text.rich(
-        style: context.textTheme.bodyMedium?.copyWith(
-          fontSize: 14.sp,
-          color: prefsSettingsProvider.isDarkTheme
-              ? Colors.grey[300]
-              : AppColors.kDeepGreen,
-        ),
-        TextSpan(
-          text: 'By signing up you are agreeing to our ',
-          children: [
-            TextSpan(
-              text: 'Terms of Service',
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  // TODO: implement onTap for Terms of Service
-                },
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: prefsSettingsProvider.isDarkTheme
-                    ? Colors.blueAccent
-                    : AppColors.kNormalBlue,
-              ),
-            ),
-            const TextSpan(
-              text: ' and ',
-            ),
-            TextSpan(
-              text: 'Privacy Policy',
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  // TODO: implement onTap for Privacy Policy
-                },
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: prefsSettingsProvider.isDarkTheme
-                    ? Colors.blueAccent
-                    : AppColors.kNormalBlue,
-              ),
-            ),
-          ],
-        ),
-        textAlign: TextAlign.center,
       ),
     );
   }
