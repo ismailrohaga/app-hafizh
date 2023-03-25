@@ -5,8 +5,11 @@ import 'package:hafizh/common/provider/preference_settings_provider.dart';
 
 class PasswordTextFieldWidget extends StatefulWidget {
   final String labelText;
+  final void Function(String value)? onChanged;
+  final String? errorText;
 
-  const PasswordTextFieldWidget({super.key, required this.labelText});
+  const PasswordTextFieldWidget(
+      {super.key, required this.labelText, this.onChanged, this.errorText});
 
   @override
   State<PasswordTextFieldWidget> createState() =>
@@ -32,11 +35,13 @@ class _PasswordTextFieldStateWidget extends State<PasswordTextFieldWidget> {
     return Consumer<PreferenceSettingsProvider>(
       builder: (context, preference, __) => TextField(
         obscureText: _isObscure,
+        onChanged: widget.onChanged,
         style: context.textTheme.bodyLarge?.copyWith(
           color: preference.isDarkTheme ? Colors.grey[300] : Colors.black,
         ),
         decoration: InputDecoration(
           labelText: widget.labelText,
+          errorText: widget.errorText,
           suffixIcon: SizedBox(
             width: 22.w,
             height: 15.h,

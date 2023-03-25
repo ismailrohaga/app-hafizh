@@ -4,6 +4,9 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/provider.dart';
 import 'package:hafizh/common/ui/widget/molecules/button/hafizh_button_widget.dart';
+import 'package:hafizh/data/model/validation/auth/email.dart';
+import 'package:hafizh/data/model/validation/auth/password.dart';
+import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
 
 import 'package:hafizh/presentation/auth/widgets/login_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
@@ -19,7 +22,15 @@ class LoginWithEmailView extends StatefulWidget {
 }
 
 class _LoginWithEmailViewState extends State<LoginWithEmailView> {
-  void _onLoginButtonPressed() {}
+  void _onLoginButtonPressed() {
+    final submissionStatus = context.read<LoginCubit>().state.submissionStatus;
+
+    if (submissionStatus) {
+      // context.read<LoginCubit>().loginWithEmail();
+
+      print('Login with email');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +38,8 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
 
     return ScaffoldLoginViewWrapperWidget(
         bottomRichText: const LoginBottomRichTextWidget(),
-        child: Center(
-          child: Column(children: [
+        child: BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+          return Column(children: [
             Text(
               'Sign In',
               style: context.textTheme.headlineLarge?.copyWith(
@@ -37,16 +48,26 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
                       : Colors.black),
             ),
             SizedBox(height: 52.h),
-            const EmailTextFieldWidget(),
-            SizedBox(height: SpacingConstant.md),
-            const PasswordTextFieldWidget(
-              labelText: 'Password',
+            EmailTextFieldWidget(
+              errorText: state.email.displayError?.text,
+              onChanged: (value) =>
+                  context.read<LoginCubit>().emailChanged(value),
             ),
             SizedBox(height: SpacingConstant.md),
-            HafizhButtonWidget(text: "Sign In", onTap: _onLoginButtonPressed),
+            PasswordTextFieldWidget(
+              labelText: 'Password',
+              errorText: state.password.displayError?.text,
+              onChanged: (value) =>
+                  context.read<LoginCubit>().passwordChanged(value),
+            ),
+            SizedBox(height: SpacingConstant.md),
+            HafizhButtonWidget(
+                text: "Sign In",
+                disabled: !state.submissionStatus,
+                onTap: _onLoginButtonPressed),
             SizedBox(height: SpacingConstant.xl),
             const TermOfServicePrivacyPolicyWidget(),
-          ]),
-        ));
+          ]);
+        }));
   }
 }

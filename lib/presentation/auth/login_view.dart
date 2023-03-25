@@ -8,7 +8,6 @@ import 'package:hafizh/common/state/view_data_state.dart';
 import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 
 import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
-import 'package:hafizh/presentation/auth/cubit/login_state.dart';
 import 'package:hafizh/presentation/auth/widgets/google_signin_button.dart';
 import 'package:hafizh/presentation/auth/widgets/login_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
