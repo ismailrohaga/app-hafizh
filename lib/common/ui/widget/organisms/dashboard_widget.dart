@@ -47,13 +47,7 @@ class DashboardWidget extends StatelessWidget {
           const SizedBox(
             height: SpacingConstant.lg,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: callToAction ?? Container(),
-              ),
-            ],
-          ),
+          callToAction ?? const SizedBox(),
         ],
       ),
     );

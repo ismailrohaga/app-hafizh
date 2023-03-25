@@ -37,14 +37,22 @@ class AppTheme {
   );
 
   ThemeData get darkTheme => ThemeData.dark().copyWith(
-      colorScheme: AppColors.kColorScheme,
-      appBarTheme: const AppBarTheme(elevation: 0),
-      scaffoldBackgroundColor: Colors.black,
-      textTheme: kTextTheme);
+        colorScheme: AppColors.kColorScheme,
+        appBarTheme: const AppBarTheme(elevation: 0),
+        scaffoldBackgroundColor: AppColors.kDeepGreen,
+        textTheme: kTextTheme,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.kDeepGreen,
+          unselectedItemColor: Colors.white,
+        ),
+      );
 
   ThemeData get lightTheme => ThemeData.light().copyWith(
       colorScheme: AppColors.kColorScheme,
       appBarTheme: const AppBarTheme(elevation: 0),
       scaffoldBackgroundColor: Colors.white,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          // TODO: Change this if needed
+          ),
       textTheme: kTextTheme);
 }
