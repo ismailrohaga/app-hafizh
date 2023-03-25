@@ -6,6 +6,8 @@ class AppColors {
   static const Color kTertriary = Color(0xFFFFE5BD);
   static const Color kDeepGreen = Color(0xFF012C3B);
   static const Color kLightDeepGreen = Color(0XFF215061);
+  static const Color kGrey = Color(0XFFB6B6B6);
+  static const Color kNormalBlue = Color(0XFF1145FF);
 
   static const kColorScheme = ColorScheme(
     primary: kPrimary,

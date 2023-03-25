@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/circular_constant.dart';
+import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
 class HafizhButtonWidget extends StatelessWidget {
   final String text;
-  final void Function()? onTap;
+  final Icon? leftIcon;
+  final Icon? rightIcon;
+  final void Function() onTap;
 
-  const HafizhButtonWidget({super.key, required this.text, this.onTap});
+  const HafizhButtonWidget(
+      {super.key,
+      required this.text,
+      required this.onTap,
+      this.leftIcon,
+      this.rightIcon});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-            color: context.colors.primary,
-            borderRadius:
-                const BorderRadius.all(Radius.circular(CircularConstant.lg))),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            text,
-            style: context.textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          ),
+    return ElevatedButton(
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: context.colors.primary,
+        foregroundColor: context.colors.onPrimary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(CircularConstant.lg),
         ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 16,
+        ),
+        shadowColor: Colors.transparent,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          if (leftIcon != null) leftIcon!,
+          if (leftIcon != null) const SizedBox(width: SpacingConstant.sm),
+          Text(
+            text,
+            style: context.textTheme.labelLarge,
+          ),
+          if (rightIcon != null) const SizedBox(width: SpacingConstant.sm),
+          if (rightIcon != null) rightIcon!,
+        ],
       ),
     );
   }
