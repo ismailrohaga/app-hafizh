@@ -14,25 +14,6 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  // void _handleOnInitialize(
-  //     BuildContext context, bool isDoneOnBoard, bool isNotLoggedIn) async {
-  //   // TODO: initialize something, such as DB, etc. then remove Future Delayed initialization
-  //   Future.delayed(const Duration(seconds: 3)).then(
-  //     (_) {
-  //       if (!isNotLoggedIn) {
-  //         context.goNamed(NamedRoutes.homeView);
-  //         return;
-  //       }
-
-  //       if (isDoneOnBoard) {
-  //         context.goNamed(NamedRoutes.homeView);
-  //       } else {
-  //         context.goNamed(NamedRoutes.onBoardView);
-  //       }
-  //     },
-  //   );
-  // }
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -49,7 +30,7 @@ class _SplashViewState extends State<SplashView> {
           return context.goNamed(NamedRoutes.onBoardView);
         }
 
-        context.go('/auth');
+        context.goNamed(NamedRoutes.loginView);
       });
     });
 
