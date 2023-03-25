@@ -5,6 +5,7 @@ import 'package:hafizh/common/ui/widget/organisms/organisms.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
 import 'package:hafizh/presentation/login/login_view.dart';
+import 'package:hafizh/presentation/login/login_with_email_view.dart';
 import 'package:hafizh/presentation/quran/quran_view.dart';
 import 'package:hafizh/presentation/settings/settings_view.dart';
 import 'package:hafizh/presentation/onboard/onboard_view.dart';
@@ -31,6 +32,11 @@ final GoRouter appRouter = GoRouter(
       name: NamedRoutes.loginView,
       path: "/login-view",
       builder: (context, state) => const LoginView(),
+    ),
+    GoRoute(
+      name: NamedRoutes.loginWithEmailView,
+      path: "/login-with-email-view",
+      builder: (context, state) => const LoginWithEmailView(),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
