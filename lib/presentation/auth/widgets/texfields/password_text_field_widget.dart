@@ -4,7 +4,9 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 
 class PasswordTextFieldWidget extends StatefulWidget {
-  const PasswordTextFieldWidget({super.key});
+  final String labelText;
+
+  const PasswordTextFieldWidget({super.key, required this.labelText});
 
   @override
   State<PasswordTextFieldWidget> createState() =>
@@ -34,7 +36,7 @@ class _PasswordTextFieldStateWidget extends State<PasswordTextFieldWidget> {
           color: preference.isDarkTheme ? Colors.grey[300] : Colors.black,
         ),
         decoration: InputDecoration(
-          labelText: 'Password',
+          labelText: widget.labelText,
           suffixIcon: SizedBox(
             width: 22.w,
             height: 15.h,

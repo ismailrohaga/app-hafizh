@@ -11,15 +11,15 @@ import 'package:hafizh/presentation/auth/widgets/term_of_service_privacy_policy_
 import 'package:hafizh/presentation/auth/widgets/texfields/email_text_field_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/texfields/password_text_field_widget.dart';
 
-class LoginWithEmailView extends StatefulWidget {
-  const LoginWithEmailView({super.key});
+class RegisterWithEmailView extends StatefulWidget {
+  const RegisterWithEmailView({super.key});
 
   @override
-  State<LoginWithEmailView> createState() => _LoginWithEmailViewState();
+  State<RegisterWithEmailView> createState() => _RegisterWithEmailViewState();
 }
 
-class _LoginWithEmailViewState extends State<LoginWithEmailView> {
-  void _onLoginButtonPressed() {}
+class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
+  void _onTapRegister() {}
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
         child: Center(
           child: Column(children: [
             Text(
-              'Sign In',
+              'Sign Up With Email',
               style: context.textTheme.headlineLarge?.copyWith(
                   color: prefsSettingsProvider.isDarkTheme
                       ? Colors.grey[300]
@@ -43,7 +43,11 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
               labelText: 'Password',
             ),
             SizedBox(height: SpacingConstant.md),
-            HafizhButtonWidget(text: "Sign In", onTap: _onLoginButtonPressed),
+            const PasswordTextFieldWidget(
+              labelText: 'Retype Password',
+            ),
+            SizedBox(height: SpacingConstant.md),
+            HafizhButtonWidget(text: "Sign Up", onTap: _onTapRegister),
             SizedBox(height: SpacingConstant.xl),
             const TermOfServicePrivacyPolicyWidget(),
           ]),
