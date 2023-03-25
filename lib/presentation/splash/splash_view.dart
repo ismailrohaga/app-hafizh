@@ -49,7 +49,7 @@ class _SplashViewState extends State<SplashView> {
           return context.goNamed(NamedRoutes.onBoardView);
         }
 
-        context.goNamed(NamedRoutes.loginView);
+        context.go('/auth');
       });
     });
 

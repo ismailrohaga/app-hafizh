@@ -57,6 +57,8 @@ class AppTheme {
         appBarTheme: const AppBarTheme(elevation: 0),
         scaffoldBackgroundColor: AppColors.kDeepGreen,
         inputDecorationTheme: kInputDecorationTheme.copyWith(
+          prefixIconColor: AppColors.kGrey,
+          suffixIconColor: AppColors.kGrey,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.w),
             borderSide: const BorderSide(color: AppColors.kGrey),
@@ -83,6 +85,7 @@ class AppTheme {
       bottomNavigationBarTheme: kBottomNavigationBarTheme,
       inputDecorationTheme: kInputDecorationTheme.copyWith(
         prefixIconColor: AppColors.kGrey,
+        suffixIconColor: AppColors.kGrey,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.w),
           borderSide: const BorderSide(color: AppColors.kGrey),

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/widget/organisms/organisms.dart';
+import 'package:hafizh/presentation/auth/login_view.dart';
+import 'package:hafizh/presentation/auth/register_view.dart';
 import 'package:hafizh/presentation/detail_surah/detail_surah_view.dart';
 import 'package:hafizh/presentation/home/home_view.dart';
-import 'package:hafizh/presentation/login/login_view.dart';
-import 'package:hafizh/presentation/login/login_with_email_view.dart';
+import 'package:hafizh/presentation/auth/login_with_email_view.dart';
 import 'package:hafizh/presentation/quran/quran_view.dart';
 import 'package:hafizh/presentation/settings/settings_view.dart';
 import 'package:hafizh/presentation/onboard/onboard_view.dart';
@@ -29,15 +30,21 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const OnBoardView(),
     ),
     GoRoute(
-      name: NamedRoutes.loginView,
-      path: "/login-view",
-      builder: (context, state) => const LoginView(),
-    ),
-    GoRoute(
-      name: NamedRoutes.loginWithEmailView,
-      path: "/login-with-email-view",
-      builder: (context, state) => const LoginWithEmailView(),
-    ),
+        path: '/auth',
+        name: NamedRoutes.loginView,
+        builder: (context, state) => const LoginView(),
+        routes: [
+          GoRoute(
+            name: NamedRoutes.loginWithEmailView,
+            path: "login-with-email-view",
+            builder: (context, state) => const LoginWithEmailView(),
+          ),
+          GoRoute(
+            name: NamedRoutes.registerView,
+            path: "register-view",
+            builder: (context, state) => const RegisterView(),
+          ),
+        ]),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
-import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
-import 'package:hafizh/common/ui/app_colors.dart';
 
 class ScaffoldLoginViewWrapperWidget extends StatelessWidget {
   final Widget child;
+  final Widget? bottomRichText;
 
-  const ScaffoldLoginViewWrapperWidget({super.key, required this.child});
+  const ScaffoldLoginViewWrapperWidget(
+      {super.key, required this.child, this.bottomRichText});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,15 @@ class ScaffoldLoginViewWrapperWidget extends StatelessWidget {
             ? SystemUiOverlayStyle.light
             : SystemUiOverlayStyle.dark,
         child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              iconTheme: IconThemeData(
+                color: prefsSettingsProvider.isDarkTheme
+                    ? Colors.grey[300]
+                    : Colors.black,
+              ),
+            ),
             body: SafeArea(
                 child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -31,27 +40,7 @@ class ScaffoldLoginViewWrapperWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         child,
-                        RichText(
-                          text: TextSpan(
-                            text: "Don't have an account? ",
-                            style: context.textTheme.labelMedium?.copyWith(
-                              color: prefsSettingsProvider.isDarkTheme
-                                  ? Colors.grey[300]
-                                  : Colors.black,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "Sign Up",
-                                style: context.textTheme.labelMedium?.copyWith(
-                                  color: prefsSettingsProvider.isDarkTheme
-                                      ? Colors.blue
-                                      : AppColors.kNormalBlue,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        bottomRichText ?? const SizedBox.shrink(),
                       ],
                     )))));
   }

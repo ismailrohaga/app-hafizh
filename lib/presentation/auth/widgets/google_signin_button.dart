@@ -8,8 +8,13 @@ import 'package:hafizh/common/ui/app_colors.dart';
 class GoogleSignInButton extends StatelessWidget {
   final Function()? onPressed;
   final bool loading;
+  final String text;
 
-  const GoogleSignInButton({super.key, this.onPressed, this.loading = false});
+  const GoogleSignInButton(
+      {super.key,
+      this.text = 'Sign in with Google',
+      this.onPressed,
+      this.loading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,7 @@ class GoogleSignInButton extends StatelessWidget {
           ),
           SizedBox(width: SpacingConstant.sm),
           Text(
-            'Sign in with Google',
+            text,
             style: context.textTheme.labelLarge?.copyWith(
               color: prefsSettingProvider.isDarkTheme
                   ? Colors.grey[300]
