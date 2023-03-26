@@ -26,7 +26,6 @@ class RegisterCubit extends Cubit<RegisterState> {
           await _signUpWithEmailAndPasswordUseCase.call(email, password);
 
       response.fold((failure) {
-        print("RegisterCubit signUpWithEmailAndPassword: ${failure.message}");
         emit(state.copyWith(
           registerStatus: ViewData.error(message: failure.message),
         ));
