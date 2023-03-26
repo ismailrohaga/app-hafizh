@@ -1,7 +1,5 @@
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
-import 'package:hafizh/data/model/validation/auth/email.dart';
-import 'package:hafizh/data/model/validation/auth/password.dart';
 import 'package:hafizh/domain/usecase/authentication/sign_in_with_google_usecase.dart';
 
 part 'login_state.dart';
@@ -14,24 +12,6 @@ class LoginCubit extends Cubit<LoginState> {
         super(LoginState(
           viewData: ViewData.initial(),
         ));
-
-  void emailChanged(String value) {
-    final email = Email.dirty(value);
-
-    emit(state.copyWith(
-      email: email,
-      submissionStatus: Formz.validate([state.password, email]),
-    ));
-  }
-
-  void passwordChanged(String value) {
-    final password = Password.dirty(value);
-
-    emit(state.copyWith(
-      password: password,
-      submissionStatus: Formz.validate([state.password, password]),
-    ));
-  }
 
   Future<void> signInWithGoogle() async {
     try {

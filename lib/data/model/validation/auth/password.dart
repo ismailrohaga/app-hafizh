@@ -31,12 +31,14 @@ class Password extends FormzInput<String, PasswordValidationError> {
 }
 
 extension PasswordValidationErrorExt on PasswordValidationError {
-  String get text {
+  String? get text {
     switch (this) {
       case PasswordValidationError.invalid:
         return 'Invalid password format (min 8 characters, at least 1 letter and 1 number)';
       case PasswordValidationError.empty:
         return 'Password cannot be empty';
+      default:
+        return null;
     }
   }
 }
