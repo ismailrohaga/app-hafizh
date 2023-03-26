@@ -80,7 +80,15 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
     });
   }
 
-  void _onTapRegister() {}
+  void _onTapRegister() {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      _state = _state.copyWith(status: FormzSubmissionStatus.inProgress);
+    });
+
+    // TODO: Implement register with email to firebase
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +98,7 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
         bottomRichText: const RegisterBottomRichTextWidget(),
         child: Center(
           child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
             child: Column(children: [
               Text(
@@ -102,21 +111,18 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
               SizedBox(height: 52.h),
               EmailTextFieldWidget(
                 controller: _emailController,
-                errorText: _state.email.displayError?.text,
                 validator: (_) => _state.email.displayError?.text,
               ),
               SizedBox(height: SpacingConstant.md),
               PasswordTextFieldWidget(
                 labelText: "Password",
                 controller: _passwordController,
-                errorText: _state.password.displayError?.text,
                 validator: (_) => _state.password.displayError?.text,
               ),
               SizedBox(height: SpacingConstant.md),
               PasswordTextFieldWidget(
                 labelText: "Confirm Password",
                 controller: _confirmedPasswordController,
-                errorText: _state.confirmedPassword.displayError?.text,
                 validator: (_) => _state.confirmedPassword.displayError?.text,
               ),
               SizedBox(height: SpacingConstant.md),

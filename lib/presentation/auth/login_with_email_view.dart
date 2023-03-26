@@ -68,6 +68,8 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
         status: FormzSubmissionStatus.inProgress,
       );
     });
+
+    // TODO: Implement login with email to firebase
   }
 
   @override
