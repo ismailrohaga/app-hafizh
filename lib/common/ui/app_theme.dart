@@ -40,7 +40,11 @@ class AppTheme {
   InputDecorationTheme get kInputDecorationTheme => InputDecorationTheme(
         contentPadding: EdgeInsets.all(12.sp),
         labelStyle: kTextTheme.bodyMedium,
-        floatingLabelStyle: kTextTheme.bodyMedium,
+        prefixIconColor: AppColors.kGrey,
+        suffixIconColor: AppColors.kGrey,
+        floatingLabelStyle: kTextTheme.bodyLarge?.copyWith(
+          color: Colors.black,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.w),
           borderSide: const BorderSide(color: AppColors.kGrey),
@@ -57,8 +61,6 @@ class AppTheme {
         appBarTheme: const AppBarTheme(elevation: 0),
         scaffoldBackgroundColor: AppColors.kDeepGreen,
         inputDecorationTheme: kInputDecorationTheme.copyWith(
-          prefixIconColor: AppColors.kGrey,
-          suffixIconColor: AppColors.kGrey,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.w),
             borderSide: const BorderSide(color: AppColors.kGrey),
@@ -84,8 +86,10 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.white,
       bottomNavigationBarTheme: kBottomNavigationBarTheme,
       inputDecorationTheme: kInputDecorationTheme.copyWith(
-        prefixIconColor: AppColors.kGrey,
-        suffixIconColor: AppColors.kGrey,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.w),
+          borderSide: const BorderSide(color: AppColors.kGrey),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.w),
           borderSide: const BorderSide(color: AppColors.kGrey),
