@@ -33,12 +33,13 @@ class LoginView extends StatelessWidget {
           ),
           SizedBox(height: SpacingConstant.xl),
           const GoogleSignButtonBlocBuilderWidget(),
-          SizedBox(height: SpacingConstant.md),
+          SizedBox(height: 12.h),
           HafizhButtonWidget(
             text: 'Sign-in with Email',
             onTap: () => context.goNamed(NamedRoutes.loginWithEmailView),
-            leftIcon: const Icon(
+            leftIcon: Icon(
               Icons.email,
+              size: 20.w,
               color: Colors.white,
             ),
           ),

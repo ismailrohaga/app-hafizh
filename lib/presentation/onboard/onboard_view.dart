@@ -41,8 +41,7 @@ class _OnBoardViewState extends State<OnBoardView> {
       width: isActive ? 22.0 : 12.0,
       decoration: BoxDecoration(
         color: isActive ? context.colors.secondary : context.colors.tertiary,
-        borderRadius:
-            const BorderRadius.all(Radius.circular(CircularConstant.lg)),
+        borderRadius: BorderRadius.all(Radius.circular(CircularConstant.lg)),
       ),
     );
   }

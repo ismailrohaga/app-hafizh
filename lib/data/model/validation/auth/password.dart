@@ -3,7 +3,8 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 /// Validation errors for the [Password] [FormzInput].
 enum PasswordValidationError {
   /// Generic invalid error.
-  invalid
+  invalid,
+  empty
 }
 
 /// {@template password}
@@ -21,7 +22,9 @@ class Password extends FormzInput<String, PasswordValidationError> {
 
   @override
   PasswordValidationError? validator(String? value) {
-    return _passwordRegExp.hasMatch(value ?? '')
+    if (value == null || value.isEmpty) return PasswordValidationError.empty;
+
+    return _passwordRegExp.hasMatch(value)
         ? null
         : PasswordValidationError.invalid;
   }
@@ -32,6 +35,8 @@ extension PasswordValidationErrorExt on PasswordValidationError {
     switch (this) {
       case PasswordValidationError.invalid:
         return 'Invalid password format (min 8 characters, at least 1 letter and 1 number)';
+      case PasswordValidationError.empty:
+        return 'Password cannot be empty';
     }
   }
 }

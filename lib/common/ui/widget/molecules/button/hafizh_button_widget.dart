@@ -38,9 +38,10 @@ class HafizhButtonWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(CircularConstant.lg),
         ),
+        maximumSize: Size.fromHeight(48.h),
+        minimumSize: Size.fromHeight(48.h),
         padding: EdgeInsets.symmetric(
-          vertical: 12.h,
-          horizontal: 16.w,
+          vertical: 14.5.h,
         ),
         shadowColor: Colors.transparent,
       ),
