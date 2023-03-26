@@ -26,7 +26,7 @@ class LoginBottomRichTextWidget extends StatelessWidget {
               text: "Sign Up",
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  context.goNamed(NamedRoutes.registerView);
+                  context.goNamed(NamedRoutes.registerWithEmailView);
                 },
               style: context.textTheme.labelMedium?.copyWith(
                 color: preference.isDarkTheme
