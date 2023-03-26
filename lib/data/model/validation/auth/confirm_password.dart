@@ -1,9 +1,6 @@
 import 'package:hafizh/common/dependencies/dependencies.dart';
 
-enum ConfirmedPasswordValidationError {
-  invalid,
-  mismatch,
-}
+enum ConfirmedPasswordValidationError { mismatch, empty }
 
 class ConfirmedPassword
     extends FormzInput<String, ConfirmedPasswordValidationError> {
@@ -17,7 +14,7 @@ class ConfirmedPassword
   @override
   ConfirmedPasswordValidationError? validator(String value) {
     if (value.isEmpty) {
-      return ConfirmedPasswordValidationError.invalid;
+      return ConfirmedPasswordValidationError.empty;
     }
     return password == value ? null : ConfirmedPasswordValidationError.mismatch;
   }
@@ -28,6 +25,8 @@ extension Explanation on ConfirmedPasswordValidationError {
     switch (this) {
       case ConfirmedPasswordValidationError.mismatch:
         return 'Passwords must match';
+      case ConfirmedPasswordValidationError.empty:
+        return 'Please confirm your password';
       default:
         return null;
     }
