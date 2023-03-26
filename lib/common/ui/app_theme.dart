@@ -61,6 +61,9 @@ class AppTheme {
         appBarTheme: const AppBarTheme(elevation: 0),
         scaffoldBackgroundColor: AppColors.kDeepGreen,
         inputDecorationTheme: kInputDecorationTheme.copyWith(
+          floatingLabelStyle: kTextTheme.bodyLarge?.copyWith(
+            color: Colors.grey[300],
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.w),
             borderSide: const BorderSide(color: AppColors.kGrey),
