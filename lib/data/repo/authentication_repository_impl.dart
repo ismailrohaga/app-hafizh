@@ -65,8 +65,24 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
     } on FirebaseAuthException catch (e) {
       return Left(LogInWithGoogleFailure.fromCode(e.code));
     } catch (_) {
-      print(_);
       return const Left(LogInWithGoogleFailure());
+    }
+  }
+
+  @override
+  Future<Either<LogInWithEmailAndPasswordFailure, UserEntity>>
+      signInWithEmailAndPassword(String email, String password) async {
+    try {
+      final response = await firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final user = response.user?.toUserEntity ?? UserEntity.empty;
+
+      return Right(user);
+    } on FirebaseAuthException catch (e) {
+      return Left(LogInWithEmailAndPasswordFailure.fromCode(e.code));
     }
   }
 

@@ -35,8 +35,9 @@ class App extends StatelessWidget {
           BlocProvider(
               create: (_) => DetailSurahBloc(getDetailSurahUsecase: locator())),
           BlocProvider(
-              create: (context) =>
-                  LoginCubit(signInWithGoogleUseCase: locator())),
+              create: (context) => LoginCubit(
+                  signInWithGoogleUseCase: locator(),
+                  signInWithEmailAndPasswordUseCase: locator())),
           BlocProvider(create: (_) => RegisterCubit())
         ],
         child: Consumer<PreferenceSettingsProvider>(

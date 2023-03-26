@@ -3,11 +3,13 @@ import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/provider.dart';
+import 'package:hafizh/common/state/view_data_state.dart';
 import 'package:hafizh/common/ui/widget/molecules/button/hafizh_button_widget.dart';
 
 import 'package:hafizh/data/model/validation/auth/email.dart';
 import 'package:hafizh/data/model/validation/auth/login_state_validation.dart';
 import 'package:hafizh/data/model/validation/auth/password.dart';
+import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
 
 import 'package:hafizh/presentation/auth/widgets/login_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
@@ -60,16 +62,13 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
     });
   }
 
-  void _onLoginButtonPressed() {
-    if (!_formKey.currentState!.validate()) return;
+  void _onRegisterTap() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
 
-    setState(() {
-      _state = _state.copyWith(
-        status: FormzSubmissionStatus.inProgress,
-      );
-    });
-
-    // TODO: Implement login with email to firebase
+    context.read<LoginCubit>().signWithEmailAndPassword(
+        _emailController.text, _passwordController.text);
   }
 
   @override
@@ -78,36 +77,60 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
 
     return ScaffoldLoginViewWrapperWidget(
         bottomRichText: const LoginBottomRichTextWidget(),
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            Text(
-              'Sign In',
-              style: context.textTheme.headlineLarge?.copyWith(
-                  color: prefsSettingsProvider.isDarkTheme
-                      ? Colors.grey[300]
-                      : Colors.black),
-            ),
-            SizedBox(height: 52.h),
-            EmailTextFieldWidget(
-              controller: _emailController,
-              validator: (_) => _state.email.displayError?.text,
-            ),
-            SizedBox(height: SpacingConstant.md),
-            PasswordTextFieldWidget(
-              controller: _passwordController,
-              labelText: 'Password',
-              validator: (_) => _state.password.displayError?.text,
-            ),
-            SizedBox(height: SpacingConstant.md),
-            HafizhButtonWidget(
-              text: "Sign In",
-              onTap: _onLoginButtonPressed,
-              disabled: _formKey.currentState?.validate() == false,
-            ),
-            SizedBox(height: SpacingConstant.xl),
-            const TermOfServicePrivacyPolicyWidget(),
-          ]),
-        ));
+        child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+          final status = state.viewData.status;
+          final message = state.viewData.message;
+
+          if (status.isError) {
+            context.scaffoldMessenger.showSnackBar(
+              SnackBar(
+                content: Text(message),
+              ),
+            );
+          }
+
+          if (status.isHasData) {
+            context.scaffoldMessenger.showSnackBar(
+              SnackBar(
+                content: Text(message),
+              ),
+            );
+
+            context.goNamed(NamedRoutes.homeView);
+          }
+        }, builder: (context, state) {
+          return Form(
+            key: _formKey,
+            child: Column(children: [
+              Text(
+                'Sign In',
+                style: context.textTheme.headlineLarge?.copyWith(
+                    color: prefsSettingsProvider.isDarkTheme
+                        ? Colors.grey[300]
+                        : Colors.black),
+              ),
+              SizedBox(height: 52.h),
+              EmailTextFieldWidget(
+                controller: _emailController,
+                validator: (_) => _state.email.displayError?.text,
+              ),
+              SizedBox(height: SpacingConstant.md),
+              PasswordTextFieldWidget(
+                controller: _passwordController,
+                labelText: 'Password',
+                validator: (_) => _state.password.displayError?.text,
+              ),
+              SizedBox(height: SpacingConstant.md),
+              HafizhButtonWidget(
+                text: "Sign In",
+                loading: state.viewData.status.isLoading,
+                onTap: _onRegisterTap,
+                disabled: _formKey.currentState?.validate() == false,
+              ),
+              SizedBox(height: SpacingConstant.xl),
+              const TermOfServicePrivacyPolicyWidget(),
+            ]),
+          );
+        }));
   }
 }
