@@ -87,6 +87,23 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
   }
 
   @override
+  Future<Either<SignUpWithEmailAndPasswordFailure, UserEntity>>
+      signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      final response = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      final user = response.user?.toUserEntity ?? UserEntity.empty;
+
+      return Right(user);
+    } on FirebaseAuthException catch (e) {
+      return Left(SignUpWithEmailAndPasswordFailure.fromCode(e.code));
+    } catch (_) {
+      return const Left(SignUpWithEmailAndPasswordFailure());
+    }
+  }
+
+  @override
   Future<Either<LogOutFailure, void>> signOut() async {
     try {
       await Future.wait([

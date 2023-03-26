@@ -1,26 +1,22 @@
 part of 'register_cubit.dart';
 
 class RegisterState extends Equatable {
-  final String message;
+  final ViewData<UserEntity> registerStatus;
 
-  const RegisterState({
-    this.message = '',
-  });
+  RegisterState({
+    ViewData<UserEntity>? registerStatus,
+  }) : registerStatus = registerStatus ?? ViewData.initial();
 
   RegisterState copyWith({
-    String? message,
-    Email? email,
-    Password? password,
-    ConfirmedPassword? confirmedPassword,
-    bool? submissionStatus,
+    ViewData<UserEntity>? registerStatus,
   }) {
     return RegisterState(
-      message: message ?? this.message,
+      registerStatus: registerStatus ?? this.registerStatus,
     );
   }
 
   @override
   List<Object?> get props => [
-        message,
+        registerStatus,
       ];
 }

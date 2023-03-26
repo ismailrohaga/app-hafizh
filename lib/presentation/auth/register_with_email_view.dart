@@ -3,11 +3,13 @@ import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/provider.dart';
+import 'package:hafizh/common/state/view_data_state.dart';
 import 'package:hafizh/common/ui/widget/molecules/button/hafizh_button_widget.dart';
 import 'package:hafizh/data/model/validation/auth/confirm_password.dart';
 import 'package:hafizh/data/model/validation/auth/email.dart';
 import 'package:hafizh/data/model/validation/auth/password.dart';
 import 'package:hafizh/data/model/validation/auth/register_state_validation.dart';
+import 'package:hafizh/presentation/auth/cubit/register_cubit.dart';
 
 import 'package:hafizh/presentation/auth/widgets/register_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
@@ -80,14 +82,21 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
     });
   }
 
-  void _onTapRegister() {
-    if (!_formKey.currentState!.validate()) return;
+  void _onTapRegister() async {
+    final isValid = Formz.validate([
+      _state.email,
+      _state.password,
+      _state.confirmedPassword,
+    ]);
 
-    setState(() {
-      _state = _state.copyWith(status: FormzSubmissionStatus.inProgress);
-    });
+    if (!_formKey.currentState!.validate() || !isValid) return;
 
-    // TODO: Implement register with email to firebase
+    final registerCubit = context.read<RegisterCubit>();
+
+    var email = _emailController.text;
+    var password = _passwordController.text;
+
+    await registerCubit.signUpWithEmailAndPassword(email, password);
   }
 
   @override
@@ -96,41 +105,68 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
 
     return ScaffoldLoginViewWrapperWidget(
         bottomRichText: const RegisterBottomRichTextWidget(),
-        child: Center(
-          child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            key: _formKey,
-            child: Column(children: [
-              Text(
-                'Sign Up With Email',
-                style: context.textTheme.headlineLarge?.copyWith(
-                    color: prefsSettingsProvider.isDarkTheme
-                        ? Colors.grey[300]
-                        : Colors.black),
+        child: BlocConsumer<RegisterCubit, RegisterState>(
+            listener: (context, state) {
+          final status = state.registerStatus.status;
+          final message = state.registerStatus.message;
+
+          if (status.isError) {
+            context.scaffoldMessenger.showSnackBar(
+              SnackBar(
+                content: Text(message),
+                backgroundColor: context.colors.primary,
               ),
-              SizedBox(height: 52.h),
-              EmailTextFieldWidget(
-                controller: _emailController,
-                validator: (_) => _state.email.displayError?.text,
-              ),
-              SizedBox(height: SpacingConstant.md),
-              PasswordTextFieldWidget(
-                labelText: "Password",
-                controller: _passwordController,
-                validator: (_) => _state.password.displayError?.text,
-              ),
-              SizedBox(height: SpacingConstant.md),
-              PasswordTextFieldWidget(
-                labelText: "Confirm Password",
-                controller: _confirmedPasswordController,
-                validator: (_) => _state.confirmedPassword.displayError?.text,
-              ),
-              SizedBox(height: SpacingConstant.md),
-              HafizhButtonWidget(text: "Sign Up", onTap: _onTapRegister),
-              SizedBox(height: SpacingConstant.xl),
-              const TermOfServicePrivacyPolicyWidget(),
-            ]),
-          ),
-        ));
+            );
+          }
+
+          if (status.isHasData) {
+            context.goNamed(NamedRoutes.homeView);
+          }
+        }, builder: (context, state) {
+          final status = state.registerStatus.status;
+
+          return Center(
+            child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: _formKey,
+              child: Column(children: [
+                Text(
+                  'Sign Up With Email',
+                  style: context.textTheme.headlineLarge?.copyWith(
+                      color: prefsSettingsProvider.isDarkTheme
+                          ? Colors.grey[300]
+                          : Colors.black),
+                ),
+                SizedBox(height: 52.h),
+                EmailTextFieldWidget(
+                  controller: _emailController,
+                  validator: (_) => _state.email.displayError?.text,
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(height: SpacingConstant.md),
+                PasswordTextFieldWidget(
+                  labelText: "Password",
+                  controller: _passwordController,
+                  validator: (_) => _state.password.displayError?.text,
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(height: SpacingConstant.md),
+                PasswordTextFieldWidget(
+                  labelText: "Confirm Password",
+                  controller: _confirmedPasswordController,
+                  validator: (_) => _state.confirmedPassword.displayError?.text,
+                  textInputAction: TextInputAction.done,
+                ),
+                SizedBox(height: SpacingConstant.md),
+                HafizhButtonWidget(
+                    text: "Sign Up",
+                    loading: status.isLoading,
+                    onTap: _onTapRegister),
+                SizedBox(height: SpacingConstant.xl),
+                const TermOfServicePrivacyPolicyWidget(),
+              ]),
+            ),
+          );
+        }));
   }
 }

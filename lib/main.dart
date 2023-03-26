@@ -38,7 +38,9 @@ class App extends StatelessWidget {
               create: (context) => LoginCubit(
                   signInWithGoogleUseCase: locator(),
                   signInWithEmailAndPasswordUseCase: locator())),
-          BlocProvider(create: (_) => RegisterCubit())
+          BlocProvider(
+              create: (_) =>
+                  RegisterCubit(signUpWithEmailAndPasswordUseCase: locator()))
         ],
         child: Consumer<PreferenceSettingsProvider>(
           builder: (context, prefSetProvider, _) {

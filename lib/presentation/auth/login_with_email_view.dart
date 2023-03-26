@@ -62,12 +62,18 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
     });
   }
 
-  void _onRegisterTap() {
-    if (!_formKey.currentState!.validate()) {
+  void _onRegisterTap() async {
+    final isValid = Formz.validate([
+      _state.email,
+      _state.password,
+    ]);
+
+    if (!_formKey.currentState!.validate() || !isValid) {
       return;
     }
 
-    context.read<LoginCubit>().signWithEmailAndPassword(
+    final loginCubit = context.read<LoginCubit>();
+    await loginCubit.signWithEmailAndPassword(
         _emailController.text, _passwordController.text);
   }
 
@@ -85,6 +91,7 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
             context.scaffoldMessenger.showSnackBar(
               SnackBar(
                 content: Text(message),
+                backgroundColor: context.colors.primary,
               ),
             );
           }
@@ -101,6 +108,7 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
         }, builder: (context, state) {
           return Form(
             key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(children: [
               Text(
                 'Sign In',

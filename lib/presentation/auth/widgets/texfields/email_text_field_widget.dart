@@ -8,6 +8,7 @@ class EmailTextFieldWidget extends StatelessWidget {
   final void Function(String value)? onChanged;
   final String? errorText;
   final String? Function(String? value)? validator;
+  final TextInputAction? textInputAction;
 
   const EmailTextFieldWidget({
     super.key,
@@ -15,12 +16,14 @@ class EmailTextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.errorText,
     this.validator,
+    this.textInputAction,
   });
 
   @override
   Widget build(BuildContext context) {
     return Consumer<PreferenceSettingsProvider>(
       builder: (context, preference, widget) => TextFormField(
+        textInputAction: textInputAction,
         controller: controller,
         onChanged: onChanged,
         validator: validator,

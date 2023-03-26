@@ -9,6 +9,7 @@ class PasswordTextFieldWidget extends StatefulWidget {
   final String? errorText;
   final void Function(String value)? onChanged;
   final String? Function(String?)? validator;
+  final TextInputAction? textInputAction;
 
   final String? initialValue;
 
@@ -16,6 +17,7 @@ class PasswordTextFieldWidget extends StatefulWidget {
       {super.key,
       required this.controller,
       required this.labelText,
+      this.textInputAction,
       this.errorText,
       this.onChanged,
       this.validator,
@@ -44,6 +46,7 @@ class _PasswordTextFieldStateWidget extends State<PasswordTextFieldWidget> {
   Widget build(BuildContext context) {
     return Consumer<PreferenceSettingsProvider>(
       builder: (context, preference, __) => TextFormField(
+        textInputAction: widget.textInputAction,
         controller: widget.controller,
         initialValue: widget.initialValue,
         obscureText: _isObscure,
