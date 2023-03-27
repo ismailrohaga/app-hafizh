@@ -10,8 +10,10 @@ import 'package:hafizh/data/repo/authentication_repository_impl.dart';
 import 'package:hafizh/data/repo/quran_repository_impl.dart';
 import 'package:hafizh/domain/repo/authentication_repo.dart';
 import 'package:hafizh/domain/repo/quran_repo.dart';
+import 'package:hafizh/domain/usecase/authentication/sign_in_with_email_and_password_usecase.dart';
 import 'package:hafizh/domain/usecase/authentication/sign_in_with_google_usecase.dart';
 import 'package:hafizh/domain/usecase/authentication/sign_out_usecase.dart';
+import 'package:hafizh/domain/usecase/authentication/sign_up_with_email_and_password_usecase.dart';
 import 'package:hafizh/domain/usecase/get_bookmark_verses_usecase.dart';
 import 'package:hafizh/domain/usecase/get_detail_surah_usecase.dart';
 import 'package:hafizh/domain/usecase/get_juz_usecase.dart';
@@ -104,8 +106,15 @@ class DependencyInjection {
     locator.registerLazySingleton<StatusBookmarkVerseUsecase>(
         () => StatusBookmarkVerseUsecase(repository: locator()));
 
+    // Auth Use Case
     locator.registerLazySingleton<SignInWithGoogleUseCase>(
         () => SignInWithGoogleUseCase(repository: locator()));
+
+    locator.registerLazySingleton<SignInWithEmailAndPasswordUseCase>(
+        () => SignInWithEmailAndPasswordUseCase(repository: locator()));
+
+    locator.registerLazySingleton<SignUpWithEmailAndPasswordUseCase>(
+        () => SignUpWithEmailAndPasswordUseCase(repository: locator()));
 
     locator.registerLazySingleton<SignOutUseCase>(
         () => SignOutUseCase(repository: locator()));

@@ -1,5 +1,4 @@
-import 'package:hafizh/common/dependencies/dependencies.dart';
-import 'package:hafizh/common/state/view_data_state.dart';
+part of 'login_cubit.dart';
 
 class LoginState extends Equatable {
   final String message;
@@ -21,5 +20,8 @@ class LoginState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [viewData, message];
+  List<Object?> get props => [
+        viewData,
+        message,
+      ];
 }

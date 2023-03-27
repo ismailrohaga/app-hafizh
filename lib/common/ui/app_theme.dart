@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ui/app_colors.dart';
 
@@ -40,13 +41,20 @@ class AppTheme {
   InputDecorationTheme get kInputDecorationTheme => InputDecorationTheme(
         contentPadding: EdgeInsets.all(12.sp),
         labelStyle: kTextTheme.bodyMedium,
-        floatingLabelStyle: kTextTheme.bodyMedium,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.w),
+        prefixIconColor: AppColors.kGrey,
+        suffixIconColor: AppColors.kGrey,
+        floatingLabelStyle: kTextTheme.bodyLarge?.copyWith(
+          color: Colors.black,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(CircularConstant.md),
           borderSide: const BorderSide(color: AppColors.kGrey),
         ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.kGrey),
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.w),
+          borderRadius: BorderRadius.circular(CircularConstant.md),
         ),
       );
   BottomNavigationBarThemeData get kBottomNavigationBarTheme =>
@@ -57,14 +65,15 @@ class AppTheme {
         appBarTheme: const AppBarTheme(elevation: 0),
         scaffoldBackgroundColor: AppColors.kDeepGreen,
         inputDecorationTheme: kInputDecorationTheme.copyWith(
-          prefixIconColor: AppColors.kGrey,
-          suffixIconColor: AppColors.kGrey,
+          floatingLabelStyle: kTextTheme.bodyLarge?.copyWith(
+            color: Colors.grey[300],
+          ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.w),
+            borderRadius: BorderRadius.circular(CircularConstant.md),
             borderSide: const BorderSide(color: AppColors.kGrey),
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.w),
+            borderRadius: BorderRadius.circular(CircularConstant.md),
           ),
         ),
         bottomNavigationBarTheme: kBottomNavigationBarTheme.copyWith(
@@ -84,14 +93,12 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.white,
       bottomNavigationBarTheme: kBottomNavigationBarTheme,
       inputDecorationTheme: kInputDecorationTheme.copyWith(
-        prefixIconColor: AppColors.kGrey,
-        suffixIconColor: AppColors.kGrey,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.w),
+          borderRadius: BorderRadius.circular(CircularConstant.md),
           borderSide: const BorderSide(color: AppColors.kGrey),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.w),
+          borderRadius: BorderRadius.circular(CircularConstant.md),
         ),
       ),
       textTheme: kTextTheme.apply(
