@@ -14,9 +14,9 @@ class SliverShimmerListSurahWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: SpacingConstant.sm),
+                      SizedBox(height: SpacingConstant.sm),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                             horizontal: ScreenPaddingConstant.horizontal),
                         child: Shimmer.fromColors(
                           baseColor: Colors.grey[300]!,

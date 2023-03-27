@@ -64,7 +64,7 @@ class _DetailSurahViewState extends State<DetailSurahView> {
               },
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                       horizontal: ScreenPaddingConstant.horizontal,
                       vertical: ScreenPaddingConstant.vertical),
                   child: SingleChildScrollView(

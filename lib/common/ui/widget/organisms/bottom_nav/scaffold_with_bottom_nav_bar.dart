@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 
@@ -34,8 +33,7 @@ class _OrganismScaffoldWithBottomNavBarState
     return Consumer<PreferenceSettingsProvider>(
         builder: (context, prefSetProvider, _) {
       return Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: prefSetProvider.systemUiOverlayStyle, child: widget.child),
+        body: widget.child,
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           items: tabs,

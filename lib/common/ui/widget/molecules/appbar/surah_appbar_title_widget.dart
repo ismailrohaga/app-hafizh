@@ -49,7 +49,7 @@ class AppBarWithShimmerEffectWidget extends StatelessWidget {
                   height: 10,
                   color: Colors.white,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: SpacingConstant.xs,
                 ),
                 const StarBadgeWidget(

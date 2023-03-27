@@ -49,7 +49,7 @@ class _SplashViewState extends State<SplashView> {
           return context.goNamed(NamedRoutes.onBoardView);
         }
 
-        context.goNamed(NamedRoutes.loginView);
+        context.go('/auth');
       });
     });
 
@@ -73,7 +73,7 @@ class _SplashViewState extends State<SplashView> {
                 AssetConstant.hafizhWhiteIcon,
                 width: 40,
               ),
-              const SizedBox(width: SpacingConstant.xs),
+              SizedBox(width: SpacingConstant.xs),
               Text('Hafizh', style: context.textTheme.headlineLarge),
             ],
           ),

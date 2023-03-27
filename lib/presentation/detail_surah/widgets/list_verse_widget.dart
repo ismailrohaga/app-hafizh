@@ -25,7 +25,7 @@ class ListVerseWidget extends StatelessWidget {
     return ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        separatorBuilder: (context, index) => const SizedBox(
+        separatorBuilder: (context, index) => SizedBox(
               height: SpacingConstant.md,
             ),
         itemCount: verses?.length ?? 0,
@@ -60,11 +60,11 @@ class VerseWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         VerseToolbarWidget(colors: colors, verse: verse, textTheme: textTheme),
-        const SizedBox(
+        SizedBox(
           height: SpacingConstant.md,
         ),
         VerseArabTextWidget(verse: verse, textTheme: textTheme),
-        const SizedBox(
+        SizedBox(
           height: SpacingConstant.xl,
         ),
         VerseTransliterationTextWidget(verse: verse, textTheme: textTheme)
@@ -99,7 +99,7 @@ class VerseTransliterationTextWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
+        SizedBox(
           height: SpacingConstant.xs,
         ),
         ShowUpAnimation(
@@ -208,7 +208,7 @@ class _VerseToolbarWidgetState extends State<VerseToolbarWidget> {
   Widget build(BuildContext context) {
     return ShowUpAnimation(
       child: Container(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
             horizontal: SpacingConstant.md, vertical: SpacingConstant.sm),
         decoration: BoxDecoration(
             color: widget.colors.tertiary.withOpacity(0.5),

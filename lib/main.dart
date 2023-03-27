@@ -6,7 +6,7 @@ import 'package:hafizh/common/ui/app_theme.dart';
 import 'package:hafizh/core/router/app_router.dart';
 import 'package:hafizh/presentation/bloc/auth/auth_bloc.dart';
 import 'package:hafizh/presentation/detail_surah/bloc/detail_surah_bloc.dart';
-import 'package:hafizh/presentation/login/cubit/login_cubit.dart';
+import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/quran/bloc/quran_bloc.dart';
 
 class App extends StatelessWidget {
@@ -39,10 +39,15 @@ class App extends StatelessWidget {
         ],
         child: Consumer<PreferenceSettingsProvider>(
           builder: (context, prefSetProvider, _) {
-            return MaterialApp.router(
-              title: 'Hafizh',
-              theme: prefSetProvider.themeData,
-              routerConfig: appRouter,
+            return ScreenUtilInit(
+              designSize: const Size(390, 844),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) => MaterialApp.router(
+                title: 'Hafizh',
+                theme: prefSetProvider.themeData,
+                routerConfig: appRouter,
+              ),
             );
           },
         ),
