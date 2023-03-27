@@ -16,14 +16,17 @@ class RegisterCubit extends Cubit<RegisterState> {
           registerStatus: ViewData.initial(),
         ));
 
-  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+  Future<void> signUpWithEmailAndPassword(
+      {required String email,
+      required String name,
+      required String password}) async {
     try {
       emit(state.copyWith(
         registerStatus: ViewData.loading(message: 'Loading...'),
       ));
 
-      final response =
-          await _signUpWithEmailAndPasswordUseCase.call(email, password);
+      final response = await _signUpWithEmailAndPasswordUseCase.call(
+          email: email, name: name, password: password);
 
       response.fold((failure) {
         emit(state.copyWith(

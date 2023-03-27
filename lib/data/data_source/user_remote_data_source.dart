@@ -4,8 +4,8 @@ import 'package:hafizh/data/model/dto/user_dto.dart';
 abstract class UserRemoteDataSource {
   Future<void> createUser(UserDTO user);
   Future<void> updateUser(String id, UserDTO user);
-  Future<UserDTO> getUserByEmail(String email);
-  Future<UserDTO> getUserById(String id);
+  Future<UserDTO?> getUserByEmail(String? email);
+  Future<UserDTO?> getUserById(String id);
 }
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
@@ -28,8 +28,8 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
           .collection('users')
           .doc(autoId)
           .set(payload.toFirestore());
-    } catch (e) {
-      rethrow;
+    } on FirebaseException catch (e) {
+      throw Exception(e.message);
     }
   }
 
@@ -46,17 +46,15 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   }
 
   @override
-  Future<UserDTO> getUserByEmail(String email) async {
+  Future<UserDTO?> getUserByEmail(String? email) async {
     try {
       final snapshot = await _firestore
           .collection('users')
           .where('email', isEqualTo: email)
           .get();
 
-      print(snapshot.docs.toSet());
-
       if (snapshot.docs.isEmpty) {
-        return Future.error('User not found');
+        return null;
       }
 
       return UserDTO.fromFirestore(snapshot.docs.first);
@@ -66,12 +64,12 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   }
 
   @override
-  Future<UserDTO> getUserById(String id) async {
+  Future<UserDTO?> getUserById(String id) async {
     try {
       final snapshot = await _firestore.collection('users').doc(id).get();
 
       if (!snapshot.exists) {
-        return Future.error('User not found');
+        return null;
       }
 
       return UserDTO.fromFirestore(snapshot);

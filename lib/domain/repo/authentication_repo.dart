@@ -7,7 +7,11 @@ abstract class AuthenticationRepo {
   Future<Either<LogInWithEmailAndPasswordFailure, UserEntity>>
       signInWithEmailAndPassword(String email, String password);
   Future<Either<SignUpWithEmailAndPasswordFailure, UserEntity>>
-      signUpWithEmailAndPassword(String email, String password);
+      signUpWithEmailAndPassword({
+    required String email,
+    required String name,
+    required String password,
+  });
   Future<Either<LogOutFailure, void>> signOut();
   Stream<UserEntity> get user;
   UserEntity get currentUser;

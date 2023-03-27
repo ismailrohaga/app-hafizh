@@ -14,7 +14,7 @@ import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/auth/widgets/login_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/term_of_service_privacy_policy_widget.dart';
-import 'package:hafizh/presentation/auth/widgets/texfields/email_text_field_widget.dart';
+import 'package:hafizh/presentation/auth/widgets/texfields/text_form_field_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/texfields/password_text_field_widget.dart';
 
 class LoginWithEmailView extends StatefulWidget {
@@ -118,7 +118,8 @@ class _LoginWithEmailViewState extends State<LoginWithEmailView> {
                         : Colors.black),
               ),
               SizedBox(height: 52.h),
-              EmailTextFieldWidget(
+              TextFormFieldWidget(
+                labelText: 'Email',
                 controller: _emailController,
                 validator: (_) => _state.email.displayError?.text,
               ),

@@ -14,7 +14,7 @@ import 'package:hafizh/presentation/auth/cubit/register_cubit.dart';
 import 'package:hafizh/presentation/auth/widgets/register_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/term_of_service_privacy_policy_widget.dart';
-import 'package:hafizh/presentation/auth/widgets/texfields/email_text_field_widget.dart';
+import 'package:hafizh/presentation/auth/widgets/texfields/text_form_field_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/texfields/password_text_field_widget.dart';
 
 class RegisterWithEmailView extends StatefulWidget {
@@ -30,6 +30,7 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
   RegisterStateValidation _state = RegisterStateValidation();
 
   late final TextEditingController _emailController;
+  late final TextEditingController _nameController;
   late final TextEditingController _passwordController;
   late final TextEditingController _confirmedPasswordController;
 
@@ -38,6 +39,7 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
     super.initState();
 
     _emailController = TextEditingController()..addListener(_onEmailChanged);
+    _nameController = TextEditingController()..addListener(_onNameChanged);
     _passwordController = TextEditingController()
       ..addListener(_onPasswordChanged);
     _confirmedPasswordController = TextEditingController()
@@ -56,6 +58,12 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
   void _onEmailChanged() {
     setState(() {
       _state = _state.copyWith(email: Email.dirty(_emailController.text));
+    });
+  }
+
+  void _onNameChanged() {
+    setState(() {
+      _state = _state.copyWith(name: Name.dirty(_nameController.text));
     });
   }
 
@@ -94,9 +102,11 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
     final registerCubit = context.read<RegisterCubit>();
 
     var email = _emailController.text;
+    var name = _nameController.text;
     var password = _passwordController.text;
 
-    await registerCubit.signUpWithEmailAndPassword(email, password);
+    await registerCubit.signUpWithEmailAndPassword(
+        email: email, name: name, password: password);
   }
 
   @override
@@ -138,9 +148,17 @@ class _RegisterWithEmailViewState extends State<RegisterWithEmailView> {
                           : Colors.black),
                 ),
                 SizedBox(height: 52.h),
-                EmailTextFieldWidget(
+                TextFormFieldWidget(
+                  labelText: 'Email',
                   controller: _emailController,
                   validator: (_) => _state.email.displayError?.text,
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(height: SpacingConstant.md),
+                TextFormFieldWidget(
+                  labelText: 'Name',
+                  controller: _nameController,
+                  validator: (_) => _state.name.displayError?.text,
                   textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: SpacingConstant.md),

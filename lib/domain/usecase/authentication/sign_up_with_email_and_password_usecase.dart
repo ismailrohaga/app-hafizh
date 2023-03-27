@@ -9,8 +9,15 @@ class SignUpWithEmailAndPasswordUseCase {
   SignUpWithEmailAndPasswordUseCase({required AuthenticationRepo repository})
       : _repository = repository;
 
-  Future<Either<SignUpWithEmailAndPasswordFailure, UserEntity>> call(
-      String email, String password) {
-    return _repository.signUpWithEmailAndPassword(email, password);
+  Future<Either<SignUpWithEmailAndPasswordFailure, UserEntity>> call({
+    required String email,
+    required String name,
+    required String password,
+  }) async {
+    return _repository.signUpWithEmailAndPassword(
+      email: email,
+      name: name,
+      password: password,
+    );
   }
 }

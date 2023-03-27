@@ -18,8 +18,9 @@ class UserRepositoryImpl implements UserRepo {
       String email) async {
     try {
       final result = await _userRemoteDataSource.getUserByEmail(email);
+      final userEntity = result?.toEntity() ?? UserEntity.empty;
 
-      return Right(result.toEntity());
+      return Right(userEntity);
     } catch (e) {
       return Left(FailureResponse(message: e.toString()));
     }
