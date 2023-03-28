@@ -4,7 +4,7 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 
 class PasswordTextFieldWidget extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String labelText;
   final String? errorText;
   final void Function(String value)? onChanged;
@@ -15,7 +15,7 @@ class PasswordTextFieldWidget extends StatefulWidget {
 
   const PasswordTextFieldWidget(
       {super.key,
-      required this.controller,
+      this.controller,
       required this.labelText,
       this.textInputAction,
       this.errorText,

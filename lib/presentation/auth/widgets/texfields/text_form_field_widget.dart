@@ -9,6 +9,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final String? errorText;
   final String? labelText;
   final String? Function(String? value)? validator;
+  final String? initialValue;
   final TextInputAction? textInputAction;
 
   const TextFormFieldWidget({
@@ -18,6 +19,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.errorText,
     this.labelText,
     this.validator,
+    this.initialValue,
     this.textInputAction,
   });
 
@@ -27,6 +29,7 @@ class TextFormFieldWidget extends StatelessWidget {
       builder: (context, preference, widget) => TextFormField(
         textInputAction: textInputAction,
         controller: controller,
+        initialValue: initialValue,
         onChanged: onChanged,
         validator: validator,
         style: context.textTheme.bodyLarge?.copyWith(

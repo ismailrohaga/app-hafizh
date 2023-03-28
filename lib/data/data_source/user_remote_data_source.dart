@@ -2,7 +2,7 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/data/model/dto/user_dto.dart';
 
 abstract class UserRemoteDataSource {
-  Future<void> createUser(UserDTO user);
+  Future<UserDTO?> createUser(UserDTO user);
   Future<void> updateUser(String id, UserDTO user);
   Future<UserDTO?> getUserByEmail(String? email);
   Future<UserDTO?> getUserById(String id);
@@ -17,7 +17,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   final FirebaseFirestore _firestore;
 
   @override
-  Future<void> createUser(UserDTO user) async {
+  Future<UserDTO?> createUser(UserDTO user) async {
     try {
       final autoId = _firestore.collection('users').doc().id;
       final payload = user.copyWith(
@@ -28,6 +28,10 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
           .collection('users')
           .doc(autoId)
           .set(payload.toFirestore());
+
+      final createdUser = await getUserById(autoId);
+
+      return createdUser;
     } on FirebaseException catch (e) {
       throw Exception(e.message);
     }

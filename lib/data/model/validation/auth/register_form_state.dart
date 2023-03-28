@@ -3,8 +3,8 @@ import 'package:hafizh/data/model/validation/auth/confirm_password.dart';
 import 'package:hafizh/data/model/validation/auth/email.dart';
 import 'package:hafizh/data/model/validation/auth/password.dart';
 
-class RegisterStateValidation with FormzMixin {
-  RegisterStateValidation({
+class RegisterFormState with FormzMixin {
+  RegisterFormState({
     Email? email,
     this.name = const Name.pure(),
     this.password = const Password.pure(),
@@ -18,14 +18,14 @@ class RegisterStateValidation with FormzMixin {
   final ConfirmedPassword confirmedPassword;
   final FormzSubmissionStatus status;
 
-  RegisterStateValidation copyWith({
+  RegisterFormState copyWith({
     Email? email,
     Name? name,
     Password? password,
     ConfirmedPassword? confirmedPassword,
     FormzSubmissionStatus? status,
   }) {
-    return RegisterStateValidation(
+    return RegisterFormState(
       email: email ?? this.email,
       name: name ?? this.name,
       password: password ?? this.password,

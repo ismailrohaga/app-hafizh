@@ -42,25 +42,27 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
       return UserEntity.empty;
     }
 
-    final userEntity = firebaseUser.toUserEntity;
+    final userPrefs = _preferenceSettingsProvider.user;
+    if (userPrefs.isEmpty) {
+      final userEntity = firebaseUser.toUserEntity;
+      final userRemote =
+          await _userRemoteDataSource.getUserByEmail(userEntity.email);
 
-    final userRemote =
-        await _userRemoteDataSource.getUserByEmail(userEntity.email ?? '');
+      if (userRemote == null) {
+        _preferenceSettingsProvider.setUser(userEntity);
+        return userEntity;
+      }
 
-    if (userRemote == null) {
-      _preferenceSettingsProvider.setUser(userEntity);
-      return userEntity;
+      _preferenceSettingsProvider.setUser(userRemote.toEntity());
+      return userRemote.toEntity();
     }
 
-    _preferenceSettingsProvider.setUser(userRemote.toEntity());
-    return userRemote.toEntity();
+    return userPrefs;
   }
 
   // via Firebase. Otherwise, return the user entity that was saved in shared preferences.
   @override
-  UserEntity get currentUser =>
-      _firebaseAuth.currentUser?.toUserEntity ??
-      _preferenceSettingsProvider.user;
+  UserEntity get currentUser => _preferenceSettingsProvider.user;
 
   AuthCredential _getGoogleCredential(GoogleSignInAuthentication googleAuth) =>
       GoogleAuthProvider.credential(
@@ -147,11 +149,16 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
       final userEntity = response.user?.toUserEntity ?? UserEntity.empty;
 
       final userDTO = UserDTO.fromEntity(userEntity);
-      await _userRemoteDataSource.createUser(userDTO.copyWith(
+      final userRemote =
+          await _userRemoteDataSource.createUser(userDTO.copyWith(
         name: name,
       ));
 
-      return Right(userEntity);
+      if (userRemote == null) {
+        return const Left(SignUpWithEmailAndPasswordFailure());
+      }
+
+      return Right(userRemote.toEntity());
     } on FirebaseAuthException catch (e) {
       return Left(SignUpWithEmailAndPasswordFailure.fromCode(e.code));
     } on FirebaseException catch (e) {
