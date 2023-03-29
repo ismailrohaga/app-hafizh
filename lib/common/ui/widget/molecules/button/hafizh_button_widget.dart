@@ -25,9 +25,8 @@ class HafizhButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if (!disabled || !loading) {
-          onTap();
-        }
+        if (disabled || loading) return;
+        onTap();
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: disabled || loading
