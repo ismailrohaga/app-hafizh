@@ -33,7 +33,7 @@ class HafizhButtonWidget extends StatelessWidget {
             ? context.colors.primary.withOpacity(0.5)
             : context.colors.primary,
         foregroundColor: context.colors.onPrimary,
-        splashFactory: disabled ? NoSplash.splashFactory : null,
+        splashFactory: disabled || loading ? NoSplash.splashFactory : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(CircularConstant.lg),
         ),
