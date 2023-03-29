@@ -5,7 +5,7 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/provider.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
 import 'package:hafizh/common/ui/widget/molecules/button/hafizh_button_widget.dart';
-import 'package:hafizh/data/model/validation/auth/confirm_password.dart';
+import 'package:hafizh/data/model/validation/auth/confirmed_password.dart';
 import 'package:hafizh/data/model/validation/auth/email.dart';
 import 'package:hafizh/data/model/validation/auth/password.dart';
 import 'package:hafizh/data/model/validation/auth/register_form_state.dart';

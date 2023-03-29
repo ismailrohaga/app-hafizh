@@ -57,10 +57,11 @@ class GoogleSignButtonBlocBuilderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      bloc: context.read<LoginCubit>(),
+      listenWhen: (previous, current) =>
+          previous.loginStatus.status != current.loginStatus.status,
       listener: (context, state) {
-        final status = state.viewData.status;
-        final message = state.message;
+        final status = state.loginStatus.status;
+        final message = state.loginStatus.message;
 
         if (status.isError) {
           context.scaffoldMessenger.showSnackBar(
@@ -83,7 +84,7 @@ class GoogleSignButtonBlocBuilderWidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final loading = state.viewData.status.isLoading;
+        final loading = state.loginStatus.status.isLoading;
 
         return GoogleSignInButton(
           loading: loading,

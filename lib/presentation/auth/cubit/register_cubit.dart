@@ -1,6 +1,6 @@
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/state/view_data_state.dart';
-import 'package:hafizh/data/model/validation/auth/confirm_password.dart';
+import 'package:hafizh/data/model/validation/auth/confirmed_password.dart';
 import 'package:hafizh/data/model/validation/auth/email.dart';
 import 'package:hafizh/data/model/validation/auth/password.dart';
 import 'package:hafizh/data/model/validation/auth/register_form_state.dart';
