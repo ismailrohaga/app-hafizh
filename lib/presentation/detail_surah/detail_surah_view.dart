@@ -57,7 +57,7 @@ class _DetailSurahViewState extends State<DetailSurahView> {
                 style: textTheme.titleSmall,
               ),
             ),
-            onBackPressed: () => context.goNamed(NamedRoutes.quranView),
+            onBackPressed: () => context.pop(),
             child: RefreshIndicator(
               onRefresh: () async {
                 _fetchDetailSurah();

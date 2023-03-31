@@ -56,7 +56,7 @@ class SliverChildBuilderDelegateListSurahWidget extends StatelessWidget {
                 subtitle: "Number of Verses : $numberOfVerses",
                 name: name,
                 number: number,
-                onTap: () => context.goNamed(NamedRoutes.detailSurahView,
+                onTap: () => context.pushNamed(NamedRoutes.detailSurahView,
                     params: {'id': number.toString()}),
               ),
             ],
