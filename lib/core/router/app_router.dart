@@ -71,6 +71,7 @@ final GoRouter appRouter = GoRouter(
       ],
     ),
     GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
       name: NamedRoutes.detailSurahView,
       path: '/detail-surah-view/:id',
       builder: (context, state) => DetailSurahView(
