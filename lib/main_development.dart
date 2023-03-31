@@ -15,5 +15,5 @@ void main() async {
 
   DependencyInjection.registerDependencies(env: Environment.dev);
 
-  runApp(const App());
+  runApp(const Main());
 }

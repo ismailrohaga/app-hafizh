@@ -9,8 +9,8 @@ import 'package:hafizh/presentation/detail_surah/bloc/detail_surah_bloc.dart';
 import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
 import 'package:hafizh/presentation/quran/bloc/quran_bloc.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class Main extends StatelessWidget {
+  const Main({super.key});
 
   AppTheme get theme => AppTheme();
 
