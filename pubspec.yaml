@@ -39,6 +39,10 @@ dependencies:
     dio_cache_interceptor: ^3.4.0
     shimmer: ^2.0.0
     stream_transform: ^2.1.0
+    show_up_animation: ^2.0.0
+    flutter_screenutil: ^5.7.0
+    formz: ^0.6.0
+    cloud_firestore: ^4.4.5
 
 dev_dependencies:
     flutter_test:

@@ -21,6 +21,7 @@ class ScaffoldWithDetailSurahAppBar extends StatelessWidget {
           backgroundColor: context.colors.background,
           toolbarHeight: 90,
           title: title,
+          centerTitle: true,
           leading: BackButton(
             color: context.colors.surface,
             onPressed: onBackPressed,

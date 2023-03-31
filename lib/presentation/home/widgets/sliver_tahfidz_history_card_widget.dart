@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/app_colors.dart';
 import 'package:hafizh/common/ui/widget/atoms/surah_with_badge_widget.dart';
 
-class TahfidzHistoryCardWidget extends StatelessWidget {
-  const TahfidzHistoryCardWidget({super.key});
+class SliverTahfidzHistoryCardWidget extends StatelessWidget {
+  const SliverTahfidzHistoryCardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(
-            vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            HistoryResultOfTahfidzWidget(),
-            MemorizedInfoWidget(
-              juzMemorizedCount: '2',
-              surahMemorizedCount: '102',
-            ),
-          ],
-        ));
+    return SliverToBoxAdapter(
+      child: ShowUpAnimation(
+        animationDuration: const Duration(milliseconds: 350),
+        direction: Direction.vertical,
+        child: Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: 20, horizontal: ScreenPaddingConstant.horizontal),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                HistoryResultOfTahfidzWidget(),
+                MemorizedInfoWidget(
+                  juzMemorizedCount: '2',
+                  surahMemorizedCount: '102',
+                ),
+              ],
+            )),
+      ),
+    );
   }
 }
 
@@ -40,7 +47,7 @@ class MemorizedInfoWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(left: 22, top: 12, right: 22, bottom: 22),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.kLightDeepGreen,
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(CircularConstant.lg),
@@ -135,20 +142,20 @@ class HistoryResultOfTahfidzWidget extends StatelessWidget {
                   'Tahfidz History',
                   style: context.textTheme.titleMedium,
                 ),
-                const SizedBox(width: SpacingConstant.xs),
+                SizedBox(width: SpacingConstant.xs),
                 Icon(Icons.keyboard_arrow_right, color: colors.surface)
               ],
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: SpacingConstant.lg,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text("2 weeks ago, you’ve memorized"),
+            children: [
+              const Text("2 weeks ago, you’ve memorized"),
               SizedBox(height: SpacingConstant.xs),
-              SurahWithBadgeWidget(surah: "An-Nisa", surahNumber: 92)
+              const SurahWithBadgeWidget(surah: "An-Nisa", surahNumber: 92)
             ],
           )
         ],

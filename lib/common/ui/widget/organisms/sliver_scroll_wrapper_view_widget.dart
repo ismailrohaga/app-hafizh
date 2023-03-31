@@ -20,7 +20,7 @@ class SliverScrollWrapperViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: [
+    return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverAppBar(
         expandedHeight: expandedHeight,
         stretch: true,

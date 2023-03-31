@@ -1,30 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:hafizh/common/const/circular_constant.dart';
+import 'package:hafizh/common/const/const.dart';
+import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
 class HafizhButtonWidget extends StatelessWidget {
   final String text;
-  final void Function()? onTap;
+  final Icon? leftIcon;
+  final Icon? rightIcon;
+  final bool disabled;
+  final bool loading;
+  final void Function() onTap;
 
-  const HafizhButtonWidget({super.key, required this.text, this.onTap});
+  const HafizhButtonWidget({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.disabled = false,
+    this.loading = false,
+    this.leftIcon,
+    this.rightIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-            color: context.colors.primary,
-            borderRadius:
-                const BorderRadius.all(Radius.circular(CircularConstant.lg))),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            text,
-            style: context.textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          ),
+    return ElevatedButton(
+      onPressed: () {
+        if (disabled || loading) return;
+        onTap();
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: disabled || loading
+            ? context.colors.primary.withOpacity(0.5)
+            : context.colors.primary,
+        foregroundColor: context.colors.onPrimary,
+        splashFactory: disabled || loading ? NoSplash.splashFactory : null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(CircularConstant.lg),
         ),
+        maximumSize: Size.fromHeight(48.h),
+        minimumSize: Size.fromHeight(48.h),
+        padding: EdgeInsets.symmetric(
+          vertical: 14.5.h,
+        ),
+        shadowColor: Colors.transparent,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          if (leftIcon != null) leftIcon!,
+          if (leftIcon != null) SizedBox(width: 8.w),
+          Text(text, style: context.textTheme.labelLarge),
+          if (rightIcon != null) SizedBox(width: 8.w),
+          if (rightIcon != null) rightIcon!,
+          if (loading) SizedBox(width: 8.w),
+          if (loading)
+            SizedBox(
+              width: 16.w,
+              height: 16.w,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.w,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  context.colors.surface,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

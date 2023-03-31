@@ -7,14 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1075143665059:android:cfba0f5e0f2e8add096616",
+        "mobilesdk_app_id": "1:1075143665059:android:d9185cbcd1fd469a096616",
         "android_client_info": {
-          "package_name": "com.sixmavericks.hafizh"
+          "package_name": "com.sixmavericks.hafizh.prod"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1075143665059-ab4i23m6uh740fh5q0a0b9ejssdpdhof.apps.googleusercontent.com",
+          "client_id": "1075143665059-9pqbdtc8sn7e5i6rh8bi4un7aogs5isi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sixmavericks.hafizh.prod",
+            "certificate_hash": "df1e4d56b514202fd7c4a030faea60b9187ae526"
+          }
+        },
+        {
+          "client_id": "1075143665059-dn6hofeogabh64e8eenfie9r108acgp3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +37,13 @@
             {
               "client_id": "1075143665059-ab4i23m6uh740fh5q0a0b9ejssdpdhof.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1075143665059-3ouct1lrpibcdbpc5np0uq0ogfl780g6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hafizh"
+              }
             }
           ]
         }

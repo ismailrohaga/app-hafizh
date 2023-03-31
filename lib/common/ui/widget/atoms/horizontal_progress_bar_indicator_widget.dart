@@ -28,13 +28,13 @@ class HorizontalProgressBarIndicator extends StatelessWidget {
       flex: 1,
       child: Container(
           height: SpacingConstant.sm,
-          margin: const EdgeInsets.only(right: SpacingConstant.sm),
+          margin: EdgeInsets.only(right: SpacingConstant.sm),
           decoration: BoxDecoration(
             color: isCompleted
                 ? context.colors.secondary
                 : context.colors.tertiary,
             borderRadius:
-                const BorderRadius.all(Radius.circular(CircularConstant.md)),
+                BorderRadius.all(Radius.circular(CircularConstant.md)),
           )),
     );
   }

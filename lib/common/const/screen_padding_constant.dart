@@ -1,6 +1,8 @@
+import 'package:hafizh/common/dependencies/dependencies.dart';
+
 class ScreenPaddingConstant {
-  static const horizontal = 22.0;
+  static double horizontal = 24.w;
 
   // TODO: You can custom your own padding here
-  static const vertical = 22.0;
+  static double vertical = 22.h;
 }

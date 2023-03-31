@@ -20,7 +20,7 @@ class SurahWithBadgeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(surah, style: context.textTheme.titleLarge),
-        const SizedBox(
+        SizedBox(
           width: SpacingConstant.sm,
         ),
         StarBadgeWidget(
