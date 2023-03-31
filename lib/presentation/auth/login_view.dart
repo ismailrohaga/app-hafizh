@@ -8,7 +8,6 @@ import 'package:hafizh/common/state/view_data_state.dart';
 import 'package:hafizh/common/ui/widget/molecules/molecules.dart';
 
 import 'package:hafizh/presentation/auth/cubit/login_cubit.dart';
-import 'package:hafizh/presentation/auth/cubit/login_state.dart';
 import 'package:hafizh/presentation/auth/widgets/google_signin_button.dart';
 import 'package:hafizh/presentation/auth/widgets/login_bottom_rich_text_widget.dart';
 import 'package:hafizh/presentation/auth/widgets/scaffold_login_view_wrapper_widget.dart';
@@ -34,12 +33,13 @@ class LoginView extends StatelessWidget {
           ),
           SizedBox(height: SpacingConstant.xl),
           const GoogleSignButtonBlocBuilderWidget(),
-          SizedBox(height: SpacingConstant.md),
+          SizedBox(height: 12.h),
           HafizhButtonWidget(
             text: 'Sign-in with Email',
             onTap: () => context.goNamed(NamedRoutes.loginWithEmailView),
-            leftIcon: const Icon(
+            leftIcon: Icon(
               Icons.email,
+              size: 20.w,
               color: Colors.white,
             ),
           ),
@@ -57,10 +57,11 @@ class GoogleSignButtonBlocBuilderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      bloc: context.read<LoginCubit>(),
+      listenWhen: (previous, current) =>
+          previous.loginStatus.status != current.loginStatus.status,
       listener: (context, state) {
-        final status = state.viewData.status;
-        final message = state.message;
+        final status = state.loginStatus.status;
+        final message = state.loginStatus.message;
 
         if (status.isError) {
           context.scaffoldMessenger.showSnackBar(
@@ -83,7 +84,7 @@ class GoogleSignButtonBlocBuilderWidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final loading = state.viewData.status.isLoading;
+        final loading = state.loginStatus.status.isLoading;
 
         return GoogleSignInButton(
           loading: loading,

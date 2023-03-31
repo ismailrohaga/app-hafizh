@@ -4,9 +4,24 @@ import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 
 class PasswordTextFieldWidget extends StatefulWidget {
+  final TextEditingController? controller;
   final String labelText;
+  final String? errorText;
+  final void Function(String value)? onChanged;
+  final String? Function(String?)? validator;
+  final TextInputAction? textInputAction;
 
-  const PasswordTextFieldWidget({super.key, required this.labelText});
+  final String? initialValue;
+
+  const PasswordTextFieldWidget(
+      {super.key,
+      this.controller,
+      required this.labelText,
+      this.textInputAction,
+      this.errorText,
+      this.onChanged,
+      this.validator,
+      this.initialValue});
 
   @override
   State<PasswordTextFieldWidget> createState() =>
@@ -30,13 +45,19 @@ class _PasswordTextFieldStateWidget extends State<PasswordTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<PreferenceSettingsProvider>(
-      builder: (context, preference, __) => TextField(
+      builder: (context, preference, __) => TextFormField(
+        textInputAction: widget.textInputAction,
+        controller: widget.controller,
+        initialValue: widget.initialValue,
         obscureText: _isObscure,
+        validator: widget.validator,
+        onChanged: widget.onChanged,
         style: context.textTheme.bodyLarge?.copyWith(
           color: preference.isDarkTheme ? Colors.grey[300] : Colors.black,
         ),
         decoration: InputDecoration(
           labelText: widget.labelText,
+          errorText: widget.errorText,
           suffixIcon: SizedBox(
             width: 22.w,
             height: 15.h,

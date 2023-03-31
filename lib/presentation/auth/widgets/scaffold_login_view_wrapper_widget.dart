@@ -20,28 +20,26 @@ class ScaffoldLoginViewWrapperWidget extends StatelessWidget {
             ? SystemUiOverlayStyle.light
             : SystemUiOverlayStyle.dark,
         child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              iconTheme: IconThemeData(
-                color: prefsSettingsProvider.isDarkTheme
-                    ? Colors.grey[300]
-                    : Colors.black,
-              ),
-            ),
             body: SafeArea(
                 child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: ScreenPaddingConstant.vertical,
-                      horizontal: ScreenPaddingConstant.horizontal,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        child,
-                        bottomRichText ?? const SizedBox.shrink(),
-                      ],
-                    )))));
+          padding: EdgeInsets.symmetric(
+            vertical: ScreenPaddingConstant.vertical,
+            horizontal: ScreenPaddingConstant.horizontal,
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      child,
+                      bottomRichText ?? const SizedBox.shrink(),
+                    ]),
+              )
+            ],
+          ),
+        ))));
   }
 }

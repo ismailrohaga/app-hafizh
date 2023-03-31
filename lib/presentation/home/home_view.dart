@@ -15,34 +15,32 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authBloc = context.select((AuthBloc bloc) => bloc);
-
-    return BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state.status == AuthStatus.unauthenticated) {
-            context.goNamed(NamedRoutes.loginView);
-          }
-        },
-        child: Scaffold(
-          body: SliverScrollWrapperViewWidget(
-            expandedHeight: 320,
-            title: Text(
-              'Hi ${authBloc.state.user.name}',
-              style: context.textTheme.titleLarge,
-            ),
-            background: DashboardWidget(
-              backgroundImage: AssetConstant.heroBgImage,
-              contractWidget: const DashboardFullContractWidget(),
-              callToAction: HafizhButtonWidget(
-                text: 'Start New Tahfidz',
-                onTap: () {},
-              ),
-            ),
-            slivers: const [
-              SliverTahfidzHistoryCardWidget(),
-              SliverTahfidzhHistoryListDelegateWidget()
-            ],
+    return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
+      if (state.status == AuthStatus.unauthenticated) {
+        context.goNamed(NamedRoutes.loginView);
+      }
+    }, builder: (context, state) {
+      return Scaffold(
+        body: SliverScrollWrapperViewWidget(
+          expandedHeight: 320,
+          title: Text(
+            'Hi ${state.user.name}',
+            style: context.textTheme.titleLarge,
           ),
-        ));
+          background: DashboardWidget(
+            backgroundImage: AssetConstant.heroBgImage,
+            contractWidget: const DashboardFullContractWidget(),
+            callToAction: HafizhButtonWidget(
+              text: 'Start New Tahfidz',
+              onTap: () {},
+            ),
+          ),
+          slivers: const [
+            SliverTahfidzHistoryCardWidget(),
+            SliverTahfidzhHistoryListDelegateWidget()
+          ],
+        ),
+      );
+    });
   }
 }

@@ -34,7 +34,7 @@ class HorizontalProgressBarIndicator extends StatelessWidget {
                 ? context.colors.secondary
                 : context.colors.tertiary,
             borderRadius:
-                const BorderRadius.all(Radius.circular(CircularConstant.md)),
+                BorderRadius.all(Radius.circular(CircularConstant.md)),
           )),
     );
   }

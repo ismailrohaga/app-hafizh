@@ -47,7 +47,7 @@ class MemorizedInfoWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(left: 22, top: 12, right: 22, bottom: 22),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.kLightDeepGreen,
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(CircularConstant.lg),
