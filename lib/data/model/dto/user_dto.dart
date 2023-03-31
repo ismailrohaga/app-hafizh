@@ -1,6 +1,9 @@
 import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/domain/entity/user_entity.dart';
 
+const String defaultImageURL =
+    "https://firebasestorage.googleapis.com/v0/b/hafizh-dev.appspot.com/o/users%2Fuser.png?alt=media&token=6f8dc1b8-361a-40de-81d7-5ba35a2d5097";
+
 class UserDTO {
   final String id;
   final String name;

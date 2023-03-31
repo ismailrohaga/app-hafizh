@@ -148,11 +148,11 @@ class AuthenticationRepositoryImpl extends AuthenticationRepo {
 
       final userEntity = response.user?.toUserEntity ?? UserEntity.empty;
 
-      final userDTO = UserDTO.fromEntity(userEntity);
-      final userRemote =
-          await _userRemoteDataSource.createUser(userDTO.copyWith(
+      final userDTO = UserDTO.fromEntity(userEntity.copyWith(
         name: name,
+        photo: defaultImageURL,
       ));
+      final userRemote = await _userRemoteDataSource.createUser(userDTO);
 
       if (userRemote == null) {
         return const Left(SignUpWithEmailAndPasswordFailure());
