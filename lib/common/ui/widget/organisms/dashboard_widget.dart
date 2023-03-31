@@ -47,24 +47,6 @@ class DashboardWidget extends StatelessWidget {
           SizedBox(
             height: SpacingConstant.lg,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: contractWidget,
-              ),
-              const SizedBox(
-                width: 12,
-              ),
-              const CircularPercentageIndicatorWidget(
-                value: 0.8,
-              )
-            ],
-          ),
-          SizedBox(
-            height: SpacingConstant.lg,
-          ),
           callToAction ?? const SizedBox(),
         ],
       ),
