@@ -43,10 +43,15 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void onPasswordChanged(String value) {
     final password = Password.dirty(value);
+    final confirmedPassword = ConfirmedPassword.dirty(
+      password: password.value,
+      value: state.form.confirmedPassword.value,
+    );
 
     emit(state.copyWith(
       form: state.form.copyWith(
         password: password,
+        confirmedPassword: confirmedPassword,
       ),
     ));
   }
