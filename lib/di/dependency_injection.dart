@@ -5,6 +5,7 @@ import 'package:hafizh/core/credentials.dart';
 import 'package:hafizh/core/network/dio_handler.dart';
 import 'package:hafizh/data/data_source/quran_local_data_source.dart';
 import 'package:hafizh/data/data_source/quran_remote_data_source.dart';
+import 'package:hafizh/data/data_source/user_remote_data_source.dart';
 import 'package:hafizh/data/db/database_helper.dart';
 import 'package:hafizh/data/repo/authentication_repository_impl.dart';
 import 'package:hafizh/data/repo/quran_repository_impl.dart';
@@ -48,8 +49,11 @@ class DependencyInjection {
     locator.registerLazySingleton<PreferenceSettingsProvider>(
         () => PreferenceSettingsProvider(preferenceSettingsHelper: locator()));
 
-    // Firebase
+    // Firebase (Firestore, Auth, etc)
     locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+
+    locator.registerLazySingleton<FirebaseFirestore>(
+        () => FirebaseFirestore.instance);
 
     // Google Signin
     locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
@@ -60,6 +64,9 @@ class DependencyInjection {
     /// Remote Data Source
     locator.registerLazySingleton<QuranRemoteDataSource>(
         () => QuranRemoteDataSourceImpl(dio: locator()));
+
+    locator.registerLazySingleton<UserRemoteDataSource>(
+        () => UserRemoteDataSourceImpl(firestore: locator()));
 
     /// Local Data Source
     locator.registerLazySingleton<QuranLocalDataSource>(
@@ -73,7 +80,8 @@ class DependencyInjection {
         AuthenticationRepositoryImpl(
             preferenceSettingsProvider: locator(),
             firebaseAuth: locator(),
-            googleSignIn: locator()));
+            googleSignIn: locator(),
+            userRemoteDataSource: locator()));
 
     /// Use Case
     locator.registerLazySingleton<GetSurahUsecase>(

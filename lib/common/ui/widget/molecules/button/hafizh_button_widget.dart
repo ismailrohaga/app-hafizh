@@ -25,16 +25,15 @@ class HafizhButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if (!disabled || !loading) {
-          onTap();
-        }
+        if (disabled || loading) return;
+        onTap();
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: disabled || loading
             ? context.colors.primary.withOpacity(0.5)
             : context.colors.primary,
         foregroundColor: context.colors.onPrimary,
-        splashFactory: disabled ? NoSplash.splashFactory : null,
+        splashFactory: disabled || loading ? NoSplash.splashFactory : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(CircularConstant.lg),
         ),

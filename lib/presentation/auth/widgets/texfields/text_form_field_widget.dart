@@ -3,19 +3,23 @@ import 'package:hafizh/common/dependencies/dependencies.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/provider/preference_settings_provider.dart';
 
-class EmailTextFieldWidget extends StatelessWidget {
+class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
   final String? errorText;
+  final String? labelText;
   final String? Function(String? value)? validator;
+  final String? initialValue;
   final TextInputAction? textInputAction;
 
-  const EmailTextFieldWidget({
+  const TextFormFieldWidget({
     super.key,
     this.controller,
     this.onChanged,
     this.errorText,
+    this.labelText,
     this.validator,
+    this.initialValue,
     this.textInputAction,
   });
 
@@ -25,13 +29,14 @@ class EmailTextFieldWidget extends StatelessWidget {
       builder: (context, preference, widget) => TextFormField(
         textInputAction: textInputAction,
         controller: controller,
+        initialValue: initialValue,
         onChanged: onChanged,
         validator: validator,
         style: context.textTheme.bodyLarge?.copyWith(
           color: preference.isDarkTheme ? Colors.grey[300] : Colors.black,
         ),
         decoration: InputDecoration(
-          labelText: 'Email',
+          labelText: labelText,
           errorText: errorText,
         ),
       ),

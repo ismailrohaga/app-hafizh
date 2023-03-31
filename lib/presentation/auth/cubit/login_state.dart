@@ -1,27 +1,28 @@
 part of 'login_cubit.dart';
 
 class LoginState extends Equatable {
-  final String message;
-  final ViewData viewData;
+  final ViewData loginStatus;
+  final LoginFormState form;
 
   LoginState({
-    ViewData? viewData,
-    this.message = '',
-  }) : viewData = viewData ?? ViewData.initial();
+    ViewData? loginStatus,
+    LoginFormState? form,
+  })  : loginStatus = loginStatus ?? ViewData.initial(),
+        form = form ?? LoginFormState();
 
   LoginState copyWith({
-    ViewData? viewData,
-    String? message,
+    ViewData? loginStatus,
+    LoginFormState? form,
   }) {
     return LoginState(
-      viewData: viewData ?? this.viewData,
-      message: message ?? this.message,
+      loginStatus: loginStatus ?? this.loginStatus,
+      form: form ?? this.form,
     );
   }
 
   @override
   List<Object?> get props => [
-        viewData,
-        message,
+        loginStatus,
+        form,
       ];
 }
