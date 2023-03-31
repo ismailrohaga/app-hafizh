@@ -30,11 +30,12 @@ class HomeView extends StatelessWidget {
               'Hi ${authBloc.state.user.name}',
               style: context.textTheme.titleLarge,
             ),
-            background: const DashboardWidget(
+            background: DashboardWidget(
               backgroundImage: AssetConstant.heroBgImage,
-              contractWidget: DashboardFullContractWidget(),
+              contractWidget: const DashboardFullContractWidget(),
               callToAction: HafizhButtonWidget(
                 text: 'Start New Tahfidz',
+                onTap: () {},
               ),
             ),
             slivers: const [

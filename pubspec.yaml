@@ -40,6 +40,8 @@ dependencies:
     shimmer: ^2.0.0
     stream_transform: ^2.1.0
     show_up_animation: ^2.0.0
+    flutter_screenutil: ^5.7.0
+    formz: ^0.6.0
 
 dev_dependencies:
     flutter_test:

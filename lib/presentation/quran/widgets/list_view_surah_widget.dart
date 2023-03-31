@@ -14,7 +14,7 @@ class ListViewSurahWidget extends StatelessWidget {
     return ListView.separated(
       scrollDirection: Axis.vertical,
       separatorBuilder: (context, index) =>
-          const SizedBox(height: SpacingConstant.sm),
+          SizedBox(height: SpacingConstant.sm),
       padding: const EdgeInsets.all(0),
       itemCount: surah.length,
       itemBuilder: (context, index) {

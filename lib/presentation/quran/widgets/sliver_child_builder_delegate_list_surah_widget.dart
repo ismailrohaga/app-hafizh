@@ -48,12 +48,12 @@ class SliverChildBuilderDelegateListSurahWidget extends StatelessWidget {
       return ShowUpAnimation(
         animationDuration: const Duration(milliseconds: 350),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
               horizontal: ScreenPaddingConstant.horizontal),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: SpacingConstant.sm),
+              SizedBox(height: SpacingConstant.sm),
               SurahCardWidget(
                 subtitle: "Number of Verses : $numberOfVerses",
                 name: name,

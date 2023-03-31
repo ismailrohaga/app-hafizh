@@ -21,7 +21,7 @@ class SurahTileTitleWidget extends StatelessWidget {
           style: style ??
               context.theme.textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
-        const SizedBox(
+        SizedBox(
           width: SpacingConstant.sm,
         ),
         StarBadgeWidget(
