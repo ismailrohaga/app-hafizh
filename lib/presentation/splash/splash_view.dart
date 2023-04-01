@@ -43,8 +43,6 @@ class _SplashViewState extends State<SplashView> {
       backgroundColor: context.colors.background,
       body: Center(
         child: ShowUpAnimation(
-          delayStart: const Duration(seconds: 1),
-          animationDuration: const Duration(seconds: 1),
           curve: Curves.bounceIn,
           direction: Direction.vertical,
           offset: 0.5,

@@ -1,33 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/dependencies/dependencies.dart';
-import 'package:hafizh/common/ext/build_context_ext.dart';
 import 'package:hafizh/common/ui/widget/atoms/atoms.dart';
 
 class SurahAppBarTitleWidget extends StatelessWidget {
-  final int? verse;
   final bool? loading;
-  final SurahWithBadgeWidget surahWithBadgeWidget;
+  final SurahWithBadgeWidget title;
+  final Widget? subtitle;
 
   const SurahAppBarTitleWidget(
-      {super.key,
-      this.verse,
-      required this.surahWithBadgeWidget,
-      this.loading = false});
+      {super.key, this.subtitle, required this.title, this.loading = false});
 
   @override
   Widget build(BuildContext context) {
-    final verseText = verse != null ? "Ayah $verse" : "";
-
     if (loading ?? false) {
       return const AppBarWithShimmerEffectWidget();
     }
 
     return Column(
       children: [
-        surahWithBadgeWidget,
-        if (verse != null)
-          Text(verseText, style: context.textTheme.titleMedium),
+        title,
+        if (subtitle != null) subtitle!,
       ],
     );
   }

@@ -12,6 +12,7 @@ export 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 export 'package:shimmer/shimmer.dart';
 export 'package:stream_transform/stream_transform.dart';
 export 'package:show_up_animation/show_up_animation.dart';
+export 'package:just_audio/just_audio.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:formz/formz.dart';
 
