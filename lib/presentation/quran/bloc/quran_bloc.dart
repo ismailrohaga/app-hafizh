@@ -15,10 +15,15 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   final GetSurahUsecase getSurahUsecase;
 
   QuranBloc({required this.getSurahUsecase})
-      : super(QuranState(
-            statusSurah: ViewData.initial(), filteredSurah: const [])) {
+      : super(QuranState(statusSurah: ViewData.initial())) {
     on<FetchSurah>(_fetchSurah);
-    on<FilterSurah>(_filterSurah, transformer: debounce(_duration));
+    on<SearchSurahChanged>(_searchSurahChanged,
+        transformer: debounce(_duration));
+    on<CategoryChanged>(_categoryChanged);
+  }
+
+  void _categoryChanged(CategoryChanged event, Emitter<QuranState> emit) {
+    emit(state.copyWith(category: event.category));
   }
 
   void _fetchSurah(FetchSurah event, Emitter<QuranState> emit) async {
@@ -43,9 +48,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
         response.fold(
             (failure) => emit(state.copyWith(
                 statusSurah: ViewData.error(message: failure.message))),
-            (data) => emit(state.copyWith(
-                statusSurah: ViewData.loaded(data: data),
-                filteredSurah: data)));
+            (data) =>
+                emit(state.copyWith(statusSurah: ViewData.loaded(data: data))));
       }
     } catch (e) {
       emit(state.copyWith(
@@ -53,27 +57,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     }
   }
 
-  void _filterSurah(FilterSurah event, Emitter<QuranState> emit) async {
+  void _searchSurahChanged(
+      SearchSurahChanged event, Emitter<QuranState> emit) async {
     emit(state.copyWith(query: event.query));
-
-    final query = event.query;
-    final surah = state.statusSurah.data;
-
-    if (query.isEmpty) {
-      emit(state.copyWith(filteredSurah: surah));
-    } else {
-      final filteredSurah = surah!.where((surah) {
-        final surahName = surah.name.transliteration.id.toLowerCase();
-        final surahNameTranslate = surah.numberOfVerses.toString();
-        final surahNumber = surah.number.toString();
-        final queryLowerCase = query.toLowerCase();
-
-        return surahName.contains(queryLowerCase) ||
-            surahNameTranslate.contains(queryLowerCase) ||
-            surahNumber.contains(queryLowerCase);
-      }).toList();
-
-      emit(state.copyWith(filteredSurah: filteredSurah));
-    }
   }
 }

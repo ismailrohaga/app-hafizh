@@ -1,5 +1,24 @@
 import 'package:equatable/equatable.dart';
 
+extension ListSurahEntityFilterByQueryExtension on List<SurahEntity> {
+  List<SurahEntity> filterByQuery(String? query) {
+    if (query == null || query.isEmpty) {
+      return this;
+    }
+
+    return where((surah) {
+      final surahName = surah.name.transliteration.id.toLowerCase();
+      final surahNameTranslate = surah.numberOfVerses.toString();
+      final surahNumber = surah.number.toString();
+      final queryLowerCase = query.toLowerCase();
+
+      return surahName.contains(queryLowerCase) ||
+          surahNameTranslate.contains(queryLowerCase) ||
+          surahNumber.contains(queryLowerCase);
+    }).toList();
+  }
+}
+
 class SurahResponseEntity extends Equatable {
   const SurahResponseEntity({
     required this.code,

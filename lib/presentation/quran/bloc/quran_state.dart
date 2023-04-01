@@ -4,22 +4,22 @@ import 'package:hafizh/domain/entity/surah_entity.dart';
 
 class QuranState extends Equatable {
   final ViewData<List<SurahEntity>> statusSurah;
-  final List<SurahEntity> filteredSurah;
   final String? query;
+  final String? category;
 
   const QuranState(
-      {required this.statusSurah, this.filteredSurah = const [], this.query});
+      {required this.statusSurah, this.query, this.category = "surah"});
 
   QuranState copyWith(
       {ViewData<List<SurahEntity>>? statusSurah,
-      List<SurahEntity>? filteredSurah,
-      String? query}) {
+      String? query,
+      String? category}) {
     return QuranState(
         statusSurah: statusSurah ?? this.statusSurah,
-        filteredSurah: filteredSurah ?? this.filteredSurah,
-        query: query ?? this.query);
+        query: query ?? this.query,
+        category: category ?? this.category);
   }
 
   @override
-  List<Object?> get props => [statusSurah, filteredSurah, query];
+  List<Object?> get props => [statusSurah, query, category];
 }

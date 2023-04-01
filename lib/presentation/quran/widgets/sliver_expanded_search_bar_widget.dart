@@ -3,12 +3,19 @@ import 'package:hafizh/common/const/const.dart';
 import 'package:hafizh/common/ext/build_context_ext.dart';
 
 class SliverExpandedSearchBarWidget extends StatefulWidget {
-  final void Function(String)? onSearch;
+  final void Function(String value)? onSearch;
+  final void Function(String? value)? onCategoryChanged;
   final String? value;
+  final String? category;
   final bool isDarkTheme;
 
   const SliverExpandedSearchBarWidget(
-      {super.key, this.onSearch, this.value, this.isDarkTheme = false});
+      {super.key,
+      this.onSearch,
+      this.onCategoryChanged,
+      this.category = "surah",
+      this.value,
+      this.isDarkTheme = false});
 
   @override
   State<SliverExpandedSearchBarWidget> createState() =>
@@ -66,12 +73,11 @@ class _SliverExpandedSearchBarWidget
           children: [
             _isExpanded
                 ? const SizedBox.shrink()
-                : Text(
-                    "Surah",
-                    style: textTheme.titleLarge?.copyWith(
-                      color: isDarkTheme ? Colors.grey[300] : Colors.black,
-                    ),
-                  ),
+                : SearchDropdownCategory(
+                    textTheme: textTheme,
+                    isDarkTheme: isDarkTheme,
+                    value: widget.category,
+                    onChanged: widget.onCategoryChanged),
 
             _isExpanded
                 ? Expanded(
@@ -108,6 +114,49 @@ class _SliverExpandedSearchBarWidget
           ],
         ),
       ),
+    );
+  }
+}
+
+class SearchDropdownCategory extends StatelessWidget {
+  const SearchDropdownCategory({
+    super.key,
+    this.value = "surah",
+    this.onChanged,
+    required this.textTheme,
+    required this.isDarkTheme,
+  });
+
+  final TextTheme textTheme;
+  final bool isDarkTheme;
+  final String? value;
+  final void Function(String? value)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      icon: const Icon(Icons.arrow_drop_down),
+      value: value.toString(),
+      isDense: true,
+      borderRadius: BorderRadius.circular(CircularConstant.lg),
+      dropdownColor: isDarkTheme ? Colors.grey[900] : Colors.white,
+      style: context.textTheme.titleLarge
+          ?.copyWith(color: isDarkTheme ? Colors.grey[300] : Colors.black),
+      underline: Container(
+        height: 2,
+        color: Colors.transparent,
+      ),
+      onChanged: onChanged,
+      items: const [
+        DropdownMenuItem<String>(
+          value: "surah",
+          child: Text("Surah"),
+        ),
+        DropdownMenuItem<String>(
+          value: "juz",
+          child: Text("Juz"),
+        )
+      ],
     );
   }
 }
